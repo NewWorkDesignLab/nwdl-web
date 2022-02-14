@@ -5,8 +5,8 @@
 
 Spina::Theme.register do |theme|
   # All views are namespaced based on the theme's name
-  theme.name = 'nwdl-default'
-  theme.title = 'NWDL Default'
+  theme.name = 'nwdl'
+  theme.title = 'NWDL'
 
   # Parts
   # Define all editable parts you want to use in your view templates
@@ -22,14 +22,20 @@ Spina::Theme.register do |theme|
   # - Repeater
   theme.parts = [
     {name: 'rich_content',  title: "Inhalt", part_type: "Spina::Parts::Text"},
-    {name: 'header_image',  title: "Gallerie-Bild", part_type: "Spina::Parts::Image"},
+    {name: 'thumbnail',  title: "Thumbnail", part_type: "Spina::Parts::Image"},
+    {name: 'header_image',  title: "Image", part_type: "Spina::Parts::Image"},
+    {name: 'main_address',  title: "Anschrift", part_type: "Spina::Parts::Text"},
+    {name: 'main_contact',  title: "Kontakt", part_type: "Spina::Parts::Text"},
+
     {name: 'focus_text',  title: "Fokus", part_type: "Spina::Parts::Text"},
     {name: 'focus_research_text',  title: "Fokus (Forschung)", part_type: "Spina::Parts::Text"},
     {name: 'focus_transver_text',  title: "Fokus (Transver)", part_type: "Spina::Parts::Text"},
     {name: 'focus_consulting_text',  title: "Fokus (Beratung)", part_type: "Spina::Parts::Text"},
     {name: 'projects_text',  title: "Projekte", part_type: "Spina::Parts::Text"},
     {name: 'newsletter_text',  title: "Newsletter", part_type: "Spina::Parts::Text"},
-    {name: 'events_text',  title: "Events", part_type: "Spina::Parts::Text"}
+    {name: 'events_text',  title: "Events", part_type: "Spina::Parts::Text"},
+
+    {name: 'logo', title: 'NWDL-Logo', part_type: "Spina::Parts::Image"},
   ]
 
   # View templates
@@ -38,7 +44,7 @@ Spina::Theme.register do |theme|
   # by referencing them from the theme.parts configuration above.
   theme.view_templates = [
     # for static pages
-    {name: 'homepage', title: 'Home', parts: %w(focus_text focus_research_text focus_transver_text focus_consulting_text projects_text newsletter_text events_text)},
+    {name: 'homepage', title: 'Home', parts: %w(header_image focus_text focus_research_text focus_transver_text focus_consulting_text projects_text events_text)},
     {name: 'legal', title: 'Impressum', parts: %w(rich_content)},
     {name: 'data', title: 'Datenschutz', parts: %w(rich_content)},
     # for resource-indexes
@@ -46,7 +52,7 @@ Spina::Theme.register do |theme|
     {name: 'employees', title: 'Mitarbeiter', parts: %w(rich_content)},
     {name: 'articles', title: 'Artikel', parts: %w(rich_content)},
     # for resources
-    {name: 'content', title: 'Inhalt', parts: %w(rich_content header_image)}
+    {name: 'content', title: 'Inhalt', parts: %w(thumbnail rich_content)}
   ]
 
   # Custom pages
@@ -73,7 +79,7 @@ Spina::Theme.register do |theme|
   # Layout parts (optional)
   # You can create global content that doesn't belong to one specific page. We call these layout parts.
   # You only have to reference the name of the parts you want to have here.
-  theme.layout_parts = []
+  theme.layout_parts = %w(logo newsletter_text main_address main_contact)
 
   # Resources (optional)
   # Think of resources as a collection of pages. They are managed separately in Spina

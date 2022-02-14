@@ -1,0 +1,35 @@
+<%# IMAGES %>
+<div class="image-anchor mt-7">
+      <div class="newsletter-kreise"><%= render 'nwdl/shared/images/newsletter_kreise' %></div>
+      <div class="newsletter-wolke"><%= render 'nwdl/shared/images/newsletter_wolke' %></div>
+</div>
+
+<%# NEWSLETTER %>
+<div class="row mt-5 pt-5 justify-content-between nwdl-bg-blue-dark">
+  <div class="col-12 col-md-6 ps-6 pb-6 nwdl-content nwdl-uppercase-header">
+    <%= current_account.content.html :newsletter_text %>
+
+    <form class="">
+      <div class="">
+        <label for="newsletterNameInput" class="form-label">Name</label>
+        <input type="text" class="form-control" id="newsletterNameInput">
+      </div>
+
+      <div class="">
+        <label for="newsletterEmailInput" class="form-label">E-Mail</label>
+        <input type="email" class="form-control" id="newsletterEmailInput">
+      </div>
+
+      <button type="submit" class="btn btn-primary">Anmelden</button>
+    </form>
+  </div>
+  <div class="col-12 col-md-4 ps-6 pt-6 pb-6 nwdl-bg-orange-dark">
+    <%= current_account.content.html :main_address %>
+    <%= current_account.content.html :main_contact %>
+  </div>
+</div>
+
+<%# IMAGES %>
+<div class="image-anchor">
+      <div class="farbfleck-pink"><%= render 'nwdl/shared/images/farbfleck_pink' %></div>
+</div>

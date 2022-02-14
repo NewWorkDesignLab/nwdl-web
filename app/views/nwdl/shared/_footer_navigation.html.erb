@@ -1,2 +1,42 @@
-<% presenter = Spina::MenuPresenter.new(Spina::Navigation.find_by(name: 'footer')) %>
-<%= presenter.to_html %>
+<%# BLACK INFO BAR %>
+<div class="">
+  <div class="container-fluid mt-8 nwdl-bg-black text-white nwdl-footer">
+    <div class="container-xl nwdl-content">
+      <div class="row justify-content-between g-3">
+        <div class="col-12 col-sm-7 col-md-4 py-3">
+          <%= current_account.content.html :main_address %>
+        </div>
+
+        <div class="col-12 col-sm-7 col-md-4 py-3">
+          <%= current_account.content.html :main_contact %>
+        </div>
+
+        <div class="col-12 col-sm-7 col-md-4 py-3">
+          <%= current_account.content.image_tag(:logo, {}, {class: "nwdl-logo"}) %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%# WHITE NAVIGATION BAR %>
+  <nav class="navbar navbar-expand-xl nwdl-bg-black text-white">
+    <div class="container-xl">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <% nav = Spina::Navigation.find_by(name: 'footer') %>
+        <% items = nav.navigation_items.regular_pages.sorted.live.in_menu.active %>
+
+        <% items.each do |item| %>
+          <% if item.page.materialized_path %>
+            <li class="nav-item">
+              <%= link_to item.page.menu_title, item.page.materialized_path, class: "nav-link" %>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+
+<%# <% presenter = Spina::MenuPresenter.new(Spina::Navigation.find_by(name: 'footer')) %>
+<%# <%= presenter.to_html %>

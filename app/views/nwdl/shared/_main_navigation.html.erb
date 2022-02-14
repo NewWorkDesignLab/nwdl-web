@@ -1,2 +1,27 @@
-<% presenter = Spina::MenuPresenter.new(Spina::Navigation.find_by(name: 'main')) %>
-<%= presenter.to_html %>
+<nav class="navbar fixed-top navbar-expand-xl navbar-dark bg-dark">
+  <div class="container-xl">
+    <%= link_to root_path, class: "navbar-brand" do %>
+      <%= current_account.content.image_tag(:logo, {}, {class: "nwdl-logo"}) %>
+    <% end %>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#toggle-target" aria-controls="toggle-target" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="toggle-target">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <% nav = Spina::Navigation.find_by(name: 'main') %>
+        <% items = nav.navigation_items.regular_pages.sorted.live.in_menu.active %>
+
+        <% items.each do |item| %>
+          <% if item.page.materialized_path %>
+            <li class="nav-item">
+              <%# <% classes = [].tap { |out| out << "nav-link"; out << "active" if request.path.start_with?(item.page.materialized_path) }.join(' ') %>
+              <%= link_to item.page.menu_title, item.page.materialized_path, class: "nav-link active" %>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>

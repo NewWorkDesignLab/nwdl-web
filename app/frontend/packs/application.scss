@@ -1,0 +1,146 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&family=Raleway&display=swap');
+
+$font-family-base: 'Raleway', sans-serif;
+$headings-font-family: 'Playfair Display', serif;
+
+$spacer: 1rem;
+$spacers: (
+  0: 0,
+  1: $spacer * .25,
+  2: $spacer * .5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+  6: $spacer * 5,
+  7: $spacer * 7.5,
+  8: $spacer * 10,
+  9: $spacer * 15,
+  10: $spacer * 20,
+);
+
+// Import Bootstrap v5
+@import "~bootstrap/scss/bootstrap";
+
+body {
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+.nwdl-page-container {
+  @extend .container-fluid;
+  min-height: 60vh;
+}
+
+.nwdl-logo {
+  max-height: 40px;
+  width: 100%;
+}
+
+.nwdl-content {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.image-anchor {
+  @extend .row;
+  @extend .justify-content-center;
+}
+
+.astronaut {
+  position: absolute;
+  min-width: 350px;
+  width: 48%;
+  margin-left: -50%;
+  margin-top: -23%;
+}
+
+.farbklecks {
+  position: absolute;
+  z-index: -1;
+  min-width: 300px;
+  width: 38%;
+  margin-left: 100%;
+  margin-top: -15%;
+}
+
+.planet {
+  position: absolute;
+  z-index: -1;
+  min-width: 200px;
+  width: 16%;
+  margin-left: -64%;
+  margin-top: -3%;
+}
+
+.newsletter-kreise {
+  position: absolute;
+  z-index: -1;
+  min-width: 250px;
+  width: 14%;
+  margin-left: 72%;
+  margin-top: -5%;
+}
+
+.newsletter-wolke {
+  position: absolute;
+  min-width: 150px;
+  width: 12%;
+  margin-left: 24%;
+  margin-top: 3%;
+}
+
+.farbfleck-pink {
+  position: absolute;
+  z-index: -1;
+  min-width: 250px;
+  width: 16%;
+  margin-left: -70%;
+  margin-top: -4%;
+}
+
+.nwdl-header-image {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+}
+
+.nwdl-footer {
+  min-height: 20vh;
+}
+
+.nwdl-cachel-img {
+  width: 100%;
+  height: 100%;
+  max-height: 270px;
+  object-fit: cover;
+}
+
+.nwdl-uppercase-header {
+  h1, h2, h3, h4, h5, h6 {
+    text-transform: uppercase;
+    font-size: 3.5rem;
+  }
+}
+
+.nwdl-bg-blue-light {
+  background-color: #E1EBF3;
+}
+.nwdl-bg-blue-middle {
+  background-color: #C0DAF3;
+}
+.nwdl-bg-blue-dark {
+  background-color: #86AED5;
+}
+.nwdl-bg-orange-light {
+  background-color: #F6CA46;
+}
+.nwdl-bg-orange-dark {
+  background-color: #EF9C20;
+}
+.nwdl-bg-grey {
+  background-color: #272727;
+}
+.nwdl-bg-black {
+  background-color: #000000;
+}
