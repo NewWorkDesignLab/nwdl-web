@@ -1,2 +1,8 @@
-<h1><%= current_page.title %></h1>
-<%= content.html :content %>
+<%= render 'nwdl/shared/default_page' do %>
+  <div class="nwdl-rich-content-wrapper">
+    <%= content.html :rich_content %>
+  </div>
+<% end %>
+
+<%# NEWSLETTER %>
+<%= render 'nwdl/shared/newsletter' %>

@@ -1,8 +1,8 @@
 <%# BLACK INFO BAR %>
 <div class="">
-  <div class="container-fluid mt-8 nwdl-bg-black text-white nwdl-footer">
+  <div class="container-fluid mt-8 nwdl-bg-black text-white nwdl-footer p-0">
     <div class="container-xl nwdl-content">
-      <div class="row justify-content-between g-3">
+      <div class="row justify-content-between">
         <div class="col-12 col-sm-7 col-md-4 py-3">
           <%= current_account.content.html :main_address %>
         </div>
@@ -11,7 +11,7 @@
           <%= current_account.content.html :main_contact %>
         </div>
 
-        <div class="col-12 col-sm-7 col-md-4 py-3">
+        <div class="col-12 col-sm-7 col-md-4 py-3 d-flex justify-content-center">
           <%= current_account.content.image_tag(:logo, {}, {class: "nwdl-logo"}) %>
         </div>
       </div>

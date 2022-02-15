@@ -1,7 +1,21 @@
-<div class="nwdl-page-container mt-7">
-  <div class="container-xl nwdl-content">
-    <div class="nwdl-uppercase-header">
-      <h1><%= current_page.title %></h1>
-    </div>
+<%= render 'nwdl/shared/default_page' do %>
+  <div class="nwdl-rich-content-wrapper">
+    <%= content.html :rich_content %>
   </div>
-</div>
+
+  <div class="row g-3 mt-3 mb-5 justify-content-center justify-content-md-start">
+    <% articles = Spina::Resource.find_by(name: "articles")&.pages %>
+    <% if articles.present? %>
+      <% articles.each do |article| %>
+        <% if article.present? %>
+
+        <% end %>
+      <% end %>
+    <% else %>
+      <p>Leider sind noch keine Artikel vorhanden.</p>
+    <% end %>
+  </div>
+<% end %>
+
+<%# NEWSLETTER %>
+<%= render 'nwdl/shared/newsletter' %>

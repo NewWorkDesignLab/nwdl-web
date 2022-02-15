@@ -1,7 +1,5 @@
-<div class="nwdl-page-container mt-7">
-  <div class="container-xl nwdl-content">
-    <div class="nwdl-uppercase-header">
-      <h1><%= current_page.title %></h1>
-    </div>
+<%= render 'nwdl/shared/default_page' do %>
+  <div class="nwdl-rich-content-wrapper">
+    <%= content.html :rich_content %>
   </div>
-</div>
+<% end %>

@@ -1,86 +1,125 @@
-<div class="container-fluid bg-success min-vh-100 p-0">
+<div class="container-fluid p-0">
   <%= content.image_tag(:header_image, {}, {class: "nwdl-header-image"}) %>
 </div>
 
-<div class="nwdl-page-container">
-  <div class="container-xl">
+<%# FOCUS %>
+<div class="container-xl">
+  <%# MAIN FOCUS %>
+  <div class="row justify-content-end mt-8">
+    <div class="col-12 col-sm-7 nwdl-content nwdl-uppercase-header">
+      <%= content.html :focus_text %>
+    </div>
+  </div>
 
-    <%# FOCUS %>
-    <div class="row justify-content-end mt-8">
-      <div class="col-12 col-sm-7 nwdl-content nwdl-uppercase-header">
-        <%= content.html :focus_text %>
+  <%# IMAGES %>
+  <div class="image-anchor mt-7">
+    <div class="astronaut"><%= render 'nwdl/shared/images/astronaut' %></div>
+    <div class="farbklecks"><%= render 'nwdl/shared/images/farbfleck' %></div>
+  </div>
+
+  <%# FOCUS BOXES %>
+  <div class="row justify-content-center g-3">
+    <div class="col-12 col-sm-7 col-md-4">
+      <div class="p-4 h-100 text-center nwdl-content nwdl-bg-blue-middle">
+        <%= content.html :focus_research_text %>
       </div>
     </div>
-
-    <%# IMAGES %>
-    <div class="image-anchor mt-7">
-      <div class="astronaut"><%= render 'nwdl/shared/images/astronaut' %></div>
-      <div class="farbklecks"><%= render 'nwdl/shared/images/farbfleck' %></div>
+    <div class="col-12 col-sm-7 col-md-4">
+      <div class="p-4 h-100 text-center nwdl-content nwdl-bg-blue-light">
+        <%= content.html :focus_transver_text %>
+      </div>
     </div>
+    <div class="col-12 col-sm-7 col-md-4">
+      <div class="p-4 h-100 text-center nwdl-content nwdl-bg-blue-dark">
+        <%= content.html :focus_consulting_text %>
+      </div>
+    </div>
+  </div>
 
-    <%# FOCUS BOXES %>
-    <div class="row justify-content-center g-3">
-      <div class="col-12 col-sm-7 col-md-4">
-        <div class="p-4 h-100 text-center nwdl-content nwdl-bg-blue-middle">
-          <%= content.html :focus_research_text %>
+  <%# IMAGES %>
+  <div class="image-anchor">
+    <div class="planet"><%= render 'nwdl/shared/images/planet' %></div>
+  </div>
+</div>
+
+
+<%# PROJECTS %>
+<div class="container-xl">
+  <div class="row mt-8">
+    <div class="col-12 col-md-8 nwdl-content nwdl-uppercase-header">
+      <%= content.html :projects_text %>
+    </div>
+    <div class="col-0 col-md-4"></div>
+  </div>
+
+  <%# PROJECT PRESENTER %>
+  <div class="row g-3 mt-4 justify-content-center justify-content-md-start">
+    <% projects = Spina::Resource.find_by(name: "projects").pages.limit(3) %>
+    <% projects.each do |project| %>
+      <% if project.present? && project.find_part(:thumbnail)&.content.present? %>
+        <div class="col-12 col-sm-7 col-md-4">
+          <%= link_to project.materialized_path do %>
+            <%= project.content.image_tag(:thumbnail, {}, {class: "nwdl-cachel-img"}) %>
+          <% end %>
         </div>
-      </div>
-      <div class="col-12 col-sm-7 col-md-4">
-        <div class="p-4 h-100 text-center nwdl-content nwdl-bg-blue-light">
-          <%= content.html :focus_transver_text %>
-        </div>
-      </div>
-      <div class="col-12 col-sm-7 col-md-4">
-        <div class="p-4 h-100 text-center nwdl-content nwdl-bg-blue-dark">
-          <%= content.html :focus_consulting_text %>
-        </div>
-      </div>
-    </div>
-
-    <%# IMAGES %>
-    <div class="image-anchor">
-      <div class="planet"><%= render 'nwdl/shared/images/planet' %></div>
-    </div>
-
-    <%# PROJECTS %>
-    <div class="row mt-8">
-      <div class="col-12 col-md-8 nwdl-content nwdl-uppercase-header">
-        <%= content.html :projects_text %>
-      </div>
-      <div class="col-0 col-md-4"></div>
-    </div>
-
-    <%# PROJECT PRESENTER %>
-    <div class="row g-3 mt-4 justify-content-center justify-content-md-start">
-      <% projects = Spina::Resource.find_by(name: "projects").pages.limit(3) %>
-      <% projects.each do |project| %>
-        <% if project.present? && project.find_part(:thumbnail)&.content.present? %>
-          <div class="col-12 col-sm-7 col-md-4">
-            <%= link_to project.materialized_path do %>
-              <%= project.content.image_tag(:thumbnail, {}, {class: "nwdl-cachel-img"}) %>
-            <% end %>
-          </div>
-        <% end %>
       <% end %>
+    <% end %>
+  </div>
+
+  <%# AFTER PROJECT PRESENTER %>
+  <div class="row mt-3">
+    <div class="col-12 nwdl-content text-center">
+      <p>Sie möchten mehr über unsere Projekte erfahren?</p>
+      <%= link_to "Zeige mehr!", Spina::Page.find_by(name: "projects").materialized_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+</div>
+
+
+<%# NEWSLETTER %>
+<%= render 'nwdl/shared/newsletter' %>
+
+
+<%# EVENTS %>
+<div class="container-xl">
+  <%# MAIN EVENTS %>
+  <div class="row justify-content-center mt-8">
+    <div class="col-12 col-sm-7 nwdl-content nwdl-uppercase-header ms-auto">
+      <%= content.html :events_text %>
     </div>
 
-    <%# AFTER PROJECT PRESENTER %>
-    <div class="row mt-3">
-      <div class="col-12 nwdl-content text-center">
-        <p>Sie möchten mehr über unsere Projekte erfahren?</p>
-        <%= link_to "Zeige mehr!", Spina::Page.find_by(name: "projects").materialized_path, class: "btn btn-primary" %>
+    <div class="col-12 row">
+      <div class="col-12 row mb-2 nwdl-event">
+        <div class="col-12 col-md-5 flex-grow-1 nwdl-event-date d-flex align-items-center">
+          <p class="m-0">08/2021</p>
+        </div>
+        <div class="d-none d-md-block col-12 col-md-2 nwdl-event-connector"></div>
+        <div class="col-12 col-md-5 nwdl-bg-blue-light flex-grow-1">Inhalt</div>
+      </div>
+
+      <div class="col-12 row mb-2 nwdl-event">
+        <div class="col-12 col-md-5 flex-grow-1 nwdl-event-date d-flex align-items-center">
+          <p>08/2021</p>
+        </div>
+        <div class="d-none d-md-block col-12 col-md-2 nwdl-event-connector"></div>
+        <div class="col-12 col-md-5 nwdl-bg-blue-light flex-grow-1">Inhalt</div>
+      </div>
+
+      <div class="col-12 row mb-2 nwdl-event">
+        <div class="col-12 col-md-5 flex-grow-1 nwdl-event-date d-flex align-items-center">
+          <p>08/2021</p>
+        </div>
+        <div class="d-none d-md-block col-12 col-md-2 nwdl-event-connector"></div>
+        <div class="col-12 col-md-5 nwdl-bg-blue-light flex-grow-1">Inhalt</div>
+      </div>
+
+      <div class="col-12 row mb-2 nwdl-event">
+        <div class="col-12 col-md-5 flex-grow-1 nwdl-event-date d-flex align-items-center">
+          <p>08/2021</p>
+        </div>
+        <div class="d-none d-md-block col-12 col-md-2 nwdl-event-connector"></div>
+        <div class="col-12 col-md-5 nwdl-bg-blue-light flex-grow-1">Inhalt</div>
       </div>
     </div>
-
-    <%# NEWSLETTER %>
-    <%= render 'nwdl/shared/newsletter' %>
-
-    <%# EVENTS %>
-    <div class="row mt-8 justify-content-end">
-      <div class="col-12 col-sm-7 nwdl-content nwdl-uppercase-header">
-        <%= content.html :events_text %>
-      </div>
-    </div>
-
   </div>
 </div>

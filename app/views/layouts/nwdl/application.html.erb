@@ -10,8 +10,10 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <%= render 'nwdl/shared/main_navigation' %>
-    <%= yield %>
-    <%= render 'nwdl/shared/footer_navigation' %>
+    <div class="main-wrapper">
+      <%= render 'nwdl/shared/main_navigation' %>
+      <%= yield %>
+      <%= render 'nwdl/shared/footer_navigation' %>
+    </div>
   </body>
 </html>
