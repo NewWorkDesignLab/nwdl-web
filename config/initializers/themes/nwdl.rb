@@ -23,6 +23,7 @@ Spina::Theme.register do |theme|
   theme.parts = [
     {name: 'rich_content',  title: "Inhalt", part_type: "Spina::Parts::Text"},
     {name: 'thumbnail',  title: "Thumbnail", part_type: "Spina::Parts::Image"},
+    {name: 'subheading',  title: "Subtitle", part_type: "Spina::Parts::Line"},
     {name: 'header_image',  title: "Image", part_type: "Spina::Parts::Image"},
     {name: 'main_address',  title: "Anschrift", part_type: "Spina::Parts::Text"},
     {name: 'main_contact',  title: "Kontakt", part_type: "Spina::Parts::Text"},
@@ -36,6 +37,8 @@ Spina::Theme.register do |theme|
     {name: 'events_text',  title: "Events", part_type: "Spina::Parts::Text"},
 
     {name: 'logo', title: 'NWDL-Logo', part_type: "Spina::Parts::Image"},
+
+    {name: 'metadata', title: 'Metadaten', part_type: "Spina::Parts::Metadata"},
   ]
 
   # View templates
@@ -52,7 +55,7 @@ Spina::Theme.register do |theme|
     {name: 'employees', title: 'Mitarbeiter', parts: %w(rich_content)},
     {name: 'articles', title: 'Artikel', parts: %w(rich_content)},
     # for resources
-    {name: 'content', title: 'Inhalt', parts: %w(thumbnail rich_content)}
+    {name: 'content', title: 'Inhalt', parts: %w(subheading thumbnail metadata rich_content)}
   ]
 
   # Custom pages
