@@ -2,6 +2,9 @@ Spina.configure do |config|
   # Custom Parts
   Spina::Part.register(Spina::Parts::Metadata)
 
+  # Tailwind Content
+  Spina.config.tailwind_content << "/home/tobias/projects/nwdl-web/app/views/spina/**"
+
   # Locales
   # ===============
   # All locales your content should be available in.

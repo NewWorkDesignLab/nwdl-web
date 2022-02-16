@@ -4,7 +4,8 @@ module.exports = {
 '/home/tobias/.rvm/gems/ruby-2.7.5/gems/spina-2.8.1/app/components/**/*.*',
 '/home/tobias/.rvm/gems/ruby-2.7.5/gems/spina-2.8.1/app/helpers/**/*.*',
 '/home/tobias/.rvm/gems/ruby-2.7.5/gems/spina-2.8.1/app/assets/javascripts/**/*.js',
-'/home/tobias/.rvm/gems/ruby-2.7.5/gems/spina-2.8.1/app/**/application.tailwind.css'
+'/home/tobias/.rvm/gems/ruby-2.7.5/gems/spina-2.8.1/app/**/application.tailwind.css',
+'/home/tobias/projects/nwdl-web/app/views/spina/**'
   ],  
   theme: {
     fontFamily: {
