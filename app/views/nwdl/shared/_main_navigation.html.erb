@@ -16,8 +16,13 @@
         <% items.each do |item| %>
           <% if item.page.materialized_path %>
             <li class="nav-item">
-              <%# <% classes = [].tap { |out| out << "nav-link"; out << "active" if request.path.start_with?(item.page.materialized_path) }.join(' ') %>
-              <%= link_to item.page.menu_title, item.page.materialized_path, class: "nav-link active" %>
+              <% classes = [].tap do |out| %>
+                <% out << "nav-link" %>
+                <% if Spina::Current.page.name == "legal" || Spina::Current.page.name == "data" || item.page.name == Spina::Current.page.name || item.page.name == Spina::Current.page.resource&.name %>
+                  <% out << "active" %>
+                <% end %>
+              <% end %>
+              <%= link_to item.page.menu_title, item.page.materialized_path, class: classes.join(' ') %>
             </li>
           <% end %>
         <% end %>
