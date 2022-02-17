@@ -1,0 +1,10 @@
+de:
+  hello: 'Hallo Welt'
+  # time and date merged in pr #970 github spina
+  time:
+    formats:
+      short: "%d %b %H:%M"
+  date:
+    abbr_day_names: [Mo, Di, Mi, Do, Fr, Sa, So]
+    abbr_month_names: [~, Jan., Feb., März, Apr., Mai, Jun., Jul., Aug., Sep., Okt., Nov., Dez.]
+
