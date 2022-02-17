@@ -6,7 +6,8 @@ module Spina
       attr_json :read_time, :string, default: ""
 
       def content
-        { author: Spina::User.find(author_id), datetime: datetime, read_time: read_time }
+        # changed from .find to .find_by as described in spina pr#971
+        { author: Spina::User.find_by(id: author_id), datetime: datetime, read_time: read_time }
       end
     end
   end
