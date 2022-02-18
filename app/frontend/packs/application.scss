@@ -126,29 +126,29 @@ input {
 .astronaut {
   position: absolute;
   z-index: 1;
-  min-width: 350px;
-  width: 48%;
-  transform: translate(-40%, -100%);
-  margin-left: 0;
-  margin-top: 6vh;
+  min-width: 409px;
+  width: 69%;
+  bottom: -40px;
+  left: -162px;
 }
 
 .farbklecks {
   position: absolute;
   z-index: -1;
-  min-width: 300px;
-  width: 38%;
-  margin-left: 100%;
-  margin-top: -15%;
+  min-width: 380px;
+  width: 50%;
+  top: 69px;
+  right: 123px;
+  transform: translate(100%, -50%);
 }
 
 .planet {
   position: absolute;
   z-index: -1;
-  min-width: 200px;
-  width: 16%;
-  margin-left: -64%;
-  margin-top: -3%;
+  min-width: 256px;
+  width: 21%;
+  left: -108px;
+  top: -84px;
 }
 
 // DONE
