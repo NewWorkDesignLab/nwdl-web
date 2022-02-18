@@ -6,27 +6,32 @@
   </div>
 
   <%# NEWSLETTER %>
-  <div class="row pt-5 justify-content-around nwdl-bg-blue-dark">
-    <div class="col-12 col-md-6 pb-6 nwdl-content nwdl-uppercase-header ms-auto">
-      <%= current_account.content.html :newsletter_text %>
+  <div class="row pt-5 justify-content-around nwdl-bg-blue-dark gx-0 rounded">
+    <div class="col-12 col-md-6 pb-6 nwdl-content nwdl-uppercase-header ms-md-auto row justify-content-center">
+      <div class="col-12 col-sm-8 col-md-12">
+        <%= current_account.content.html :newsletter_text %>
 
-      <form class="mt-3">
-        <div class="mb-2">
-          <label for="newsletterNameInput" class="form-label">Name</label>
-          <input type="text" class="form-control" id="newsletterNameInput">
-        </div>
+        <form class="mt-3">
+          <div class="mb-2">
+            <label for="newsletterNameInput" class="form-label">Name</label>
+            <input type="text" class="form-control" id="newsletterNameInput">
+          </div>
 
-        <div class="mb-5">
-          <label for="newsletterEmailInput" class="form-label">E-Mail</label>
-          <input type="email" class="form-control" id="newsletterEmailInput">
-        </div>
+          <div class="mb-5">
+            <label for="newsletterEmailInput" class="form-label">E-Mail</label>
+            <input type="email" class="form-control" id="newsletterEmailInput">
+          </div>
 
-        <button type="submit" class="btn btn-primary">Anmelden</button>
-      </form>
+          <button type="submit" class="btn btn-primary">Anmelden</button>
+        </form>
+      </div>
     </div>
-    <div class="col-12 col-md-4 mt-3 pt-6 pb-6 nwdl-bg-orange-dark ms-auto angled-bg">
-      <div class="mb-4"><%= current_account.content.html :main_address %></div>
-      <div><%= current_account.content.html :main_contact %></div>
+
+    <div class="col-12 col-md-4 mt-3 pt-6 pb-6 nwdl-bg-orange-dark ms-md-auto angled-bg row justify-content-center gx-md-0">
+      <div class="col-12 col-sm-8 col-md-12">
+        <div class="mb-4"><%= current_account.content.html :main_address %></div>
+        <div><%= current_account.content.html :main_contact %></div>
+      </div>
     </div>
   </div>
 

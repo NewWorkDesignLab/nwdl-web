@@ -6,7 +6,7 @@
 <div class="container-xl">
   <%# MAIN FOCUS %>
   <div class="row justify-content-end mt-8">
-    <div class="col-12 col-sm-7 nwdl-content nwdl-uppercase-header">
+    <div class="col-12 col-sm-8 col-md-7 nwdl-content nwdl-uppercase-header">
       <%= content.html :focus_text %>
     </div>
   </div>
@@ -19,18 +19,18 @@
 
   <%# FOCUS BOXES %>
   <div class="row justify-content-center g-3">
-    <div class="col-12 col-sm-7 col-md-4">
-      <div class="p-4 h-100 text-center nwdl-content nwdl-bg-blue-middle">
+    <div class="col-12 col-sm-9 col-md-4">
+      <div class="p-4 h-100 text-center nwdl-content nwdl-bg-blue-middle rounded">
         <%= content.html :focus_research_text %>
       </div>
     </div>
-    <div class="col-12 col-sm-7 col-md-4">
-      <div class="p-4 h-100 text-center nwdl-content nwdl-bg-blue-light">
+    <div class="col-12 col-sm-9 col-md-4">
+      <div class="p-4 h-100 text-center nwdl-content nwdl-bg-blue-light rounded">
         <%= content.html :focus_transver_text %>
       </div>
     </div>
-    <div class="col-12 col-sm-7 col-md-4">
-      <div class="p-4 h-100 text-center nwdl-content nwdl-bg-blue-dark">
+    <div class="col-12 col-sm-9 col-md-4">
+      <div class="p-4 h-100 text-center nwdl-content nwdl-bg-blue-dark rounded">
         <%= content.html :focus_consulting_text %>
       </div>
     </div>
@@ -46,23 +46,18 @@
 <%# PROJECTS %>
 <div class="container-xl">
   <div class="row mt-8">
-    <div class="col-12 col-md-8 nwdl-content nwdl-uppercase-header">
+    <div class="col-12 col-sm-9 col-md-7 nwdl-content nwdl-uppercase-header">
       <%= content.html :projects_text %>
     </div>
     <div class="col-0 col-md-4"></div>
   </div>
 
   <%# PROJECT PRESENTER %>
-  <div class="row g-3 mt-4 justify-content-center justify-content-md-start">
-    <% projects = Spina::Resource.find_by(name: "projects")&.pages.live.limit(3) %>
-    <% projects.each do |project| %>
-      <% if project.present? && project.find_part(:thumbnail)&.content.present? %>
-        <div class="col-12 col-sm-7 col-md-4">
-          <%= link_to project.materialized_path do %>
-            <%= project.content.image_tag(:thumbnail, {}, {class: "nwdl-cachel-img object-fit-cover"}) %>
-          <% end %>
-        </div>
-      <% end %>
+  <div class="row g-4 mt-4 justify-content-start flex-wrap flex-sm-nowrap flex-md-wrap">
+    <% collection = Spina::Resource.find_by(name: "projects")&.pages.live.limit(3) %>
+
+    <%= render 'nwdl/shared/resource_iterator', resources: collection do |resource| %>
+      <%= render 'nwdl/shared/default_resource', resource: resource %>
     <% end %>
   </div>
 
@@ -83,7 +78,7 @@
 <%# EVENTS %>
 <div class="container-xl">
   <div class="row justify-content-end mt-8">
-    <div class="col-12 col-sm-7 nwdl-content nwdl-uppercase-header">
+    <div class="col-12 col-sm-8 col-md-7 nwdl-content nwdl-uppercase-header">
       <%= content.html :events_text %>
     </div>
   </div>
@@ -104,32 +99,28 @@
       <% recent_events = sorted_events.reverse.take(4) %>
       <% any_event_displayed = false %>
 
-      <% recent_events.each do |event| %>
-        <% if event.present? && event.find_part(:thumbnail)&.content.present? %>
-          <% any_event_displayed = true %>
-          <%= link_to event.materialized_path, class: "col-12 row mb-5 nwdl-event gx-0 justify-content-center text-reset text-decoration-none" do %>
+      <%= render 'nwdl/shared/resource_iterator', resources: recent_events do |event| %>
+        <% any_event_displayed = true %>
+        <%= link_to event.materialized_path, class: "col-12 row mb-5 nwdl-event gx-0 justify-content-center text-reset text-decoration-none" do %>
+          <%# Date %>
+          <div class="col-12 col-md-5 nwdl-event-date d-flex align-items-center mb-2 gx-0">
+            <p class="m-0"><strong><%= I18n.l( event.content(:metadata)&.dig(:datetime) ) %></strong></p>
+          </div>
 
-              <%# Date %>
-              <div class="col-12 col-md-5 nwdl-event-date d-flex align-items-center mb-2 gx-0">
-                <p class="m-0"><strong><%= I18n.l( event.content(:metadata)&.dig(:datetime) ) %></strong></p>
-              </div>
+          <%# "Connector" / Timeline %>
+          <div class="d-none d-md-block col-12 col-md-2 nwdl-event-connector gx-0">
+            <div class="vertical-line"></div>
+            <div class="dot"></div>
+          </div>
 
-              <%# "Connector" / Timeline %>
-              <div class="d-none d-md-block col-12 col-md-2 nwdl-event-connector gx-0">
-                <div class="vertical-line"></div>
-                <div class="dot"></div>
-              </div>
-
-              <%# Content %>
-              <div class="col-12 col-md-5 nwdl-bg-blue-light row gx-0">
-                <%= event.content.image_tag(:thumbnail, {}, {class: "col-12 col-sm-5 rounded object-fit-cover"}) %>
-                <div class="col-12 col-sm-7 p-2">
-                  <p class="mb-1"><strong><%= event.title %></strong></p>
-                  <%= event.content.html(:subheading) %>
-                </div>
-              </div>
-
-          <% end %>
+          <%# Content %>
+          <div class="col-12 col-md-5 nwdl-bg-blue-light row gx-0 rounded">
+            <%= event.content.image_tag(:thumbnail, {}, {class: "col-12 col-sm-5 rounded object-fit-cover"}) %>
+            <div class="col-12 col-sm-7 p-3">
+              <p class="mb-1"><strong><%= event.title %></strong></p>
+              <%= event.content.html(:subheading) %>
+            </div>
+          </div>
         <% end %>
       <% end %>
     </div>

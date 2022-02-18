@@ -2,16 +2,16 @@
 <div class="">
   <div class="container-fluid mt-8 nwdl-bg-black text-white nwdl-footer p-0">
     <div class="container-xl nwdl-content">
-      <div class="row justify-content-between">
-        <div class="col-12 col-sm-7 col-md-4 py-3">
+      <div class="row justify-content-center justify-content-md-between">
+        <div class="col-12 col-sm-8 col-md-4 py-3">
           <%= current_account.content.html :main_address %>
         </div>
 
-        <div class="col-12 col-sm-7 col-md-4 py-3">
+        <div class="col-12 col-sm-8 col-md-4 py-3">
           <%= current_account.content.html :main_contact %>
         </div>
 
-        <div class="col-12 col-sm-7 col-md-4 py-3 d-flex justify-content-center">
+        <div class="col-12 col-sm-8 col-md-4 py-3 d-flex justify-content-center">
           <%= current_account.content.image_tag(:logo, {}, {class: "nwdl-logo"}) %>
         </div>
       </div>
@@ -19,7 +19,7 @@
   </div>
 
   <%# WHITE NAVIGATION BAR %>
-  <nav class="navbar navbar-expand-xl navbar-dark nwdl-bg-grey">
+  <nav class="navbar navbar-expand-md navbar-dark nwdl-bg-grey">
     <div class="container-xl">
       <ul class="navbar-nav mb-2 mb-lg-0">
         <% nav = Spina::Navigation.find_by(name: 'footer') %>

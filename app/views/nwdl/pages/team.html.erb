@@ -1,14 +1,8 @@
 <%= render 'nwdl/shared/default_page' do %>
-  <div class="row g-3 mt-3 mb-5 justify-content-center justify-content-md-start">
-    <% team_pages = Spina::Resource.find_by(name: "team")&.pages.live %>
-    <% if team_pages.present? %>
-      <% team_pages.each do |team_page| %>
-        <% if team_page.present? %>
-
-        <% end %>
-      <% end %>
-    <% else %>
-      <p>Leider sind noch keine Mitarbeiter vorhanden.</p>
+  <%# TEAM PRESENTER %>
+  <div class="row g-5 mt-2 mb-5 justify-content-start">
+    <%= render 'nwdl/shared/resource_iterator', resource_name: "team" do |resource| %>
+      <%= render 'nwdl/shared/default_resource', resource: resource %>
     <% end %>
   </div>
 

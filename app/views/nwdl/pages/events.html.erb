@@ -9,21 +9,10 @@
     <%= content.html :rich_content %>
   </div>
 
-  <%# PROJECT PRESENTER %>
-  <div class="row g-3 mt-3 mb-5 justify-content-center justify-content-md-start">
-    <% events = Spina::Resource.find_by(name: "events")&.pages.live %>
-    <% if events.present? %>
-      <% events.each do |event| %>
-        <% if event.present? && event.find_part(:thumbnail)&.content.present? %>
-          <div class="col-12 col-sm-7 col-md-4">
-            <%= link_to event.materialized_path do %>
-              <%= event.content.image_tag(:thumbnail, {}, {class: "nwdl-cachel-img object-fit-cover"}) %>
-            <% end %>
-          </div>
-        <% end %>
-      <% end %>
-    <% else %>
-      <p>Leider sind noch keine Events vorhanden.</p>
+  <%# EVENTS PRESENTER %>
+  <div class="row g-5 mt-2 mb-5 justify-content-start">
+    <%= render 'nwdl/shared/resource_iterator', resource_name: "events" do |resource| %>
+      <%= render 'nwdl/shared/default_resource', resource: resource %>
     <% end %>
   </div>
 <% end %>
