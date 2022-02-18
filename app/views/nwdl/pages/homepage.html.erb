@@ -54,12 +54,12 @@
 
   <%# PROJECT PRESENTER %>
   <div class="row g-3 mt-4 justify-content-center justify-content-md-start">
-    <% projects = Spina::Resource.find_by(name: "projects").pages.limit(3) %>
+    <% projects = Spina::Resource.find_by(name: "projects")&.pages.live.limit(3) %>
     <% projects.each do |project| %>
       <% if project.present? && project.find_part(:thumbnail)&.content.present? %>
         <div class="col-12 col-sm-7 col-md-4">
           <%= link_to project.materialized_path do %>
-            <%= project.content.image_tag(:thumbnail, {}, {class: "nwdl-cachel-img"}) %>
+            <%= project.content.image_tag(:thumbnail, {}, {class: "nwdl-cachel-img object-fit-cover"}) %>
           <% end %>
         </div>
       <% end %>
@@ -82,44 +82,66 @@
 
 <%# EVENTS %>
 <div class="container-xl">
-  <%# MAIN EVENTS %>
-  <div class="row justify-content-center mt-8">
-    <div class="col-12 col-sm-7 nwdl-content nwdl-uppercase-header ms-auto">
+  <div class="row justify-content-end mt-8">
+    <div class="col-12 col-sm-7 nwdl-content nwdl-uppercase-header">
       <%= content.html :events_text %>
     </div>
+  </div>
 
-    <div class="col-12 row mt-5">
-      <div class="col-12 row mb-2 nwdl-event">
-        <div class="col-12 col-md-5 flex-grow-1 nwdl-event-date d-flex align-items-center">
-          <p class="m-0">08/2021</p>
-        </div>
-        <div class="d-none d-md-block col-12 col-md-2 nwdl-event-connector"></div>
-        <div class="col-12 col-md-5 nwdl-bg-blue-light flex-grow-1">Inhalt</div>
-      </div>
+  <%# EVENT PRESENTER %>
+  <div class="row justify-content-center">
+    <div class="col-12 row mt-5 overflow-hidden">
 
-      <div class="col-12 row mb-2 nwdl-event">
-        <div class="col-12 col-md-5 flex-grow-1 nwdl-event-date d-flex align-items-center">
-          <p>08/2021</p>
-        </div>
-        <div class="d-none d-md-block col-12 col-md-2 nwdl-event-connector"></div>
-        <div class="col-12 col-md-5 nwdl-bg-blue-light flex-grow-1">Inhalt</div>
-      </div>
+      <%#
+        Extream Heady Database Request, but could not figure out how to use
+        .order in combination with json_attr. Best try so far:
 
-      <div class="col-12 row mb-2 nwdl-event">
-        <div class="col-12 col-md-5 flex-grow-1 nwdl-event-date d-flex align-items-center">
-          <p>08/2021</p>
-        </div>
-        <div class="d-none d-md-block col-12 col-md-2 nwdl-event-connector"></div>
-        <div class="col-12 col-md-5 nwdl-bg-blue-light flex-grow-1">Inhalt</div>
-      </div>
+        "... ORDER BY \"spina_pages\".\"json_attributes\"::json#>>'{de_content,2,datetime}' ASC"
+        https://www.postgresql.org/docs/9.5/functions-json.html
+      %>
+      <% all_events = Spina::Resource.find_by(name: "events")&.pages.live %>
+      <% sorted_events = all_events.sort_by { |e| e.content(:metadata)&.dig(:datetime) } %>
+      <% recent_events = sorted_events.reverse.take(4) %>
+      <% any_event_displayed = false %>
 
-      <div class="col-12 row mb-2 nwdl-event">
-        <div class="col-12 col-md-5 flex-grow-1 nwdl-event-date d-flex align-items-center">
-          <p>08/2021</p>
-        </div>
-        <div class="d-none d-md-block col-12 col-md-2 nwdl-event-connector"></div>
-        <div class="col-12 col-md-5 nwdl-bg-blue-light flex-grow-1">Inhalt</div>
-      </div>
+      <% recent_events.each do |event| %>
+        <% if event.present? && event.find_part(:thumbnail)&.content.present? %>
+          <% any_event_displayed = true %>
+          <%= link_to event.materialized_path, class: "col-12 row mb-5 nwdl-event gx-0 justify-content-center text-reset text-decoration-none" do %>
+
+              <%# Date %>
+              <div class="col-12 col-md-5 nwdl-event-date d-flex align-items-center mb-2 gx-0">
+                <p class="m-0"><strong><%= I18n.l( event.content(:metadata)&.dig(:datetime) ) %></strong></p>
+              </div>
+
+              <%# "Connector" / Timeline %>
+              <div class="d-none d-md-block col-12 col-md-2 nwdl-event-connector gx-0">
+                <div class="vertical-line"></div>
+                <div class="dot"></div>
+              </div>
+
+              <%# Content %>
+              <div class="col-12 col-md-5 nwdl-bg-blue-light row gx-0">
+                <%= event.content.image_tag(:thumbnail, {}, {class: "col-12 col-sm-5 rounded object-fit-cover"}) %>
+                <div class="col-12 col-sm-7 p-2">
+                  <p class="mb-1"><strong><%= event.title %></strong></p>
+                  <%= event.content.html(:subheading) %>
+                </div>
+              </div>
+
+          <% end %>
+        <% end %>
+      <% end %>
     </div>
   </div>
+
+  <%# AFTER PROJECT PRESENTER %>
+  <% if any_event_displayed %>
+    <div class="row mt-3">
+      <div class="col-12 nwdl-content text-center">
+        <p>Sie möchten mehr über aktuelle Events erfahren?</p>
+        <%= link_to "Zeige mehr!", Spina::Page.find_by(name: "events").materialized_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
 </div>

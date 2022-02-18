@@ -78,14 +78,41 @@ body {
 }
 
 .nwdl-event {
-  min-height: 7rem;
+  min-height: 8rem;
+
+  img {
+    min-height: 7rem;
+    max-height: 12rem;
+  }
 }
 
 .nwdl-event-connector {
-  background-image: url(../../../public/test.png);
-  background-repeat: no-repeat;
-  background-position: center;
-  flex-basis: 80px;
+  position: relative;
+  flex-basis: 90px;
+
+  div {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+
+  .vertical-line {
+    border: 1.5px solid black;
+    background-color: black;
+    top: -2rem;
+    bottom: -2rem;
+    width: 0;
+  }
+  .dot {
+    border: 5px solid white;
+    border-radius: 100%;
+    background-color: #C0DAF3;
+    top: -10px;
+    bottom: 0;
+    height: 40px;
+    width: 40px;
+  }
 }
 
 @include media-breakpoint-up(md) {
@@ -213,8 +240,12 @@ input {
   width: 100%;
   height: 100%;
   max-height: 270px;
+}
+
+.object-fit-cover {
   object-fit: cover;
 }
+
 
 .nwdl-uppercase-header {
   h1, h2, h3, h4, h5, h6 {

@@ -1,11 +1,11 @@
 <%= render 'nwdl/shared/default_page' do %>
-  <%= content.html :subheading %>
-  <%= content.image_tag :thumbnail %>
-  <%= content(:metadata)[:author] %>
-  <%= content(:metadata)[:datetime] %>
-  <%= content(:metadata)[:read_time] %>
-
   <div class="nwdl-rich-content-wrapper">
+    <%= content.html :subheading %>
+    <%= content.image_tag :thumbnail %>
+    <%= content(:metadata)&.dig(:author) %>
+    <%= content(:metadata)&.dig(:datetime) %>
+    <%= content(:metadata)&.dig(:read_time) %>
+
     <%= content.html :rich_content %>
   </div>
 <% end %>

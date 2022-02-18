@@ -59,6 +59,7 @@ Spina::Theme.register do |theme|
     {name: 'projects', title: 'Projekte', parts: %w(rich_content)},
     {name: 'team', title: 'Team', parts: %w(rich_content)},
     {name: 'articles', title: 'Artikel', parts: %w(rich_content)},
+    {name: 'events', title: 'Events', parts: %w(rich_content)},
 
     # default content view template
     {name: 'content', title: 'Inhalt', parts: %w(subheading thumbnail metadata rich_content)}
@@ -74,7 +75,8 @@ Spina::Theme.register do |theme|
 
     {name: 'projects', title: "Projekte", deletable: false, view_template: "projects"},
     {name: 'team', title: "Team", deletable: false, view_template: "team"},
-    {name: 'articles', title: "Artikel", deletable: false, view_template: "articles"}
+    {name: 'articles', title: "Artikel", deletable: false, view_template: "articles"},
+    {name: 'events', title: "Events", deletable: false, view_template: "events"}
   ]
 
   # Navigations (optional)

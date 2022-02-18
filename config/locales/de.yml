@@ -3,6 +3,7 @@ de:
   # time and date merged in pr #970 github spina
   time:
     formats:
+      default: "%d. %b %Y"
       short: "%d %b %H:%M"
   date:
     abbr_day_names: [Mo, Di, Mi, Do, Fr, Sa, So]

@@ -1,6 +1,6 @@
 <%= render 'nwdl/shared/default_page' do %>
   <div class="row g-3 mt-3 mb-5 justify-content-center justify-content-md-start">
-    <% team_pages = Spina::Resource.find_by(name: "team")&.pages %>
+    <% team_pages = Spina::Resource.find_by(name: "team")&.pages.live %>
     <% if team_pages.present? %>
       <% team_pages.each do |team_page| %>
         <% if team_page.present? %>
