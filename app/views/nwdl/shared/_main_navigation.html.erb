@@ -18,11 +18,22 @@
             <li class="nav-item">
               <% classes = [].tap do |out| %>
                 <% out << "nav-link" %>
-                <% if Spina::Current.page.name == "legal" || Spina::Current.page.name == "data" || item.page.name == Spina::Current.page.name || item.page.name == Spina::Current.page.resource&.name %>
+                <% if current_page.name == "legal" || current_page.name == "data" || item.page.name == current_page.name || item.page.name == current_page.resource&.name %>
                   <% out << "active" %>
                 <% end %>
               <% end %>
               <%= link_to item.page.menu_title, item.page.materialized_path, class: classes.join(' ') %>
+            </li>
+          <% end %>
+        <% end %>
+
+        <%# Language Toggle %>
+        <% existing_locales = current_page.translations.pluck(:locale).map(&:to_sym) %>
+        <% current_locale = params[:locale]&.to_sym || I18n.default_locale&.to_sym %>
+        <% existing_locales.each do |locale| %>
+          <% if locale != current_locale %>
+            <li class="nav-item ms-4">
+              <%= link_to t("spina.languages.#{locale}"), current_page.materialized_path(locale: locale), class: "nav-link active" %>
             </li>
           <% end %>
         <% end %>
