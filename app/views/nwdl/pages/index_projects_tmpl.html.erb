@@ -1,4 +1,4 @@
-<%= render 'nwdl/shared/default_page' do %>
+<%= render 'nwdl/shared/page_wrapper' do %>
   <%# IMAGES %>
   <div class="image-anchor">
     <div class="project-gear"><%= render 'nwdl/shared/images/zahnrad' %></div>
@@ -12,7 +12,7 @@
   <%# PROJECT PRESENTER %>
   <div class="row g-5 mt-2 mb-5 justify-content-start">
     <%= render 'nwdl/shared/resource_iterator', resource_name: "projects" do |resource| %>
-      <%= render 'nwdl/shared/default_resource', resource: resource %>
+      <%= render 'nwdl/shared/resource_preview', resource: resource %>
     <% end %>
   </div>
 <% end %>

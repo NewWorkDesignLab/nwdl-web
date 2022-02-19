@@ -1,12 +1,11 @@
-<%= render 'nwdl/shared/default_page' do %>
-  <h2>ARTICLE TEMPLATE</h2>
+<%= render 'nwdl/shared/page_wrapper' do %>
   <div class="nwdl-rich-content-wrapper">
-    <%= content.html :subheading %>
+    <%= content.html :summary %>
     <%= content.image_tag :thumbnail %>
-    <%= content(:metadata)&.dig(:author) %>
-    <%= content(:metadata)&.dig(:datetime) %>
-    <%= content(:metadata)&.dig(:read_time) %>
-
+    <% if content(:author).present? %>
+      <%= link_to content(:author).title, content(:author).materialized_path %>
+    <% end %>
+    <%= content(:meta_info) %>
     <%= content.html :rich_content %>
   </div>
 <% end %>

@@ -57,7 +57,7 @@
     <% collection = Spina::Resource.find_by(name: "projects")&.pages.live.limit(3) %>
 
     <%= render 'nwdl/shared/resource_iterator', resources: collection do |resource| %>
-      <%= render 'nwdl/shared/default_resource', resource: resource %>
+      <%= render 'nwdl/shared/resource_preview', resource: resource %>
     <% end %>
   </div>
 
@@ -95,7 +95,7 @@
         https://www.postgresql.org/docs/9.5/functions-json.html
       %>
       <% all_events = Spina::Resource.find_by(name: "events")&.pages.live %>
-      <% sorted_events = all_events.sort_by { |e| e.content(:metadata)&.dig(:datetime) } %>
+      <% sorted_events = all_events.sort_by { |e| e.content(:event_time) } %>
       <% recent_events = sorted_events.reverse.take(4) %>
       <% any_event_displayed = false %>
 
@@ -104,7 +104,7 @@
         <%= link_to event.materialized_path, class: "col-12 row mb-5 nwdl-event gx-0 justify-content-center text-reset text-decoration-none" do %>
           <%# Date %>
           <div class="col-12 col-md-5 nwdl-event-date d-flex align-items-center mb-2 gx-0">
-            <p class="m-0"><strong><%= I18n.l( event.content(:metadata)&.dig(:datetime), default: '' ) %></strong></p>
+            <p class="m-0"><strong><%= I18n.l( event.content(:event_time), default: '' ) %></strong></p>
           </div>
 
           <%# "Connector" / Timeline %>
@@ -118,7 +118,7 @@
             <%= event.content.image_tag(:thumbnail, {}, {class: "col-12 col-sm-5 rounded object-fit-cover"}) %>
             <div class="col-12 col-sm-7 p-3">
               <p class="mb-1"><strong><%= event.title %></strong></p>
-              <%= event.content.html(:subheading) %>
+              <%= event.content.html(:summary) %>
             </div>
           </div>
         <% end %>

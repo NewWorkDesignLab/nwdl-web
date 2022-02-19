@@ -1,15 +1,1 @@
-<%= render 'nwdl/shared/default_page' do %>
-  <h2>EMPLOYEE TEMPLATE</h2>
-  <div class="nwdl-rich-content-wrapper">
-    <%= content.html :subheading %>
-    <%= content.image_tag :thumbnail %>
-    <%= content(:metadata)&.dig(:author) %>
-    <%= content(:metadata)&.dig(:datetime) %>
-    <%= content(:metadata)&.dig(:read_time) %>
-
-    <%= content.html :rich_content %>
-  </div>
-<% end %>
-
-<%# NEWSLETTER %>
-<%= render 'nwdl/shared/newsletter' %>
+<%= render 'nwdl/shared/resource_page' %>

@@ -8,4 +8,82 @@ de:
   date:
     abbr_day_names: [Mo, Di, Mi, Do, Fr, Sa, So]
     abbr_month_names: [~, Jan., Feb., März, Apr., Mai, Jun., Jul., Aug., Sep., Okt., Nov., Dez.]
-
+  theme:
+    homepage: "Home"
+    legal: "Impressum"
+    data: "Datenschutz"
+    project: "Projekt"
+    projects: "Projekte"
+    employee: "Team"
+    employees: "Team"
+    article: "Artikel"
+    articles: "Artikel"
+    event: "Event"
+    events: "Events"
+    default: "Seite"
+    slugs:
+      projects: "projekte"
+      team: "team"
+      articles: "artikel"
+      events: "events"
+    parts:
+      summary:
+        title: "Zusammenfassung"
+        hint: "Die Zusammenfassung soll grundlegende Informationen geben. Sie erscheint als Vorschau in der Gallerie sowie als einführender Text auf der Detail-Seite, und ist daher neben Titel und Titelbild außschlaggebend für den Lesenden. Sie sollte entsprechend spannend und informativ formuliert sein."
+      thumbnail:
+        title: "Titelbild"
+        hint: ""
+      rich_content:
+        title: "Inhalt"
+        hint: ""
+      author:
+        title: "Autor"
+        hint: ""
+      contact_person:
+        title: "Ansprechpartner"
+        hint: "Hier kann eine Person angegeben werden, welche auf der Seite als Ansprechpoarter angezeigt wird."
+      event_time:
+        title: "Beginn des Events"
+        hint: ""
+      meta_info:
+        title: "Zusätzliche Info"
+        hint: ""
+      logo:
+        title: "NWDL-Logo"
+        hint: ""
+      newsletter_text:
+        title: "Newsletter"
+        hint: ""
+      main_address:
+        title: "Anschrift"
+        hint: ""
+      main_contact:
+        title: "Kontakt"
+        hint: ""
+      header_image:
+        title: "Image"
+        hint: ""
+      focus_text:
+        title: "Fokus"
+        hint: ""
+      focus_research_text:
+        title: "Fokus (Forschung)"
+        hint: ""
+      focus_transver_text:
+        title: "Fokus (Transfer)"
+        hint: ""
+      focus_consulting_text:
+        title: "Fokus (Beratung)"
+        hint: ""
+      projects_text:
+        title: "Projekte"
+        hint: ""
+      events_text:
+        title: "Events"
+        hint: ""
+      editor_heading_general:
+        title: "Allgemeine Infos"
+        hint: ""
+      editor_heading_details:
+        title: "Inhaltliche Infos"
+        hint: ""

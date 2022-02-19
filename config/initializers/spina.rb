@@ -1,6 +1,8 @@
 Spina.configure do |config|
   # Custom Parts
-  Spina::Part.register(Spina::Parts::Metadata)
+  Spina::Part.register(Spina::Parts::User)
+  Spina::Part.register(Spina::Parts::Datetime)
+  Spina::Part.register(Spina::Parts::Editor)
 
   # Tailwind Content
   Spina.config.tailwind_content << "/home/tobias/projects/nwdl-web/app/views/spina/**"

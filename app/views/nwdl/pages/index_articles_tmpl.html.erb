@@ -1,4 +1,4 @@
-<%= render 'nwdl/shared/default_page' do %>
+<%= render 'nwdl/shared/page_wrapper' do %>
   <%# RICH CONTENT ABOVE ARTICLES %>
   <div class="nwdl-rich-content-wrapper">
     <%= content.html :rich_content %>
@@ -7,7 +7,7 @@
   <%# ARTICLES PRESENTER %>
   <div class="row g-5 mt-2 mb-5 justify-content-start">
     <%= render 'nwdl/shared/resource_iterator', resource_name: "articles" do |resource| %>
-      <%= render 'nwdl/shared/default_resource', resource: resource %>
+      <%= render 'nwdl/shared/resource_preview', resource: resource %>
     <% end %>
   </div>
 <% end %>
