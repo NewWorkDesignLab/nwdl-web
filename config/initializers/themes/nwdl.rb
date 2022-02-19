@@ -49,34 +49,50 @@ Spina::Theme.register do |theme|
   # by referencing them from the theme.parts configuration above.
   theme.view_templates = [
     # for static pages
-    {name: 'homepage', title: 'Home', parts: %w(header_image focus_text focus_research_text focus_transver_text focus_consulting_text projects_text events_text)},
+    {name: 'static_homepage_tmpl', title: 'Home', parts: %w(header_image focus_text focus_research_text focus_transver_text focus_consulting_text projects_text events_text)},
 
     # static pages
-    {name: 'legal', title: 'Impressum', parts: %w(rich_content)},
-    {name: 'data', title: 'Datenschutz', parts: %w(rich_content)},
+    {name: 'static_legal_tmpl', title: 'Impressum', parts: %w(rich_content)},
+    {name: 'static_data_tmpl', title: 'Datenschutz', parts: %w(rich_content)},
 
-    # for resource-indexes
-    {name: 'projects', title: 'Projekte', parts: %w(rich_content)},
-    {name: 'team', title: 'Team', parts: %w(rich_content)},
-    {name: 'articles', title: 'Artikel', parts: %w(rich_content)},
-    {name: 'events', title: 'Events', parts: %w(rich_content)},
+    # for resource indexes (custom pages)
+    {name: 'index_projects_tmpl', title: 'Projekte', parts: %w(rich_content)},
+    {name: 'index_team_tmpl', title: 'Team', parts: %w(rich_content)},
+    {name: 'index_articles_tmpl', title: 'Artikel', parts: %w(rich_content)},
+    {name: 'index_events_tmpl', title: 'Events', parts: %w(rich_content)},
 
-    # default content view template
-    {name: 'content', title: 'Inhalt', parts: %w(subheading thumbnail metadata rich_content)}
+    # for resource pages (resources)
+    {name: 'resource_project_tmpl', title: 'Projekt', parts: %w(subheading thumbnail metadata rich_content), exclude_from: %w(main employees articles events)},
+    {name: 'resource_employee_tmpl', title: 'Mitarbeiter:in', parts: %w(subheading thumbnail metadata rich_content), exclude_from: %w(main projects articles events)},
+    {name: 'resource_article_tmpl', title: 'Artikel', parts: %w(subheading thumbnail metadata rich_content), exclude_from: %w(main projects employees events)},
+    {name: 'resource_event_tmpl', title: 'Event', parts: %w(subheading thumbnail metadata rich_content), exclude_from: %w(main projects employees articles)},
+
+    # default page
+    {name: 'default_tmpl', title: 'Seite', parts: %w(subheading thumbnail metadata rich_content), exclude_from: %w(projects employees articles events)},
   ]
 
   # Custom pages
   # Some pages should not be created by the user, but generated automatically.
   # By naming them you can reference them in your code.
   theme.custom_pages = [
-    {name: 'homepage', title: "Home", deletable: false, view_template: "homepage"},
-    {name: 'legal', title: "Impressum", deletable: false, view_template: "legal"},
-    {name: 'data', title: "Datenschutz", deletable: false, view_template: "data"},
+    {name: 'homepage', title: "Home", deletable: false, view_template: "static_homepage_tmpl"},
+    {name: 'legal', title: "Impressum", deletable: false, view_template: "static_legal_tmpl"},
+    {name: 'data', title: "Datenschutz", deletable: false, view_template: "static_data_tmpl"},
 
-    {name: 'projects', title: "Projekte", deletable: false, view_template: "projects"},
-    {name: 'team', title: "Team", deletable: false, view_template: "team"},
-    {name: 'articles', title: "Artikel", deletable: false, view_template: "articles"},
-    {name: 'events', title: "Events", deletable: false, view_template: "events"}
+    {name: 'projects', title: "Projekte", deletable: false, view_template: "index_projects_tmpl"},
+    {name: 'team', title: "Team", deletable: false, view_template: "index_team_tmpl"},
+    {name: 'articles', title: "Artikel", deletable: false, view_template: "index_articles_tmpl"},
+    {name: 'events', title: "Events", deletable: false, view_template: "index_events_tmpl"},
+  ]
+
+  # Resources (optional)
+  # Think of resources as a collection of pages. They are managed separately in Spina
+  # allowing you to separate these pages from the 'main' collection of pages.
+  theme.resources = [
+    {name: 'projects', label: "Projekte", view_template: "resource_project_tmpl", slug_en: "projects", slug_de: "projekte"},
+    {name: 'employees', label: "Mitarbeiter:in", view_template: "resource_employee_tmpl", slug_en: "team", slug_de: "team"},
+    {name: 'articles', label: "Artikel", view_template: "resource_article_tmpl", slug_en: "articles", slug_de: "artikel"},
+    {name: 'events', label: "Events", view_template: "resource_event_tmpl", slug_en: "events", slug_de: "events"},
   ]
 
   # Navigations (optional)
@@ -84,23 +100,13 @@ Spina::Theme.register do |theme|
   # navigations.
   theme.navigations = [
     {name: 'main', label: 'Hauptmenü'},
-    {name: 'footer', label: 'Footer Menü'}
+    {name: 'footer', label: 'Footer Menü'},
   ]
 
   # Layout parts (optional)
   # You can create global content that doesn't belong to one specific page. We call these layout parts.
   # You only have to reference the name of the parts you want to have here.
   theme.layout_parts = %w(logo newsletter_text main_address main_contact)
-
-  # Resources (optional)
-  # Think of resources as a collection of pages. They are managed separately in Spina
-  # allowing you to separate these pages from the 'main' collection of pages.
-  theme.resources = [
-    {name: 'team', label: "Team", view_template: "content", slug_en: "team", slug_de: "team"},
-    {name: 'projects', label: "Projekte", view_template: "content", slug_en: "projects", slug_de: "projekte"},
-    {name: 'events', label: "Events", view_template: "content", slug_en: "events", slug_de: "events"},
-    {name: 'articles', label: "Artikel", view_template: "content", slug_en: "articles", slug_de: "artikel"}
-  ]
 
   # Plugins (optional)
   theme.plugins = []

@@ -104,7 +104,7 @@
         <%= link_to event.materialized_path, class: "col-12 row mb-5 nwdl-event gx-0 justify-content-center text-reset text-decoration-none" do %>
           <%# Date %>
           <div class="col-12 col-md-5 nwdl-event-date d-flex align-items-center mb-2 gx-0">
-            <p class="m-0"><strong><%= I18n.l( event.content(:metadata)&.dig(:datetime) ) %></strong></p>
+            <p class="m-0"><strong><%= I18n.l( event.content(:metadata)&.dig(:datetime), default: '' ) %></strong></p>
           </div>
 
           <%# "Connector" / Timeline %>
