@@ -51,8 +51,11 @@ de:
       logo:
         title: "NWDL-Logo"
         hint: ""
+      newsletter_heading:
+        title: "Newsletter Überschrift"
+        hint: ""
       newsletter_text:
-        title: "Newsletter"
+        title: "Newsletter Text"
         hint: ""
       main_address:
         title: "Anschrift"

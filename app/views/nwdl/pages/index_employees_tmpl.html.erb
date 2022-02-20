@@ -1,13 +1,24 @@
 <%= render 'nwdl/shared/page_wrapper' do %>
+  <div class="row justify-content-start">
+    <div class="col-12 col-sm-9 col-md-8 pb-7 pb-sm-0 nwdl-rich-content-wrapper">
+      <%= content.html :rich_content_before %>
+    </div>
+  </div>
+
   <%# TEAM PRESENTER %>
-  <div class="row g-5 mt-2 mb-5 justify-content-start">
-    <%= render 'nwdl/shared/resource_iterator', resource_name: "employees" do |resource| %>
-      <%= render 'nwdl/shared/resource_preview', resource: resource %>
+  <div class="row g-3 mt-2 mb-5 justify-content-start">
+    <%# IMAGE PERSON SITZEND %>
+    <div class="image-anchor">
+      <div class="person-sitzend index-foreground"><%= render 'nwdl/shared/images/person_sitzend' %></div>
+    </div>
+
+    <%= render 'nwdl/shared/resource_iterator', resource_name: "employees", nil_message: "Leider ist hier noch nichts zu sehen." do |resource| %>
+      <%= render 'nwdl/shared/employee_preview', resource: resource %>
     <% end %>
   </div>
 
   <div class="nwdl-rich-content-wrapper">
-    <%= content.html :rich_content %>
+    <%= content.html :rich_content_after %>
   </div>
 <% end %>
 

@@ -6,6 +6,6 @@
       <%= yield(resource) %>
     <% end %>
   <% end %>
-<% else %>
-  <p>Leider ist hier noch nichts zu sehen.</p>
+<% elsif (nil_message ||= nil).present? %>
+  <p><%= nil_message %></p>
 <% end %>

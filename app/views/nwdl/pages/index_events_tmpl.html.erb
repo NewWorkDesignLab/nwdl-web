@@ -1,7 +1,7 @@
 <%= render 'nwdl/shared/page_wrapper' do %>
   <%# IMAGES %>
   <div class="image-anchor">
-    <div class="project-gear"><%= render 'nwdl/shared/images/zahnrad' %></div>
+    <div class="project-gear index-background"><%= render 'nwdl/shared/images/zahnrad' %></div>
   </div>
 
   <%# RICH CONTENT ABOVE EVENTS %>
@@ -10,8 +10,8 @@
   </div>
 
   <%# EVENTS PRESENTER %>
-  <div class="row g-5 mt-2 mb-5 justify-content-start">
-    <%= render 'nwdl/shared/resource_iterator', resource_name: "events" do |resource| %>
+  <div class="row g-3 mt-2 mb-5 justify-content-start">
+    <%= render 'nwdl/shared/resource_iterator', resource_name: "events", nil_message: "Leider ist hier noch nichts zu sehen." do |resource| %>
       <%= render 'nwdl/shared/resource_preview', resource: resource %>
     <% end %>
   </div>

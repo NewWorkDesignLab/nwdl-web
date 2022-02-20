@@ -1,0 +1,83 @@
+.image-anchor {
+  position: relative;
+  // height: 0px;
+  // flex-basis: min-content;
+  @extend .row;
+  @extend .justify-content-center;
+}
+
+.astronaut {
+  position: absolute;
+  min-width: 409px;
+  width: 69%;
+  bottom: -40px;
+  left: -162px;
+}
+
+.farbklecks {
+  position: absolute;
+  min-width: 380px;
+  width: 50%;
+  top: 69px;
+  right: 123px;
+  transform: translate(100%, -50%);
+}
+
+.planet {
+  position: absolute;
+  min-width: 256px;
+  width: 21%;
+  left: -108px;
+  top: -84px;
+}
+
+.newsletter-kreise {
+  position: absolute;
+  min-width: 250px;
+  width: 14%;
+  right: -65px;
+  bottom: -77px;
+}
+
+.newsletter-wolke {
+  position: absolute;
+  min-width: 200px;
+  width: 12%;
+  transform: translate(-50%, -100%);
+  top: -12px;
+  left: 34px;
+}
+
+.farbfleck-pink {
+  position: absolute;
+  min-width: 250px;
+  width: 16%;
+  left: -112px;
+  top: -100px;
+}
+
+.person-stehend {
+  position: absolute;
+  min-width: 350px;
+  width: 20%;
+  top: -10px;
+  left: 69px;
+  transform: translateX(-100%);
+}
+
+.person-sitzend {
+  position: absolute;
+  min-width: 200px;
+  width: 25%;
+  right: 0;
+  top: 13px;
+  transform: translate(60%, -60%);
+}
+
+.project-gear {
+  position: absolute;
+  min-width: 135px;
+  width: 10%;
+  left: -60px;
+  bottom: 0;
+}

@@ -26,15 +26,17 @@ Spina::Theme.register do |theme|
     {name: 'summary', title: I18n.t('theme.parts.summary.title'), part_type: "Spina::Parts::Line", hint: I18n.t('theme.parts.summary.hint') },
     {name: 'thumbnail', title: I18n.t('theme.parts.thumbnail.title'), part_type: "Spina::Parts::Image", hint: I18n.t('theme.parts.thumbnail.hint') },
     {name: 'rich_content', title: I18n.t('theme.parts.rich_content.title'), part_type: "Spina::Parts::Text", hint: I18n.t('theme.parts.rich_content.hint') },
+    {name: 'rich_content_before', title: I18n.t('theme.parts.rich_content_before.title'), part_type: "Spina::Parts::Text", hint: I18n.t('theme.parts.rich_content_before.hint') },
+    {name: 'rich_content_after', title: I18n.t('theme.parts.rich_content_after.title'), part_type: "Spina::Parts::Text", hint: I18n.t('theme.parts.rich_content_after.hint') },
 
     {name: 'author', title: I18n.t('theme.parts.author.title'), part_type: "Spina::Parts::User", hint: I18n.t('theme.parts.author.hint') },
     {name: 'contact_person', title: I18n.t('theme.parts.contact_person.title'), part_type: "Spina::Parts::User", hint: I18n.t('theme.parts.contact_person.hint') },
     {name: 'event_time', title: I18n.t('theme.parts.event_time.title'), part_type: "Spina::Parts::Datetime", hint: I18n.t('theme.parts.event_time.hint') },
     {name: 'meta_info', title: I18n.t('theme.parts.meta_info.title'), part_type: "Spina::Parts::Line", hint: I18n.t('theme.parts.meta_info.hint') },
 
-
     # Static Layout Parts
     {name: 'logo', title: I18n.t('theme.parts.logo.title'), part_type: "Spina::Parts::Image", hint: I18n.t('theme.parts.logo.hint') },
+    {name: 'newsletter_heading', title: I18n.t('theme.parts.newsletter_heading.title'), part_type: "Spina::Parts::Text", hint: I18n.t('theme.parts.newsletter_heading.hint') },
     {name: 'newsletter_text', title: I18n.t('theme.parts.newsletter_text.title'), part_type: "Spina::Parts::Text", hint: I18n.t('theme.parts.newsletter_text.hint') },
     {name: 'main_address', title: I18n.t('theme.parts.main_address.title'), part_type: "Spina::Parts::Text", hint: I18n.t('theme.parts.main_address.hint') },
     {name: 'main_contact', title: I18n.t('theme.parts.main_contact.title'), part_type: "Spina::Parts::Text", hint: I18n.t('theme.parts.main_contact.hint') },
@@ -54,7 +56,7 @@ Spina::Theme.register do |theme|
 
     # for resource indexes (custom pages)
     {name: 'index_projects_tmpl', title: I18n.t('theme.projects'), parts: %w(rich_content)},
-    {name: 'index_employees_tmpl', title: I18n.t('theme.employees'), parts: %w(rich_content)},
+    {name: 'index_employees_tmpl', title: I18n.t('theme.employees'), parts: %w(rich_content_before rich_content_after)},
     {name: 'index_articles_tmpl', title: I18n.t('theme.articles'), parts: %w(rich_content)},
     {name: 'index_events_tmpl', title: I18n.t('theme.events'), parts: %w(rich_content)},
 
@@ -103,7 +105,7 @@ Spina::Theme.register do |theme|
   # Layout parts (optional)
   # You can create global content that doesn't belong to one specific page. We call these layout parts.
   # You only have to reference the name of the parts you want to have here.
-  theme.layout_parts = %w(logo newsletter_text main_address main_contact)
+  theme.layout_parts = %w(logo newsletter_heading newsletter_text main_address main_contact)
 
   # Plugins (optional)
   theme.plugins = []

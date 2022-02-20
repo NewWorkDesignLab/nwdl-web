@@ -3,6 +3,7 @@
 
 $font-family-base: 'Raleway', sans-serif;
 $headings-font-family: 'Playfair Display', serif;
+$enable-negative-margins: true;
 
 $spacer: 1rem;
 $spacers: (
@@ -21,6 +22,8 @@ $spacers: (
 
 // Import Bootstrap v5
 @import "~bootstrap/scss/bootstrap";
+@import "./nwdl-colors.scss";
+@import "./nwdl-images.scss";
 
 body {
   overflow-x: hidden;
@@ -53,18 +56,11 @@ body {
   max-width: 70vw;
 }
 
-.nwdl-content {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-
 @include media-breakpoint-up(md) {
   .angled-bg {
     position: relative;
-    z-index: 0;
   }
   .angled-bg::before {
-    z-index: -1;
     content: '';
     position: absolute;
     top: 0;
@@ -146,86 +142,12 @@ input {
   color: #000000 !important;
 }
 
-.image-anchor {
-  position: relative;
-  @extend .row;
-  @extend .justify-content-center;
-}
-
-.astronaut {
-  position: absolute;
+.index-foreground {
   z-index: 1;
-  min-width: 409px;
-  width: 69%;
-  bottom: -40px;
-  left: -162px;
 }
 
-.farbklecks {
-  position: absolute;
+.index-background {
   z-index: -1;
-  min-width: 380px;
-  width: 50%;
-  top: 69px;
-  right: 123px;
-  transform: translate(100%, -50%);
-}
-
-.planet {
-  position: absolute;
-  z-index: -1;
-  min-width: 256px;
-  width: 21%;
-  left: -108px;
-  top: -84px;
-}
-
-// DONE
-.newsletter-kreise {
-  position: absolute;
-  z-index: -1;
-  min-width: 250px;
-  width: 14%;
-  right: -65px;
-  bottom: -77px;
-}
-
-// DONE
-.newsletter-wolke {
-  position: absolute;
-  z-index: 1;
-  min-width: 200px;
-  width: 12%;
-  margin-left: 200px;
-  top: -1px;
-}
-
-// DONE
-.farbfleck-pink {
-  position: absolute;
-  z-index: -1;
-  min-width: 250px;
-  width: 16%;
-  left: -112px;
-  top: -100px;
-}
-
-.person-stehend {
-  position: absolute;
-  min-width: 200px;
-  width: 20%;
-  margin-left: 0;
-  margin-top: 0;
-}
-
-// DONE
-.project-gear {
-  position: absolute;
-  z-index: -1;
-  min-width: 135px;
-  width: 10%;
-  left: -60px;
-  bottom: 0;
 }
 
 .nwdl-header-image {
@@ -244,6 +166,29 @@ input {
   max-height: 270px;
 }
 
+.nwdl-quatric-wrapper {
+  width: 100%;
+  position: relative;
+  display: inline-block;
+
+  &::before {
+    content: '';
+    display: block;
+    margin-top: 100%;
+  }
+
+  * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-height: none;
+    height: 100%;
+    width: 100%;
+  }
+}
+
 .object-fit-cover {
   object-fit: cover;
 }
@@ -254,26 +199,4 @@ input {
     text-transform: uppercase;
     font-size: calc(2.5rem + 0.9vw);
   }
-}
-
-.nwdl-bg-blue-light {
-  background-color: #E1EBF3;
-}
-.nwdl-bg-blue-middle {
-  background-color: #C0DAF3;
-}
-.nwdl-bg-blue-dark {
-  background-color: #86AED5;
-}
-.nwdl-bg-orange-light {
-  background-color: #F6CA46;
-}
-.nwdl-bg-orange-dark {
-  background-color: #EF9C20;
-}
-.nwdl-bg-grey {
-  background-color: #272727;
-}
-.nwdl-bg-black {
-  background-color: #000000;
 }
