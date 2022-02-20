@@ -19,3 +19,8 @@
 
 <%# NEWSLETTER %>
 <%= render 'nwdl/shared/newsletter' %>
+
+
+<%# TESTES JSONB QUERIES %>
+<% result = Spina::Resource.find_by(name: "projects")&.pages.where("json_attributes#>'{de_content,4}' @> ?", {user_id: 17}.to_json) %>
+<% result = Spina::Resource.find_by(name: "projects")&.pages.where("json_attributes @> (?)::jsonb", {"de_content":[{"user_id":9}]}.to_json) %>

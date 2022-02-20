@@ -88,10 +88,10 @@ Spina::Theme.register do |theme|
   # Think of resources as a collection of pages. They are managed separately in Spina
   # allowing you to separate these pages from the 'main' collection of pages.
   theme.resources = [
-    {name: 'projects', label: I18n.t('theme.projects'), view_template: "resource_project_tmpl", slug_en: "projects", slug_de: "projekte"},
-    {name: 'employees', label: I18n.t('theme.employees'), view_template: "resource_employee_tmpl", slug_en: "team", slug_de: "team" },
-    {name: 'articles', label: I18n.t('theme.articles'), view_template: "resource_article_tmpl", slug_en: "articles", slug_de: "artikel" },
-    {name: 'events', label: I18n.t('theme.events'), view_template: "resource_event_tmpl", slug_en: "events", slug_de: "events" },
+    {name: 'projects', label: I18n.t('theme.projects'), view_template: "resource_project_tmpl", slug_en: "projects", slug_de: "projekte", order_by: ""},
+    {name: 'employees', label: I18n.t('theme.employees'), view_template: "resource_employee_tmpl", slug_en: "team", slug_de: "team", order_by: "" },
+    {name: 'articles', label: I18n.t('theme.articles'), view_template: "resource_article_tmpl", slug_en: "articles", slug_de: "artikel", order_by: "" },
+    {name: 'events', label: I18n.t('theme.events'), view_template: "resource_event_tmpl", slug_en: "events", slug_de: "events", order_by: "" },
   ]
 
   # Navigations (optional)
