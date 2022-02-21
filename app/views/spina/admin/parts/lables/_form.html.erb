@@ -1,0 +1,13 @@
+<div class="mt-6">
+  <label class="block text-sm leading-5 font-medium text-gray-700"><%= f.object.title %></label>
+  <div class="text-gray-400 text-sm"><%= f.object.hint %></div>
+  <div class="mt-1 flex flex-wrap gap-2">
+    <% options = Spina::Resource.find_by(name: $spina_lables)&.pages.live.joins(:translations).where(translations: {locale: locale}) %>
+    <% 3.times do |index| %>
+      <%= f.select :lable_ids,
+              options.collect{ |e| [e.title(locale: locale), e.id] },
+              { include_blank: true, selected: f.object.lable_ids&.dig(index) },
+              { name: "#{f.object_name}[lable_ids][]", class: "form-select flex-auto" } %>
+    <% end %>
+  </div>
+</div>

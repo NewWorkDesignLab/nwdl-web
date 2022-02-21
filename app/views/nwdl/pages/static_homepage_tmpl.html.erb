@@ -54,20 +54,22 @@
 
   <%# PROJECT PRESENTER %>
   <div class="row g-4 mt-4 justify-content-start flex-wrap flex-sm-nowrap flex-md-wrap">
-    <% collection = Spina::Resource.find_by(name: "projects")&.pages.live.limit(3) %>
+    <% project_collection = Spina::Resource.find_by(name: $spina_projects)&.pages.live.joins(:translations).where(translations: {locale: locale}).limit(3) %>
 
-    <%= render 'nwdl/shared/resource_iterator', resources: collection do |resource| %>
+    <%= render 'nwdl/shared/resource_iterator', resources: project_collection do |resource| %>
       <%= render 'nwdl/shared/resource_preview', resource: resource %>
     <% end %>
   </div>
 
   <%# AFTER PROJECT PRESENTER %>
-  <div class="row mt-3">
-    <div class="col-12 py-3 text-center">
-      <p>Sie möchten mehr über unsere Projekte erfahren?</p>
-      <%= link_to "Zeige mehr!", Spina::Page.find_by(name: "projects").materialized_path, class: "btn btn-nwdl" %>
+  <% if project_collection.present? %>
+    <div class="row mt-3">
+      <div class="col-12 py-3 text-center">
+        <p>Sie möchten mehr über unsere Projekte erfahren?</p>
+        <%= link_to "Zeige mehr!", Spina::Page.find_by(name: "projects").materialized_path, class: "btn btn-nwdl" %>
+      </div>
     </div>
-  </div>
+  <% end %>
 </div>
 
 
@@ -101,7 +103,7 @@
         "... ORDER BY \"spina_pages\".\"json_attributes\"::json#>>'{de_content,2,datetime}' ASC"
         https://www.postgresql.org/docs/9.5/functions-json.html
       %>
-      <% all_events = Spina::Resource.find_by(name: "events")&.pages.live %>
+      <% all_events = Spina::Resource.find_by(name: $spina_events)&.pages.live.joins(:translations).where(translations: {locale: locale}) %>
       <% sorted_events = all_events.sort_by { |e| e.content(:event_time) } %>
       <% recent_events = sorted_events.reverse.take(4) %>
       <% any_event_displayed = false %>

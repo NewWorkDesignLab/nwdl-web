@@ -20,6 +20,8 @@ de:
     articles: "Artikel"
     event: "Event"
     events: "Events"
+    lable: "Label"
+    lables: "Label"
     default: "Seite"
     slugs:
       projects: "projekte"
@@ -48,6 +50,9 @@ de:
       meta_info:
         title: "Zusätzliche Info"
         hint: ""
+      lable:
+        title: "Label"
+        hint: "Gebe bis zu drei Label an, welche zum Thema passen. Mithilfe der Label können Beiträge einfacher gefiltert und gefunden werden."
       logo:
         title: "NWDL-Logo"
         hint: ""

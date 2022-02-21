@@ -5,6 +5,11 @@
     <% if content(:author).present? %>
       <%= link_to content(:author).title, content(:author).materialized_path %>
     <% end %>
+    <% if content(:lable).present? %>
+      <% content(:lable).each do |lable| %>
+        <%= link_to lable.title, lable.materialized_path %>
+      <% end %>
+    <% end %>
     <%= content(:meta_info) %>
     <%= content.html :rich_content %>
   </div>

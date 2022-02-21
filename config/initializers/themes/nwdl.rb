@@ -33,6 +33,7 @@ Spina::Theme.register do |theme|
     {name: 'contact_person', title: I18n.t('theme.parts.contact_person.title'), part_type: "Spina::Parts::User", hint: I18n.t('theme.parts.contact_person.hint') },
     {name: 'event_time', title: I18n.t('theme.parts.event_time.title'), part_type: "Spina::Parts::Datetime", hint: I18n.t('theme.parts.event_time.hint') },
     {name: 'meta_info', title: I18n.t('theme.parts.meta_info.title'), part_type: "Spina::Parts::Line", hint: I18n.t('theme.parts.meta_info.hint') },
+    {name: 'lable', title: I18n.t('theme.parts.lable.title'), part_type: "Spina::Parts::Lable", hint: I18n.t('theme.parts.lable.hint') },
 
     # Static Layout Parts
     {name: 'logo', title: I18n.t('theme.parts.logo.title'), part_type: "Spina::Parts::Image", hint: I18n.t('theme.parts.logo.hint') },
@@ -61,13 +62,14 @@ Spina::Theme.register do |theme|
     {name: 'index_events_tmpl', title: I18n.t('theme.events'), parts: %w(rich_content)},
 
     # for resource pages (resources)
-    {name: 'resource_project_tmpl', title: I18n.t('theme.project'), parts: %w(editor_heading_general summary thumbnail editor_heading_details contact_person rich_content), exclude_from: %w(main employees articles events)},
-    {name: 'resource_employee_tmpl', title: I18n.t('theme.employee'), parts: %w(editor_heading_general summary thumbnail editor_heading_details rich_content), exclude_from: %w(main projects articles events)},
-    {name: 'resource_article_tmpl', title: I18n.t('theme.article'), parts: %w(editor_heading_general summary thumbnail editor_heading_details author meta_info rich_content), exclude_from: %w(main projects employees events)},
-    {name: 'resource_event_tmpl', title: I18n.t('theme.event'), parts: %w(editor_heading_general summary event_time thumbnail editor_heading_details contact_person rich_content), exclude_from: %w(main projects employees articles)},
+    {name: 'resource_project_tmpl', title: I18n.t('theme.project'), parts: %w(editor_heading_general summary thumbnail editor_heading_details contact_person lable rich_content), exclude_from: ["main", $spina_employees, $spina_articles, $spina_events, $spina_lables] },
+    {name: 'resource_employee_tmpl', title: I18n.t('theme.employee'), parts: %w(editor_heading_general summary thumbnail editor_heading_details rich_content), exclude_from: ["main", $spina_projects, $spina_articles, $spina_events, $spina_lables] },
+    {name: 'resource_article_tmpl', title: I18n.t('theme.article'), parts: %w(editor_heading_general summary thumbnail editor_heading_details author meta_info lable rich_content), exclude_from: ["main", $spina_projects, $spina_employees, $spina_events, $spina_lables] },
+    {name: 'resource_event_tmpl', title: I18n.t('theme.event'), parts: %w(editor_heading_general summary event_time thumbnail editor_heading_details contact_person lable rich_content), exclude_from: ["main", $spina_projects, $spina_employees, $spina_articles, $spina_lables] },
+    {name: 'resource_lable_tmpl', title: I18n.t('theme.lable'), parts: %w(), exclude_from: ["main", $spina_projects, $spina_employees, $spina_articles, $spina_events] },
 
     # default page
-    {name: 'default_tmpl', title: I18n.t('theme.default'), parts: %w(editor_heading_general summary thumbnail editor_heading_details rich_content), exclude_from: %w(projects employees articles events)},
+    {name: 'default_tmpl', title: I18n.t('theme.default'), parts: %w(editor_heading_general summary thumbnail editor_heading_details rich_content), exclude_from: [$spina_projects, $spina_employees, $spina_articles, $spina_events, $spina_lables] },
   ]
 
   # Custom pages
@@ -87,11 +89,17 @@ Spina::Theme.register do |theme|
   # Resources (optional)
   # Think of resources as a collection of pages. They are managed separately in Spina
   # allowing you to separate these pages from the 'main' collection of pages.
+  $spina_projects = "a_projects_res"
+  $spina_employees = "b_employees_res"
+  $spina_articles = "c_articles_res"
+  $spina_events = "d_events_res"
+  $spina_lables = "e_lables_res"
   theme.resources = [
-    {name: 'projects', label: I18n.t('theme.projects'), view_template: "resource_project_tmpl", slug_en: "projects", slug_de: "projekte", order_by: ""},
-    {name: 'employees', label: I18n.t('theme.employees'), view_template: "resource_employee_tmpl", slug_en: "team", slug_de: "team", order_by: "" },
-    {name: 'articles', label: I18n.t('theme.articles'), view_template: "resource_article_tmpl", slug_en: "articles", slug_de: "artikel", order_by: "" },
-    {name: 'events', label: I18n.t('theme.events'), view_template: "resource_event_tmpl", slug_en: "events", slug_de: "events", order_by: "" },
+    {name: 'a_projects_res', label: I18n.t('theme.projects'), view_template: "resource_project_tmpl", slug_en: "projects", slug_de: "projekte", order_by: ""},
+    {name: 'b_employees_res', label: I18n.t('theme.employees'), view_template: "resource_employee_tmpl", slug_en: "team", slug_de: "team", order_by: "" },
+    {name: 'c_articles_res', label: I18n.t('theme.articles'), view_template: "resource_article_tmpl", slug_en: "articles", slug_de: "artikel", order_by: "" },
+    {name: 'd_events_res', label: I18n.t('theme.events'), view_template: "resource_event_tmpl", slug_en: "events", slug_de: "events", order_by: "" },
+    {name: 'e_lables_res', label: I18n.t('theme.lables'), view_template: "resource_lable_tmpl", slug_en: "lables", slug_de: "labels", order_by: "" },
   ]
 
   # Navigations (optional)

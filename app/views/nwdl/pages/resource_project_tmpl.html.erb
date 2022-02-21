@@ -1,1 +1,18 @@
-<%= render 'nwdl/shared/resource_page' %>
+<%= render 'nwdl/shared/page_wrapper' do %>
+  <div class="nwdl-rich-content-wrapper">
+    <%= content.html :summary %>
+    <%= content.image_tag :thumbnail %>
+    <% if content(:contact_person).present? %>
+      <%= link_to content(:contact_person).title, content(:contact_person).materialized_path %>
+    <% end %>
+    <% if content(:lable).present? %>
+      <% content(:lable).each do |lable| %>
+        <%= link_to lable.title, lable.materialized_path %>
+      <% end %>
+    <% end %>
+    <%= content.html :rich_content %>
+  </div>
+<% end %>
+
+<%# NEWSLETTER %>
+<%= render 'nwdl/shared/newsletter' %>

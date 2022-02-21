@@ -1,0 +1,13 @@
+<%= render 'nwdl/shared/page_wrapper' do %>
+  <div class="row g-4 mt-4 justify-content-start flex-wrap flex-sm-nowrap flex-md-wrap">
+
+    <% labled_pages = Spina::Page.live.joins(:translations).where(translations: {locale: locale.to_sym}).where("json_attributes @> (?)::jsonb", {"#{locale.to_s}_content":[{"lable_ids":[current_page.id]}]}.to_json) %>
+    <%= render 'nwdl/shared/resource_iterator', resources: labled_pages do |resource| %>
+      <%= render 'nwdl/shared/resource_preview', resource: resource %>
+    <% end %>
+  </div>
+
+<% end %>
+
+<%# NEWSLETTER %>
+<%= render 'nwdl/shared/newsletter' %>

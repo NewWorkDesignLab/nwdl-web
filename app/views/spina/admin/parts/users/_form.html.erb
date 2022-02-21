@@ -2,6 +2,7 @@
   <label class="block text-sm leading-5 font-medium text-gray-700"><%= f.object.title %></label>
   <div class="text-gray-400 text-sm"><%= f.object.hint %></div>
   <div class="mt-1">
-    <%= f.select :user_id, Spina::Resource.find_by(name: "employees")&.pages.live.collect{ |e| [e.title, e.id] }, { include_blank: "Nicht angegeben" }, { class: "form-select block w-full max-w-5xl sm:text-sm sm:leading-5" } %>
+    <% options = Spina::Resource.find_by(name: $spina_employees)&.pages.live.joins(:translations).where(translations: {locale: locale}) %>
+    <%= f.select :user_id, options.collect{ |e| [e.title, e.id] }, { include_blank: true }, { class: "form-select block w-full max-w-5xl sm:text-sm sm:leading-5" } %>
   </div>
 </div>
