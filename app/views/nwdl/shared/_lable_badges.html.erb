@@ -1,0 +1,10 @@
+<% if display_lables.present? %>
+  <div class="d-flex justify-content-start flex-nowrap overflow-hidden gap-2 p-2 fs-5 translate-middle-y mb-n4">
+    <% colors = ["light", "middle", "dark"]%>
+    <% display_lables.each do |display_lable| %>
+      <span class="badge rounded-pill nwdl-bg-blue-<%= colors.sample %> text-dark">
+        <%= display_lable.title %>
+      </span>
+    <% end %>
+  </div>
+<% end %>

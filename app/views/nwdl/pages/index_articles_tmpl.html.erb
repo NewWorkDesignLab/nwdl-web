@@ -20,7 +20,7 @@
           <% end %>
 
           <%# HIGHLIGHT PRESENTER %>
-          <%= render 'nwdl/shared/resource/iterator', resources: highlights do |resource| %>
+          <%= render 'nwdl/shared/resource/iterator', resources: highlights, classes: "row g-4 justify-content-start flex-nowrap" do |resource| %>
             <%= render 'nwdl/shared/resource/resource_big', resource: resource %>
           <% end %>
 

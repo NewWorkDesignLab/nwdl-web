@@ -80,7 +80,7 @@ Spina::Theme.register do |theme|
   # * in backend, resources get displayed ordered by name, so I need to prefix the name with "a_".."e_"
   # * in code I use the name to find the specific Spina Pages and Resources - due to the complexity of the name and the possible
   #   change of resource order (and thereby the name) the use of an global variable is handy (" Spina::Page.find_by(name: $spina_home) ")
-  $spina_home = "spina_homepage"
+  $spina_home = "homepage"
   $spina_legal = "spina_legal"
   $spina_data = "spina_data"
   $spina_projects = "a_spina_projects"
