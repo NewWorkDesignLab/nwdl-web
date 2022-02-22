@@ -1,16 +1,39 @@
-<%= render 'nwdl/shared/page_wrapper' do %>
-  <%# RICH CONTENT ABOVE ARTICLES %>
-  <div class="nwdl-rich-content-wrapper">
-    <%= content.html :rich_content %>
-  </div>
+<%= render 'nwdl/shared/resource/index' do %>
 
-  <%# ARTICLES PRESENTER %>
-  <div class="row g-5 mt-2 mb-5 justify-content-start">
-    <%= render 'nwdl/shared/resource_iterator', resource_name: $spina_articles, nil_message: "Leider ist hier noch nichts zu sehen." do |resource| %>
-      <%= render 'nwdl/shared/resource_preview', resource: resource %>
+  <%# IMAGES %>
+  <% content_for :image_title do %>
+    <div class="articles-lamp index-background"><%= render 'nwdl/shared/images/lampe' %></div>
+  <% end %>
+
+  <%# HIGHLIGHTS %>
+  <% content_for :before_presenter do %>
+    <% highlights = content(:highlights) %>
+    <% if highlights.present? %>
+      <div class="container-fluid nwdl-bg-blue-dark mt-5 mb-7">
+        <div class="container-xl py-4">
+
+          <%# RICH CONTENT HIGHLIGHTS %>
+          <% if current_page.find_part(:rich_content_highlights)&.content.present? %>
+            <div class="nwdl-rich-content-wrapper mb-3">
+              <%= content.html :rich_content_highlights %>
+            </div>
+          <% end %>
+
+          <%# HIGHLIGHT PRESENTER %>
+          <%= render 'nwdl/shared/resource/iterator', resources: highlights do |resource| %>
+            <%= render 'nwdl/shared/resource/resource_big', resource: resource %>
+          <% end %>
+
+        </div>
+      </div>
     <% end %>
-  </div>
-<% end %>
+  <% end %>
 
-<%# NEWSLETTER %>
-<%= render 'nwdl/shared/newsletter' %>
+  <%# PRESENTER SELF %>
+  <% content_for :presenter_content do %>
+    <%= render 'nwdl/shared/resource/iterator', resource_name: $spina_articles, nil_message: "Leider ist hier noch nichts zu sehen." do |resource| %>
+      <%= render 'nwdl/shared/resource/resource_default', resource: resource %>
+    <% end %>
+  <% end %>
+
+<% end %>

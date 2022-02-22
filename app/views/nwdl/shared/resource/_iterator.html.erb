@@ -1,0 +1,14 @@
+
+<% resources ||= Spina::Resource.find_by(name: resource_name)&.pages&.live&.joins(:translations)&.where(translations: {locale: locale}) %>
+<% if resources&.present? %>
+  <% classes ||= "row g-4 justify-content-start" %>
+  <div class="<%= classes %>">
+    <% resources.each do |resource| %>
+      <% if resource.present? && resource.find_part(:thumbnail)&.content.present? && resource.find_part(:summary)&.content.present? %>
+        <%= yield(resource) %>
+      <% end %>
+    <% end %>
+  </div>
+<% elsif (nil_message ||= nil).present? %>
+  <p><%= nil_message %></p>
+<% end %>

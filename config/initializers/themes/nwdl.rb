@@ -28,6 +28,8 @@ Spina::Theme.register do |theme|
     {name: 'rich_content', title: I18n.t('theme.parts.rich_content.title'), part_type: "Spina::Parts::Text", hint: I18n.t('theme.parts.rich_content.hint') },
     {name: 'rich_content_before', title: I18n.t('theme.parts.rich_content_before.title'), part_type: "Spina::Parts::Text", hint: I18n.t('theme.parts.rich_content_before.hint') },
     {name: 'rich_content_after', title: I18n.t('theme.parts.rich_content_after.title'), part_type: "Spina::Parts::Text", hint: I18n.t('theme.parts.rich_content_after.hint') },
+    {name: 'rich_content_highlights', title: I18n.t('theme.parts.rich_content_highlights.title'), part_type: "Spina::Parts::Text", hint: I18n.t('theme.parts.rich_content_highlights.hint') },
+    {name: 'highlights', title: I18n.t('theme.parts.highlights.title'), part_type: "Spina::Parts::Article", hint: I18n.t('theme.parts.highlights.hint') },
 
     {name: 'author', title: I18n.t('theme.parts.author.title'), part_type: "Spina::Parts::User", hint: I18n.t('theme.parts.author.hint') },
     {name: 'contact_person', title: I18n.t('theme.parts.contact_person.title'), part_type: "Spina::Parts::User", hint: I18n.t('theme.parts.contact_person.hint') },
@@ -56,50 +58,60 @@ Spina::Theme.register do |theme|
     {name: 'static_data_tmpl', title: I18n.t('theme.data'), parts: %w(rich_content)},
 
     # for resource indexes (custom pages)
-    {name: 'index_projects_tmpl', title: I18n.t('theme.projects'), parts: %w(rich_content)},
+    {name: 'index_projects_tmpl', title: I18n.t('theme.projects'), parts: %w(rich_content_before rich_content_after)},
     {name: 'index_employees_tmpl', title: I18n.t('theme.employees'), parts: %w(rich_content_before rich_content_after)},
-    {name: 'index_articles_tmpl', title: I18n.t('theme.articles'), parts: %w(rich_content)},
-    {name: 'index_events_tmpl', title: I18n.t('theme.events'), parts: %w(rich_content)},
+    {name: 'index_articles_tmpl', title: I18n.t('theme.articles'), parts: %w(rich_content_before rich_content_highlights highlights rich_content_after)},
+    {name: 'index_events_tmpl', title: I18n.t('theme.events'), parts: %w(rich_content_before rich_content_after)},
 
     # for resource pages (resources)
     {name: 'resource_project_tmpl', title: I18n.t('theme.project'), parts: %w(editor_heading_general summary thumbnail editor_heading_details contact_person lable rich_content), exclude_from: ["main", $spina_employees, $spina_articles, $spina_events, $spina_lables] },
     {name: 'resource_employee_tmpl', title: I18n.t('theme.employee'), parts: %w(editor_heading_general summary thumbnail editor_heading_details rich_content), exclude_from: ["main", $spina_projects, $spina_articles, $spina_events, $spina_lables] },
     {name: 'resource_article_tmpl', title: I18n.t('theme.article'), parts: %w(editor_heading_general summary thumbnail editor_heading_details author meta_info lable rich_content), exclude_from: ["main", $spina_projects, $spina_employees, $spina_events, $spina_lables] },
     {name: 'resource_event_tmpl', title: I18n.t('theme.event'), parts: %w(editor_heading_general summary event_time thumbnail editor_heading_details contact_person lable rich_content), exclude_from: ["main", $spina_projects, $spina_employees, $spina_articles, $spina_lables] },
-    {name: 'resource_lable_tmpl', title: I18n.t('theme.lable'), parts: %w(), exclude_from: ["main", $spina_projects, $spina_employees, $spina_articles, $spina_events] },
+    {name: 'resource_lable_tmpl', title: I18n.t('theme.lable'), parts: %w(rich_content), exclude_from: ["main", $spina_projects, $spina_employees, $spina_articles, $spina_events] },
 
     # default page
     {name: 'default_tmpl', title: I18n.t('theme.default'), parts: %w(editor_heading_general summary thumbnail editor_heading_details rich_content), exclude_from: [$spina_projects, $spina_employees, $spina_articles, $spina_events, $spina_lables] },
   ]
 
+  # Variable Setup
+  # I decided to setup the theme via global variables, that has multiple reasons:
+  # * for main naviagtion active highlighting, the name of the custom page and the name of the associated resource need to match exactly
+  # * in backend, resources get displayed ordered by name, so I need to prefix the name with "a_".."e_"
+  # * in code I use the name to find the specific Spina Pages and Resources - due to the complexity of the name and the possible
+  #   change of resource order (and thereby the name) the use of an global variable is handy (" Spina::Page.find_by(name: $spina_home) ")
+  $spina_home = "spina_homepage"
+  $spina_legal = "spina_legal"
+  $spina_data = "spina_data"
+  $spina_projects = "a_spina_projects"
+  $spina_employees = "b_spina_employees"
+  $spina_articles = "c_spina_articles"
+  $spina_events = "d_spina_events"
+  $spina_lables = "e_spina_lables"
+
   # Custom pages
   # Some pages should not be created by the user, but generated automatically.
   # By naming them you can reference them in your code.
   theme.custom_pages = [
-    {name: 'homepage', title: I18n.t('theme.homepage'), deletable: false, view_template: "static_homepage_tmpl"},
-    {name: 'legal', title: I18n.t('theme.legal'), deletable: false, view_template: "static_legal_tmpl"},
-    {name: 'data', title: I18n.t('theme.data'), deletable: false, view_template: "static_data_tmpl"},
+    {name: $spina_home, title: I18n.t('theme.homepage'), deletable: false, view_template: "static_homepage_tmpl"},
+    {name: $spina_legal, title: I18n.t('theme.legal'), deletable: false, view_template: "static_legal_tmpl"},
+    {name: $spina_data, title: I18n.t('theme.data'), deletable: false, view_template: "static_data_tmpl"},
 
-    {name: 'projects', title: I18n.t('theme.projects'), deletable: false, view_template: "index_projects_tmpl"},
-    {name: 'employees', title: I18n.t('theme.employees'), deletable: false, view_template: "index_employees_tmpl"},
-    {name: 'articles', title: I18n.t('theme.articles'), deletable: false, view_template: "index_articles_tmpl"},
-    {name: 'events', title: I18n.t('theme.events'), deletable: false, view_template: "index_events_tmpl"},
+    {name: $spina_projects, title: I18n.t('theme.projects'), deletable: false, view_template: "index_projects_tmpl"},
+    {name: $spina_employees, title: I18n.t('theme.employees'), deletable: false, view_template: "index_employees_tmpl"},
+    {name: $spina_articles, title: I18n.t('theme.articles'), deletable: false, view_template: "index_articles_tmpl"},
+    {name: $spina_events, title: I18n.t('theme.events'), deletable: false, view_template: "index_events_tmpl"},
   ]
 
   # Resources (optional)
   # Think of resources as a collection of pages. They are managed separately in Spina
   # allowing you to separate these pages from the 'main' collection of pages.
-  $spina_projects = "a_projects_res"
-  $spina_employees = "b_employees_res"
-  $spina_articles = "c_articles_res"
-  $spina_events = "d_events_res"
-  $spina_lables = "e_lables_res"
   theme.resources = [
-    {name: 'a_projects_res', label: I18n.t('theme.projects'), view_template: "resource_project_tmpl", slug_en: "projects", slug_de: "projekte", order_by: ""},
-    {name: 'b_employees_res', label: I18n.t('theme.employees'), view_template: "resource_employee_tmpl", slug_en: "team", slug_de: "team", order_by: "" },
-    {name: 'c_articles_res', label: I18n.t('theme.articles'), view_template: "resource_article_tmpl", slug_en: "articles", slug_de: "artikel", order_by: "" },
-    {name: 'd_events_res', label: I18n.t('theme.events'), view_template: "resource_event_tmpl", slug_en: "events", slug_de: "events", order_by: "" },
-    {name: 'e_lables_res', label: I18n.t('theme.lables'), view_template: "resource_lable_tmpl", slug_en: "lables", slug_de: "labels", order_by: "" },
+    {name: $spina_projects, label: I18n.t('theme.projects'), view_template: "resource_project_tmpl", slug_en: "projects", slug_de: "projekte", order_by: ""},
+    {name: $spina_employees, label: I18n.t('theme.employees'), view_template: "resource_employee_tmpl", slug_en: "team", slug_de: "team", order_by: "" },
+    {name: $spina_articles, label: I18n.t('theme.articles'), view_template: "resource_article_tmpl", slug_en: "articles", slug_de: "artikel", order_by: "" },
+    {name: $spina_events, label: I18n.t('theme.events'), view_template: "resource_event_tmpl", slug_en: "events", slug_de: "events", order_by: "" },
+    {name: $spina_lables, label: I18n.t('theme.lables'), view_template: "resource_lable_tmpl", slug_en: "lables", slug_de: "labels", order_by: "" },
   ]
 
   # Navigations (optional)

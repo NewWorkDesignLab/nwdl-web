@@ -38,6 +38,15 @@ de:
       rich_content:
         title: "Inhalt"
         hint: ""
+      rich_content_before:
+        title: "Inhalt vor dem Prsesenter"
+        hint: ""
+      rich_content_after:
+        title: "Inhalt nach dem Presenter"
+        hint: ""
+      highlights:
+        title: "Hervorgehobene Artikel"
+        hint: "Gebe bis zu 5 Artikel an, welche auf der Artikel-Seite hervorgehoben dargestellt werden sollen."
       author:
         title: "Autor"
         hint: ""
