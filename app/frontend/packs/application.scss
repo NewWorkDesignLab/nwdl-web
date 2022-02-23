@@ -75,6 +75,30 @@ body {
   }
 }
 
+.nwdl-slider-wrapper {
+  margin-left: -1000px;
+  margin-right: -1000px;
+}
+
+.nwdl-slider-inner {
+  margin-left: 1000px;
+  margin-right: 1000px;
+  gap: 2rem;
+}
+
+.nwdl-slider-cachel {
+  width: 600px;
+  max-width: 80vw;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 .nwdl-event {
   min-height: 8rem;
 
