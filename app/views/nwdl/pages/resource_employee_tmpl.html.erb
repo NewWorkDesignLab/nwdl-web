@@ -1,4 +1,4 @@
-<div class="container-xl mt-8">
+<div class="container-xl mt-8 mb-6">
   <div class="row mt-5">
     <div class="col-12 col-sm-4 col-md-4 mb-4">
       <div class="nwdl-quatric-wrapper">
@@ -11,6 +11,7 @@
       <div class="nwdl-rich-content-wrapper mt-4">
         <%= content.html :rich_content %>
       </div>
+      <p class="mt-3"><strong>Email:</strong> <%= content :email %>
     </div>
   </div>
 </div>
@@ -18,10 +19,13 @@
 <%# PAGE PRESENTER %>
 <% related_pages = Spina::Page.live.joins(:translations).where(translations: {locale: locale.to_sym}).where("json_attributes @> (?)::jsonb", {"#{locale.to_s}_content":[ {"user_id": current_page.id} ]}.to_json ) %>
 <% if related_pages.present? %>
-  <div class="container-xl mt-6">
+  <div class="container-xl">
     <h2 class="mb-4">Beiträge von und mit <%= current_page.title %></h2>
     <%= render 'nwdl/shared/resource/iterator', resources: related_pages do |resource| %>
       <%= render 'nwdl/shared/resource/resource_default', resource: resource %>
     <% end %>
   </div>
 <% end %>
+
+<%# NEWSLETTER %>
+<%= render 'nwdl/shared/general/newsletter' %>
