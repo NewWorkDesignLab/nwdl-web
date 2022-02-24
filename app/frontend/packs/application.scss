@@ -44,6 +44,21 @@ body {
   * {
     max-width: 100%;
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  img {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  ul, ol {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
 }
 
 .nwdl-page-container {
@@ -54,6 +69,15 @@ body {
 .nwdl-logo {
   max-height: 40px;
   max-width: 70vw;
+}
+
+.nwdl-icon {
+  margin-right: 5px;
+
+  svg {
+    height: 19px;
+    width: 19px;
+  }
 }
 
 @include media-breakpoint-up(md) {
@@ -174,12 +198,6 @@ input {
   z-index: -1;
 }
 
-.nwdl-header-image {
-  width: 100vw;
-  height: 70vh;
-  object-fit: cover;
-}
-
 .nwdl-footer {
   min-height: 20vh;
 }
@@ -224,3 +242,16 @@ input {
     font-size: calc(2.5rem + 0.9vw);
   }
 }
+
+
+
+.vh-10 { height: 10vh; }
+.vh-20 { height: 20vh; }
+.vh-30 { height: 30vh; }
+.vh-40 { height: 40vh; }
+.vh-50 { height: 50vh; }
+.vh-60 { height: 60vh; }
+.vh-70 { height: 70vh; }
+.vh-80 { height: 80vh; }
+.vh-90 { height: 90vh; }
+.vh-100 { height: 100vh; }
