@@ -4,7 +4,7 @@ de:
   time:
     formats:
       default: "%d. %b %Y"
-      short: "%d %b %H:%M"
+      short: "%d.%m.%Y %H:%M Uhr"
   date:
     abbr_day_names: [Mo, Di, Mi, Do, Fr, Sa, So]
     abbr_month_names: [~, Jan., Feb., März, Apr., Mai, Jun., Jul., Aug., Sep., Okt., Nov., Dez.]
@@ -50,6 +50,9 @@ de:
       author:
         title: "Autor"
         hint: ""
+      email:
+        title: "E-Mail"
+        hint: "Die E-Mail des Mitarbeiters. Die E-Mail wird unter anderem auch unter Beiträgen der Mitarbeiters angezeigt."
       contact_person:
         title: "Ansprechpartner"
         hint: "Hier kann eine Person angegeben werden, welche auf der Seite als Ansprechpoarter angezeigt wird."

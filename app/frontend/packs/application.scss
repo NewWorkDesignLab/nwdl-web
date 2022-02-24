@@ -80,6 +80,11 @@ body {
   }
 }
 
+.nwdl-contact-person {
+  width: 100px;
+  height: 100px;
+}
+
 @include media-breakpoint-up(md) {
   .angled-bg {
     position: relative;

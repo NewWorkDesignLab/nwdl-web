@@ -40,12 +40,52 @@
   </div>
 <% end %>
 
-
+<%# MAIN CONTENT %>
 <div class="container-xl mt-3">
   <%= content.image_tag :thumbnail, {}, { class: "w-100 vh-40 object-fit-cover" } %>
 
   <div class="nwdl-rich-content-wrapper mt-6">
     <%= content.html :rich_content %>
+  </div>
+</div>
+
+<%# BOTTOM METADATA %>
+<div class="container-xl mt-6">
+  <div class="row justify-content-start flex-wrap">
+
+    <%# CONTACT PERSON INFO %>
+    <% if content(:contact_person).present? %>
+      <div class="col-12 col-md-6 d-flex flex-column align-items-stretch align-items-md-start">
+        <h2 class="fs-5 mb-3">Ihr Ansprechpartner bei Fragen:</h2>
+        <%= link_to content(:contact_person).materialized_path, class: "d-inline-flex gap-3 p-2 pe-6 rounded nwdl-bg-blue-light text-reset text-decoration-none" do %>
+          <%= content(:contact_person).content.image_tag(:thumbnail, {}, {class: "nwdl-contact-person rounded object-fit-cover"}) %>
+          <p>
+            <strong><%= content(:contact_person).title %></strong><br>
+            <%= content(:contact_person).content(:email) %>
+          </p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <%# DIRECT TIME AND AUTHOR META INFO (espacially for citing) %>
+    <div class="col-12 col-md-6 mt-4 d-flex flex-column justify-content-end ms-auto">
+      <%# ALWAYS display Author - if no Author given, fallback to generic Author %>
+      <% if content(:author).present? %>
+        <p class="mb-0 text-md-end text-muted">Autor: <%= content(:author).title %></p>
+      <% else %>
+        <p class="mb-0 text-md-end text-muted">Autor: New Work Design Lab<br></p>
+      <% end %>
+
+      <%# will display time of page creation aswell as time of last edited if lasted editet is not
+          nearly the same as created_at (edits in the first 10 Minutes (600 Seconds) will not be
+          displayed, due to page initial creation time) %>
+      <% if (current_page.updated_at - current_page.created_at).abs > 600 %>
+        <p class="mb-0 text-md-end text-muted">Zuletzt geändert: <%= I18n.l(current_page.updated_at, format: :short) %></p>
+      <% end %>
+
+      <p class="mb-0 text-md-end text-muted">Erstellt: <%= I18n.l(current_page.created_at, format: :short) %></p>
+    </div>
+
   </div>
 </div>
 

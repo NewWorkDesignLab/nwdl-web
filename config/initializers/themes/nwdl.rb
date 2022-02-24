@@ -31,6 +31,7 @@ Spina::Theme.register do |theme|
     {name: 'rich_content_highlights', title: I18n.t('theme.parts.rich_content_highlights.title'), part_type: "Spina::Parts::Text", hint: I18n.t('theme.parts.rich_content_highlights.hint') },
     {name: 'highlights', title: I18n.t('theme.parts.highlights.title'), part_type: "Spina::Parts::Article", hint: I18n.t('theme.parts.highlights.hint') },
 
+    {name: 'email', title: I18n.t('theme.parts.email.title'), part_type: "Spina::Parts::Line", hint: I18n.t('theme.parts.email.hint') },
     {name: 'author', title: I18n.t('theme.parts.author.title'), part_type: "Spina::Parts::User", hint: I18n.t('theme.parts.author.hint') },
     {name: 'contact_person', title: I18n.t('theme.parts.contact_person.title'), part_type: "Spina::Parts::User", hint: I18n.t('theme.parts.contact_person.hint') },
     {name: 'event_time', title: I18n.t('theme.parts.event_time.title'), part_type: "Spina::Parts::Datetime", hint: I18n.t('theme.parts.event_time.hint') },
@@ -64,10 +65,10 @@ Spina::Theme.register do |theme|
     {name: 'index_events_tmpl', title: I18n.t('theme.events'), parts: %w(rich_content_before rich_content_after)},
 
     # for resource pages (resources)
-    {name: 'resource_project_tmpl', title: I18n.t('theme.project'), parts: %w(editor_heading_general summary thumbnail editor_heading_details contact_person lable rich_content), exclude_from: ["main", $spina_employees, $spina_articles, $spina_events, $spina_lables] },
-    {name: 'resource_employee_tmpl', title: I18n.t('theme.employee'), parts: %w(editor_heading_general summary thumbnail editor_heading_details rich_content), exclude_from: ["main", $spina_projects, $spina_articles, $spina_events, $spina_lables] },
-    {name: 'resource_article_tmpl', title: I18n.t('theme.article'), parts: %w(editor_heading_general summary thumbnail editor_heading_details author meta_info lable rich_content), exclude_from: ["main", $spina_projects, $spina_employees, $spina_events, $spina_lables] },
-    {name: 'resource_event_tmpl', title: I18n.t('theme.event'), parts: %w(editor_heading_general summary event_time thumbnail editor_heading_details contact_person lable rich_content), exclude_from: ["main", $spina_projects, $spina_employees, $spina_articles, $spina_lables] },
+    {name: 'resource_project_tmpl', title: I18n.t('theme.project'), parts: %w(editor_heading_general summary thumbnail editor_heading_details author contact_person lable rich_content), exclude_from: ["main", $spina_employees, $spina_articles, $spina_events, $spina_lables] },
+    {name: 'resource_employee_tmpl', title: I18n.t('theme.employee'), parts: %w(editor_heading_general summary email thumbnail editor_heading_details rich_content), exclude_from: ["main", $spina_projects, $spina_articles, $spina_events, $spina_lables] },
+    {name: 'resource_article_tmpl', title: I18n.t('theme.article'), parts: %w(editor_heading_general summary thumbnail editor_heading_details author contact_person meta_info lable rich_content), exclude_from: ["main", $spina_projects, $spina_employees, $spina_events, $spina_lables] },
+    {name: 'resource_event_tmpl', title: I18n.t('theme.event'), parts: %w(editor_heading_general summary event_time thumbnail editor_heading_details author contact_person lable rich_content), exclude_from: ["main", $spina_projects, $spina_employees, $spina_articles, $spina_lables] },
     {name: 'resource_lable_tmpl', title: I18n.t('theme.lable'), parts: %w(rich_content), exclude_from: ["main", $spina_projects, $spina_employees, $spina_articles, $spina_events] },
 
     # default page
