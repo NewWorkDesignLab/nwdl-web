@@ -5,9 +5,11 @@ de:
     formats:
       default: "%d. %b %Y"
       short: "%d.%m.%Y %H:%M Uhr"
+      event: "%d. %B %Y, %H:%M Uhr"
   date:
     abbr_day_names: [Mo, Di, Mi, Do, Fr, Sa, So]
     abbr_month_names: [~, Jan., Feb., März, Apr., Mai, Jun., Jul., Aug., Sep., Okt., Nov., Dez.]
+    month_names: [~, Januar, Februar, März, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember]
   theme:
     homepage: "Home"
     legal: "Impressum"
