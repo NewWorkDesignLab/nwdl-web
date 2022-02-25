@@ -26,7 +26,9 @@ gem 'jbuilder', '~> 2.7'
 # gem 'image_processing', '~> 1.2'
 
 # Spina
-gem 'spina', '~> 2.8.1'
+gem 'spina', '~> 2.8.1', github: "spinacms/spina", ref: "53cc689"
+# Delayed Job
+gem 'delayed_job_active_record'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
