@@ -40,6 +40,10 @@ Spina::Theme.register do |theme|
 
     # Static Layout Parts
     {name: 'logo', title: I18n.t('theme.parts.logo.title'), part_type: "Spina::Parts::Image", hint: I18n.t('theme.parts.logo.hint') },
+    {name: 'facebook_link', title: I18n.t('theme.parts.facebook_link.title'), part_type: "Spina::Parts::Line", hint: I18n.t('theme.parts.facebook_link.hint') },
+    {name: 'instagram_link', title: I18n.t('theme.parts.instagram_link.title'), part_type: "Spina::Parts::Line", hint: I18n.t('theme.parts.instagram_link.hint') },
+    {name: 'linkedin_link', title: I18n.t('theme.parts.linkedin_link.title'), part_type: "Spina::Parts::Line", hint: I18n.t('theme.parts.linkedin_link.hint') },
+    {name: 'twitch_link', title: I18n.t('theme.parts.twitch_link.title'), part_type: "Spina::Parts::Line", hint: I18n.t('theme.parts.twitch_link.hint') },
     {name: 'newsletter_heading', title: I18n.t('theme.parts.newsletter_heading.title'), part_type: "Spina::Parts::Text", hint: I18n.t('theme.parts.newsletter_heading.hint') },
     {name: 'newsletter_text', title: I18n.t('theme.parts.newsletter_text.title'), part_type: "Spina::Parts::Text", hint: I18n.t('theme.parts.newsletter_text.hint') },
     {name: 'main_address', title: I18n.t('theme.parts.main_address.title'), part_type: "Spina::Parts::Text", hint: I18n.t('theme.parts.main_address.hint') },
@@ -126,7 +130,7 @@ Spina::Theme.register do |theme|
   # Layout parts (optional)
   # You can create global content that doesn't belong to one specific page. We call these layout parts.
   # You only have to reference the name of the parts you want to have here.
-  theme.layout_parts = %w(logo newsletter_heading newsletter_text main_address main_contact)
+  theme.layout_parts = %w(logo facebook_link instagram_link linkedin_link twitch_link newsletter_heading newsletter_text main_address main_contact)
 
   # Plugins (optional)
   theme.plugins = []

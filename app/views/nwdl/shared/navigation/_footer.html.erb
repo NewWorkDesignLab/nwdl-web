@@ -27,19 +27,19 @@
 
         <%# SOCIAL BUTTONS %>
         <li class="nav-item d-flex">
-          <%= link_to "https://tobiasbohn.com", class: "nav-link nwdl-footer-icon", target: "_blank" do %>
+          <%= link_to current_account.content(:facebook_link), class: "nav-link nwdl-footer-icon", target: "_blank" do %>
             <%= render 'shared/icons/facebook' %>
           <% end %>
 
-          <%= link_to "https://tobiasbohn.com", class: "nav-link nwdl-footer-icon", target: "_blank" do %>
+          <%= link_to current_account.content(:instagram_link), class: "nav-link nwdl-footer-icon", target: "_blank" do %>
             <%= render 'shared/icons/instagram' %>
           <% end %>
 
-          <%= link_to "https://tobiasbohn.com", class: "nav-link nwdl-footer-icon", target: "_blank" do %>
+          <%= link_to current_account.content(:linkedin_link), class: "nav-link nwdl-footer-icon", target: "_blank" do %>
             <%= render 'shared/icons/linkedin' %>
           <% end %>
 
-          <%= link_to "https://tobiasbohn.com", class: "nav-link nwdl-footer-icon", target: "_blank" do %>
+          <%= link_to current_account.content(:twitch_link), class: "nav-link nwdl-footer-icon", target: "_blank" do %>
             <%= render 'shared/icons/twitch' %>
           <% end %>
         </li>

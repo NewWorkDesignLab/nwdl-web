@@ -70,6 +70,18 @@ de:
       logo:
         title: "NWDL-Logo"
         hint: ""
+      facebook_link:
+        title: "Facebook Link"
+        hint: "Der zu öffnende Link, wenn man mit dem entsprechenden Menüeintrag interagiert"
+      instagram_link:
+        title: "Instagram Link"
+        hint: "Der zu öffnende Link, wenn man mit dem entsprechenden Menüeintrag interagiert"
+      linkedin_link:
+        title: "LinkedIn Link"
+        hint: "Der zu öffnende Link, wenn man mit dem entsprechenden Menüeintrag interagiert"
+      twitch_link:
+        title: "Twitch Link"
+        hint: "Der zu öffnende Link, wenn man mit dem entsprechenden Menüeintrag interagiert"
       newsletter_heading:
         title: "Newsletter Überschrift"
         hint: ""
