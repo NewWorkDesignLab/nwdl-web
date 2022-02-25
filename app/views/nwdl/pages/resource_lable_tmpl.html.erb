@@ -4,15 +4,15 @@
   </div>
 
   <%# RELATED TAGS %>
-  <% related_labels = current_page.descendants %>
-  <% unless current_page.is_root? %>
-    <% related_siblings = current_page.siblings.where.not(id: current_page.id) %>
-    <% related_labels = related_labels.or(related_siblings) %>
-  <% end %>
+  <%# related_labels = current_page.descendants %>
+  <%# unless current_page.is_root? %>
+    <%# related_siblings = current_page.siblings.where.not(id: current_page.id) %>
+    <%# related_labels = related_labels.or(related_siblings) %>
+  <%# end %>
 
-  <% related_labels.each do |related_lable| %>
-    <%= link_to related_lable.title, related_lable.materialized_path %>
-  <% end %>
+  <%# related_labels.each do |related_lable| %>
+    <%#= link_to related_lable.title, related_lable.materialized_path %>
+  <%# end %>
 
   <%# PAGE PRESENTER %>
   <div class="row g-4 mt-4 justify-content-start flex-wrap flex-sm-nowrap flex-md-wrap">
