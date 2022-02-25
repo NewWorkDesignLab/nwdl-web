@@ -25,10 +25,30 @@
         <% nav = Spina::Navigation.find_by(name: 'footer') %>
         <% items = nav.navigation_items.regular_pages.sorted.live.in_menu.active %>
 
+        <%# SOCIAL BUTTONS %>
+        <li class="nav-item d-flex">
+          <%= link_to "https://tobiasbohn.com", class: "nav-link nwdl-footer-icon", target: "_blank" do %>
+            <%= render 'shared/icons/facebook' %>
+          <% end %>
+
+          <%= link_to "https://tobiasbohn.com", class: "nav-link nwdl-footer-icon", target: "_blank" do %>
+            <%= render 'shared/icons/instagram' %>
+          <% end %>
+
+          <%= link_to "https://tobiasbohn.com", class: "nav-link nwdl-footer-icon", target: "_blank" do %>
+            <%= render 'shared/icons/linkedin' %>
+          <% end %>
+
+          <%= link_to "https://tobiasbohn.com", class: "nav-link nwdl-footer-icon", target: "_blank" do %>
+            <%= render 'shared/icons/twitch' %>
+          <% end %>
+        </li>
+
+        <%# MAIN FOOTER ITEMS %>
         <% items.each_with_index do |item, index| %>
           <% if item.page.materialized_path %>
             <li class="nav-item">
-              <%= link_to item.page.menu_title, item.page.materialized_path, class: "nav-link active #{"ps-0" if index == 0}" %>
+              <%= link_to item.page.menu_title, item.page.materialized_path, class: "nav-link active" %>
             </li>
           <% end %>
         <% end %>

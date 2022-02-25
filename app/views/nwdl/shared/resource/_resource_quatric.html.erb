@@ -2,6 +2,6 @@
   <div class="nwdl-quatric-wrapper">
     <%= resource.content.image_tag(:thumbnail, {}, {class: "rounded object-fit-cover"}) %>
   </div>
-  <p class="mt-2 mb-0"><strong><%= resource.title %></strong></p>
-  <%= resource.content.html(:summary) %>
+  <p class="mt-2 mb-0 nwdl-high-contrast"><strong><%= resource.title %></strong></p>
+  <div class="nwdl-high-contrast"><%= resource.content.html(:summary) %></div>
 <% end %>

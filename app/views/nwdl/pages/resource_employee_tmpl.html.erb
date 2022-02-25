@@ -6,12 +6,12 @@
       </div>
     </div>
     <div class="col-12 col-sm-8 col-md-8">
-      <h1><%= current_page.title %></h1>
-      <%= content.html :summary %>
-      <div class="nwdl-rich-content-wrapper mt-4">
+      <div class="nwdl-high-contrast"><h1><%= current_page.title %></h1></div>
+      <div class="nwdl-high-contrast"><%= content.html :summary %></div>
+      <div class="nwdl-rich-content-wrapper mt-4 nwdl-high-contrast">
         <%= content.html :rich_content %>
       </div>
-      <p class="mt-3"><strong>Email:</strong> <%= content :email %>
+      <p class="mt-3"><strong>Email:</strong> <%= content :email %></p>
     </div>
   </div>
 </div>

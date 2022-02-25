@@ -1,7 +1,7 @@
 <%= link_to resource.materialized_path, class: "col-12 row mb-5 nwdl-event justify-content-center text-reset text-decoration-none" do %>
   <%# Date %>
   <div class="col-12 col-md-5 nwdl-event-date d-flex align-items-center mb-2 gx-0">
-    <p class="m-0"><strong><%= I18n.l( resource.content(:event_time), default: '' ) %></strong></p>
+    <p class="m-0 nwdl-high-contrast"><strong><%= I18n.l( resource.content(:event_time), default: '' ) %></strong></p>
   </div>
 
   <%# "Connector" / Timeline %>
@@ -14,8 +14,8 @@
   <div class="col-12 col-md-5 nwdl-bg-blue-light row gx-0 rounded">
     <%= resource.content.image_tag(:thumbnail, {}, {class: "col-12 col-sm-5 rounded object-fit-cover"}) %>
     <div class="col-12 col-sm-7 p-3">
-      <p class="mb-1"><strong><%= resource.title %></strong></p>
-      <%= resource.content.html(:summary) %>
+      <p class="mb-1 nwdl-high-contrast"><strong><%= resource.title %></strong></p>
+      <div class="nwdl-high-contrast"><%= resource.content.html(:summary) %></div>
     </div>
   </div>
 <% end %>

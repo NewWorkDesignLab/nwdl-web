@@ -50,14 +50,28 @@ body {
     margin-bottom: 1rem;
   }
 
-  img {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+  img, figure {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
 
   ul, ol {
     margin-top: 1rem;
     margin-bottom: 1rem;
+  }
+}
+
+.nwdl-high-contrast {
+  @extend .index-foreground;
+
+  h1, h2, h3, h4, h5, h6, div, p, span, strong {
+    display: inline;
+    background-color: rgba(255, 255, 255, 0.8);
+
+    &::after {
+      content: "\a";
+      white-space: pre;
+    }
   }
 }
 
@@ -77,6 +91,19 @@ body {
   svg {
     height: 19px;
     width: 19px;
+  }
+}
+
+.nwdl-footer-icon {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+
+  svg {
+    margin-top: -2px;
+    height: 27px;
+    width: 27px;
   }
 }
 

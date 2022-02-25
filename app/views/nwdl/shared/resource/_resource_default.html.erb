@@ -4,6 +4,6 @@
   <% display_lables = resource.content(:lable) %>
   <%= render "nwdl/shared/lable_badges", display_lables: display_lables %>
 
-  <p class="mt-2 mb-0"><strong><%= resource.title %></strong></p>
-  <%= resource.content.html(:summary) %>
+  <p class="mt-2 mb-0 nwdl-high-contrast"><strong><%= resource.title %></strong></p>
+  <div class="nwdl-high-contrast"><%= resource.content.html :summary %></div>
 <% end %>

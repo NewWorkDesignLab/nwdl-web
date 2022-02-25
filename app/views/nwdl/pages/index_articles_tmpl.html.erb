@@ -14,7 +14,7 @@
 
           <%# RICH CONTENT HIGHLIGHTS %>
           <% if current_page.find_part(:rich_content_highlights)&.content.present? %>
-            <div class="nwdl-rich-content-wrapper mb-3">
+            <div class="nwdl-rich-content-wrapper mb-3 nwdl-high-contrast">
               <%= content.html :rich_content_highlights %>
             </div>
           <% end %>
