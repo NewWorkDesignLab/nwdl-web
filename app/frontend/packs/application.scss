@@ -65,8 +65,12 @@ body {
   @extend .index-foreground;
 
   h1, h2, h3, h4, h5, h6, div, p, span, strong {
+    background-color: rgba(255, 255, 255, 0.7);
+    width: fit-content;
+  }
+
+  div, p, span, strong {
     display: inline;
-    background-color: rgba(255, 255, 255, 0.8);
 
     &::after {
       content: "\a";

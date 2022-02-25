@@ -112,7 +112,7 @@
     <%= render 'nwdl/shared/resource/resource_timeline', resource: event %>
   <% end %>
 
-  <%# AFTER PROJECT PRESENTER %>
+  <%# AFTER EVENT PRESENTER %>
   <% event_link_target = Spina::Page.find_by(name: $spina_events) %>
   <% if any_event_displayed && event_link_target&.materialized_path.present? %>
     <div class="row mt-3">
