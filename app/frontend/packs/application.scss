@@ -25,6 +25,14 @@ $spacers: (
 @import "./nwdl-colors.scss";
 @import "./nwdl-images.scss";
 
+.image-anchor {
+  position: relative;
+  // height: 0px;
+  // flex-basis: min-content;
+  @extend .row;
+  @extend .justify-content-center;
+}
+
 body {
   overflow-x: hidden;
 }

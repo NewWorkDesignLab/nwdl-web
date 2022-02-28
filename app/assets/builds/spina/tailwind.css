@@ -1705,12 +1705,12 @@ trix-editor [data-trix-mutable]::selection,
   z-index: 50;
 }
 
-.z-20 {
-  z-index: 20;
-}
-
 .z-30 {
   z-index: 30;
+}
+
+.z-20 {
+  z-index: 20;
 }
 
 .z-40 {
@@ -2781,12 +2781,12 @@ trix-editor [data-trix-mutable]::selection,
   line-height: 1;
 }
 
-.leading-4 {
-  line-height: 1rem;
-}
-
 .leading-relaxed {
   line-height: 1.625;
+}
+
+.leading-4 {
+  line-height: 1rem;
 }
 
 .text-gray-800 {
@@ -3071,11 +3071,6 @@ trix-editor [data-trix-mutable]::selection,
   background-color: rgb(31 41 55 / var(--tw-bg-opacity));
 }
 
-.hover\:bg-gray-100:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
-}
-
 .hover\:bg-gray-300:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(209 213 219 / var(--tw-bg-opacity));
@@ -3084,6 +3079,11 @@ trix-editor [data-trix-mutable]::selection,
 .hover\:bg-spina-dark:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(58 58 112 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-gray-100:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-red-100:hover {

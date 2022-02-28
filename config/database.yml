@@ -20,6 +20,11 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV['POSTGRES_USER'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
+  host: postgres
+  timeout: 5000
+  port: 5432
 
 development:
   <<: *default
@@ -81,6 +86,4 @@ test:
 #
 production:
   <<: *default
-  database: nwdl_production
-  username: nwdl
-  password: <%= ENV["NWDL_DATABASE_PASSWORD"] %>
+  database: nwdl_web_production
