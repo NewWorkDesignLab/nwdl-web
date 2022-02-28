@@ -1,9 +1,0 @@
-<%= link_to resource.materialized_path, class: "col-12 col-sm-6 col-md-4 text-reset text-decoration-none position-relative" do %>
-  <%= resource.content.image_tag(:thumbnail, {}, {class: "nwdl-cachel-img rounded object-fit-cover"}) %>
-
-  <% display_lables = resource.content(:lable) %>
-  <%= render "nwdl/shared/lable_badges", display_lables: display_lables %>
-
-  <p class="mt-2 mb-0 nwdl-high-contrast"><strong><%= resource.title %></strong></p>
-  <div class="nwdl-high-contrast"><%= resource.content.html :summary %></div>
-<% end %>
