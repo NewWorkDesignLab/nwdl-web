@@ -1,12 +1,11 @@
 module.exports = {
   content: [
-    '/home/tobias/.rvm/gems/ruby-2.7.5/gems/spina-2.8.1/app/views/**/*.*',
-'/home/tobias/.rvm/gems/ruby-2.7.5/gems/spina-2.8.1/app/components/**/*.*',
-'/home/tobias/.rvm/gems/ruby-2.7.5/gems/spina-2.8.1/app/helpers/**/*.*',
-'/home/tobias/.rvm/gems/ruby-2.7.5/gems/spina-2.8.1/app/assets/javascripts/**/*.js',
-'/home/tobias/.rvm/gems/ruby-2.7.5/gems/spina-2.8.1/app/**/application.tailwind.css',
-'/home/tobias/projects/nwdl-web/app/views/spina/**'
-  ],  
+    '/home/tobias/.rvm/gems/ruby-3.0.0/bundler/gems/spina-db76dca77ba8/app/views/**/*.*',
+'/home/tobias/.rvm/gems/ruby-3.0.0/bundler/gems/spina-db76dca77ba8/app/components/**/*.*',
+'/home/tobias/.rvm/gems/ruby-3.0.0/bundler/gems/spina-db76dca77ba8/app/helpers/**/*.*',
+'/home/tobias/.rvm/gems/ruby-3.0.0/bundler/gems/spina-db76dca77ba8/app/assets/javascripts/**/*.js',
+'/home/tobias/.rvm/gems/ruby-3.0.0/bundler/gems/spina-db76dca77ba8/app/**/application.tailwind.css'
+  ],
   theme: {
     fontFamily: {
       body: ['Metropolis'],
