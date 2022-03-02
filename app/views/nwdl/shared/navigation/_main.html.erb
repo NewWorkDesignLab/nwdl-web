@@ -1,0 +1,53 @@
+<nav class="navbar fixed-top navbar-expand-xl navbar-dark bg-dark">
+  <div class="container-xl">
+    <%= link_to root_path, class: "navbar-brand" do %>
+      <%= current_account.content.image_tag(:logo, {}, {class: "nwdl-logo"}) %>
+    <% end %>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#toggle-target" aria-controls="toggle-target" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="toggle-target">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <%# Admin Edit Button %>
+        <% if current_spina_user.present? %>
+          <li class="nav-item me-5">
+            <%= link_to "Edit Page", spina.edit_admin_page_path(current_page), class: "btn btn-success", target: "_blank" %>
+          </li>
+        <% end %>
+
+        <%# Main Navigation %>
+        <% nav = Spina::Navigation.find_by(name: 'main') %>
+        <% items = nav.navigation_items.regular_pages.sorted.live.in_menu.active %>
+
+        <% any_page_active = false %>
+        <% nav_items = [].tap do |out| %>
+          <% items.each do |item| %>
+            <% if item.page.materialized_path %>
+              <% active_page = item.page.id == current_page.id || ( current_page.resource.present? && item.page.name == current_page.resource.name ) %>
+              <% out << [item.page.menu_title, item.page.materialized_path, active_page] %>
+              <% any_page_active ||= active_page %>
+            <% end %>
+          <% end %>
+        <% end.each do |item| %>
+          <li class="nav-item">
+            <% classes = [].tap { |out| out << "nav-link"; out << "active" if item[2] || !any_page_active }.join(' ') %>
+            <%= link_to item[0], item[1], class: classes %>
+          </li>
+        <% end %>
+
+        <%# Language Toggle %>
+        <% existing_locales = current_page.translations.pluck(:locale).map(&:to_sym) %>
+        <% current_locale = params[:locale]&.to_sym || I18n.default_locale&.to_sym %>
+        <% existing_locales.each do |locale| %>
+          <% if locale != current_locale %>
+            <li class="nav-item ms-3">
+              <%= link_to t("spina.languages.#{locale}"), current_page.materialized_path(locale: locale), class: "nav-link active" %>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>

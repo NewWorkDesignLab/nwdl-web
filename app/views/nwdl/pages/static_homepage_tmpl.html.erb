@@ -1,0 +1,125 @@
+<div class="container-fluid p-0">
+  <%= content.image_tag(:header_image, {}, {class: "w-100 vh-70 object-fit-cover"}) %>
+</div>
+
+<%# FOCUS %>
+<div class="container-xl mt-8">
+  <%# MAIN FOCUS %>
+  <div class="row justify-content-end">
+    <div class="col-12 col-sm-8 col-md-7 py-3 nwdl-uppercase-header nwdl-high-contrast">
+      <%= content.html :focus_text %>
+    </div>
+  </div>
+
+  <%# IMAGES %>
+  <div class="image-anchor mt-7">
+    <div class="astronaut index-foreground"><%= render 'nwdl/shared/images/astronaut' %></div>
+    <div class="farbklecks index-background"><%= render 'nwdl/shared/images/farbfleck' %></div>
+  </div>
+
+  <%# FOCUS BOXES %>
+  <div class="row justify-content-center g-3">
+    <div class="col-12 col-sm-9 col-md-4">
+      <div class="p-4 h-100 text-center nwdl-bg-blue-middle rounded">
+        <%= content.html :focus_research_text %>
+      </div>
+    </div>
+    <div class="col-12 col-sm-9 col-md-4">
+      <div class="p-4 h-100 text-center nwdl-bg-blue-light rounded">
+        <%= content.html :focus_transver_text %>
+      </div>
+    </div>
+    <div class="col-12 col-sm-9 col-md-4">
+      <div class="p-4 h-100 text-center nwdl-bg-blue-dark rounded">
+        <%= content.html :focus_consulting_text %>
+      </div>
+    </div>
+  </div>
+
+  <%# IMAGES %>
+  <div class="image-anchor">
+    <div class="planet index-background"><%= render 'nwdl/shared/images/planet' %></div>
+  </div>
+</div>
+
+
+<%# PROJECTS %>
+<div class="container-xl mt-8">
+  <div class="row">
+    <div class="col-12 col-sm-9 col-md-7 py-3 nwdl-uppercase-header nwdl-high-contrast">
+      <%= content.html :projects_text %>
+    </div>
+  </div>
+
+  <%# PROJECT PRESENTER %>
+  <% project_collection = Spina::Resource.find_by(name: $spina_projects)&.pages&.live&.joins(:translations)&.where(translations: {locale: locale})&.limit(3) %>
+  <% any_project_displayed = false %>
+
+  <%= render 'nwdl/shared/resource/iterator', resources: project_collection, classes: "row g-4 justify-content-start mt-4 flex-wrap flex-sm-nowrap flex-md-wrap" do |project| %>
+    <% any_project_displayed = true %>
+    <%= render 'nwdl/shared/resource/resource_default', resource: project %>
+  <% end %>
+
+  <%# AFTER PROJECT PRESENTER %>
+  <% project_link_target = Spina::Page.find_by(name: $spina_projects) %>
+  <% if any_project_displayed && project_link_target&.materialized_path.present? %>
+    <div class="row mt-3">
+      <div class="col-12 py-3 text-center nwdl-high-contrast">
+        <p>Sie möchten mehr über unsere Projekte erfahren?</p>
+        <%= link_to "Zeige mehr!", project_link_target.materialized_path, class: "btn btn-nwdl" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+
+<%# NEWSLETTER %>
+<%= render 'nwdl/shared/general/newsletter' %>
+
+
+<%# EVENTS %>
+<div class="container-xl mb-7 mt-8">
+  <%# EVENT MAIN %>
+  <div class="row justify-content-end pb-6 pt-2 overflow-hidden">
+    <div class="col-12 col-sm-8 col-md-7 nwdl-uppercase-header">
+
+      <%# IMAGE PERSON STEHEND %>
+      <div class="image-anchor d-none d-sm-block">
+        <div class="person-stehend index-background"><%= render 'nwdl/shared/images/person_stehend' %></div>
+      </div>
+
+      <div class="nwdl-high-contrast">
+        <%= content.html :events_text %>
+      </div>
+    </div>
+  </div>
+
+  <%# EVENT PRESENTER %>
+  <%#
+    Extream Heady Database Request, but could not figure out how to use
+    .order in combination with json_attr. Best try so far:
+
+    "... ORDER BY \"spina_pages\".\"json_attributes\"::json#>>'{de_content,2,datetime}' ASC"
+    https://www.postgresql.org/docs/9.5/functions-json.html
+  %>
+  <% all_events = Spina::Resource.find_by(name: $spina_events)&.pages.live.joins(:translations).where(translations: {locale: locale}) %>
+  <% sorted_events = all_events.sort_by { |e| e.content(:event_time) } %>
+  <% recent_events = sorted_events.reverse.take(4) %>
+  <% any_event_displayed = false %>
+
+  <%= render 'nwdl/shared/resource/iterator', resources: recent_events, classes: "row g-4 justify-content-center overflow-hidden" do |event| %>
+    <% any_event_displayed = true %>
+    <%= render 'nwdl/shared/resource/resource_timeline', resource: event %>
+  <% end %>
+
+  <%# AFTER EVENT PRESENTER %>
+  <% event_link_target = Spina::Page.find_by(name: $spina_events) %>
+  <% if any_event_displayed && event_link_target&.materialized_path.present? %>
+    <div class="row mt-3">
+      <div class="col-12 py-3 text-center nwdl-high-contrast">
+        <p>Sie möchten mehr über aktuelle Events erfahren?</p>
+        <%= link_to "Zeige mehr!", event_link_target.materialized_path, class: "btn btn-nwdl" %>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,58 @@
+<%# BLACK INFO BAR %>
+<div class="nwdl-footer">
+  <div class="container-fluid nwdl-bg-black text-white p-0">
+    <div class="container-xl py-3">
+      <div class="row justify-content-center justify-content-md-between">
+        <div class="col-12 col-sm-9 col-md-4 py-3">
+          <%= current_account.content.html :main_address %>
+        </div>
+
+        <div class="col-12 col-sm-9 col-md-4 py-3">
+          <%= current_account.content.html :main_contact %>
+        </div>
+
+        <div class="col-12 col-sm-9 col-md-4 py-3 d-flex justify-content-center">
+          <%= current_account.content.image_tag(:logo, {}, {class: "nwdl-logo"}) %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%# WHITE NAVIGATION BAR %>
+  <nav class="navbar navbar-expand-md navbar-dark nwdl-bg-grey">
+    <div class="container-xl">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <% nav = Spina::Navigation.find_by(name: 'footer') %>
+        <% items = nav.navigation_items.regular_pages.sorted.live.in_menu.active %>
+
+        <%# SOCIAL BUTTONS %>
+        <li class="nav-item d-flex">
+          <%= link_to current_account.content(:facebook_link), class: "nav-link nwdl-footer-icon", target: "_blank" do %>
+            <%= render 'shared/icons/facebook' %>
+          <% end %>
+
+          <%= link_to current_account.content(:instagram_link), class: "nav-link nwdl-footer-icon", target: "_blank" do %>
+            <%= render 'shared/icons/instagram' %>
+          <% end %>
+
+          <%= link_to current_account.content(:linkedin_link), class: "nav-link nwdl-footer-icon", target: "_blank" do %>
+            <%= render 'shared/icons/linkedin' %>
+          <% end %>
+
+          <%= link_to current_account.content(:twitch_link), class: "nav-link nwdl-footer-icon", target: "_blank" do %>
+            <%= render 'shared/icons/twitch' %>
+          <% end %>
+        </li>
+
+        <%# MAIN FOOTER ITEMS %>
+        <% items.each_with_index do |item, index| %>
+          <% if item.page.materialized_path %>
+            <li class="nav-item">
+              <%= link_to item.page.menu_title, item.page.materialized_path, class: "nav-link active" %>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
+</div>

@@ -1,0 +1,123 @@
+de:
+  hello: 'Hallo Welt'
+  # time and date merged in pr #970 github spina
+  time:
+    formats:
+      default: "%d. %b %Y"
+      short: "%d.%m.%Y %H:%M Uhr"
+      event: "%d. %B %Y, %H:%M Uhr"
+  date:
+    abbr_day_names: [Mo, Di, Mi, Do, Fr, Sa, So]
+    abbr_month_names: [~, Jan., Feb., März, Apr., Mai, Jun., Jul., Aug., Sep., Okt., Nov., Dez.]
+    month_names: [~, Januar, Februar, März, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember]
+  theme:
+    homepage: "Home"
+    legal: "Impressum"
+    data: "Datenschutz"
+    project: "Projekt"
+    projects: "Projekte"
+    employee: "Team"
+    employees: "Team"
+    article: "Artikel"
+    articles: "Artikel"
+    event: "Event"
+    events: "Events"
+    lable: "Label"
+    lables: "Label"
+    default: "Seite"
+    slugs:
+      projects: "projekte"
+      team: "team"
+      articles: "artikel"
+      events: "events"
+    parts:
+      summary:
+        title: "Zusammenfassung"
+        hint: "Die Zusammenfassung soll grundlegende Informationen geben. Sie erscheint als Vorschau in der Gallerie sowie als einführender Text auf der Detail-Seite, und ist daher neben Titel und Titelbild außschlaggebend für den Lesenden. Sie sollte entsprechend spannend und informativ formuliert sein."
+      thumbnail:
+        title: "Titelbild"
+        hint: ""
+      rich_content:
+        title: "Inhalt"
+        hint: ""
+      rich_content_before:
+        title: "Inhalt vor dem Prsesenter"
+        hint: ""
+      rich_content_after:
+        title: "Inhalt nach dem Presenter"
+        hint: ""
+      highlights:
+        title: "Hervorgehobene Artikel"
+        hint: "Gebe bis zu 5 Artikel an, welche auf der Artikel-Seite hervorgehoben dargestellt werden sollen."
+      author:
+        title: "Autor"
+        hint: ""
+      email:
+        title: "E-Mail"
+        hint: "Die E-Mail des Mitarbeiters. Die E-Mail wird unter anderem auch unter Beiträgen der Mitarbeiters angezeigt."
+      contact_person:
+        title: "Ansprechpartner"
+        hint: "Hier kann eine Person angegeben werden, welche auf der Seite als Ansprechpoarter angezeigt wird."
+      event_time:
+        title: "Beginn des Events"
+        hint: ""
+      meta_info:
+        title: "Zusätzliche Info"
+        hint: ""
+      lable:
+        title: "Label"
+        hint: "Gebe bis zu drei Label an, welche zum Thema passen. Mithilfe der Label können Beiträge einfacher gefiltert und gefunden werden."
+      logo:
+        title: "NWDL-Logo"
+        hint: ""
+      facebook_link:
+        title: "Facebook Link"
+        hint: "Der zu öffnende Link, wenn man mit dem entsprechenden Menüeintrag interagiert"
+      instagram_link:
+        title: "Instagram Link"
+        hint: "Der zu öffnende Link, wenn man mit dem entsprechenden Menüeintrag interagiert"
+      linkedin_link:
+        title: "LinkedIn Link"
+        hint: "Der zu öffnende Link, wenn man mit dem entsprechenden Menüeintrag interagiert"
+      twitch_link:
+        title: "Twitch Link"
+        hint: "Der zu öffnende Link, wenn man mit dem entsprechenden Menüeintrag interagiert"
+      newsletter_heading:
+        title: "Newsletter Überschrift"
+        hint: ""
+      newsletter_text:
+        title: "Newsletter Text"
+        hint: ""
+      main_address:
+        title: "Anschrift"
+        hint: ""
+      main_contact:
+        title: "Kontakt"
+        hint: ""
+      header_image:
+        title: "Image"
+        hint: ""
+      focus_text:
+        title: "Fokus"
+        hint: ""
+      focus_research_text:
+        title: "Fokus (Forschung)"
+        hint: ""
+      focus_transver_text:
+        title: "Fokus (Transfer)"
+        hint: ""
+      focus_consulting_text:
+        title: "Fokus (Beratung)"
+        hint: ""
+      projects_text:
+        title: "Projekte"
+        hint: ""
+      events_text:
+        title: "Events"
+        hint: ""
+      editor_heading_general:
+        title: "Allgemeine Infos"
+        hint: ""
+      editor_heading_details:
+        title: "Inhaltliche Infos"
+        hint: ""

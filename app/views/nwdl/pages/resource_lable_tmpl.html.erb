@@ -1,0 +1,28 @@
+<%= render 'nwdl/shared/general/page_wrapper' do %>
+  <div class="nwdl-rich-content-wrapper">
+    <%= content.html :rich_content %>
+  </div>
+
+  <%# RELATED TAGS %>
+  <%# related_labels = current_page.descendants %>
+  <%# unless current_page.is_root? %>
+    <%# related_siblings = current_page.siblings.where.not(id: current_page.id) %>
+    <%# related_labels = related_labels.or(related_siblings) %>
+  <%# end %>
+
+  <%# related_labels.each do |related_lable| %>
+    <%#= link_to related_lable.title, related_lable.materialized_path %>
+  <%# end %>
+
+  <%# PAGE PRESENTER %>
+  <div class="row g-4 mt-4 justify-content-start flex-wrap flex-sm-nowrap flex-md-wrap">
+    <% labled_pages = Spina::Page.live.joins(:translations).where(translations: {locale: locale.to_sym}).where("json_attributes @> (?)::jsonb", {"#{locale.to_s}_content":[{"lable_ids":[current_page.id]}]}.to_json) %>
+    <%= render 'nwdl/shared/resource/iterator', resources: labled_pages, nil_message: "Dazu scheint es noch keine Beiträge zu geben." do |resource| %>
+      <%= render 'nwdl/shared/resource/resource_default', resource: resource %>
+    <% end %>
+  </div>
+
+<% end %>
+
+<%# NEWSLETTER %>
+<%= render 'nwdl/shared/general/newsletter' %>
