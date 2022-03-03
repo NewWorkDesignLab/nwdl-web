@@ -1,11 +1,11 @@
-<div class="d-block overflow-auto no-scrollbar nwdl-slider-wrapper">
+<div class="block overflow-auto no-scrollbar nwdl-slider-wrapper">
   <% resources ||= nil %>
   <% resource_name ||= nil %>
-  <%= render 'nwdl/shared/resource/iterator', resources: resources, resource_name: resource_name, classes: "d-inline-flex nwdl-slider-inner" do |resource| %>
+  <%= render 'nwdl/shared/resource/iterator', resources: resources, resource_name: resource_name, classes: "inline-flex nwdl-slider-inner gap-4 my-4" do |resource| %>
 
-    <%= link_to resource.materialized_path, class: "text-reset text-decoration-none nwdl-slider-cachel" do %>
-      <div class="bg-white p-3 rounded h-100">
-        <%= resource.content.image_tag(:thumbnail, {}, {class: "nwdl-cachel-img rounded object-fit-cover"}) %>
+    <%= link_to resource.materialized_path, class: "nwdl-slider-cachel" do %>
+      <div class="bg-white p-3 rounded h-full">
+        <%= resource.content.image_tag(:thumbnail, {}, {class: "nwdl-cachel-img rounded object-cover"}) %>
 
         <% display_lables = resource.content(:lable) %>
         <%= render "nwdl/shared/lable_badges", display_lables: display_lables %>

@@ -1,27 +1,31 @@
 <div class="container max-w-screen-xl mx-auto px-4 mt-40">
   <%# IMAGE NEWSLETTER KREISE %>
   <div class="relative flex flex-wrap justify-center">
-    <div class="absolute newsletter-kreise nwdl-index-background"><%= render 'nwdl/shared/images/newsletter_kreise' %></div>
+    <div class="absolute newsletter-kreise -z-10"><%= render 'nwdl/shared/images/newsletter_kreise' %></div>
   </div>
 
   <%# NEWSLETTER %>
   <div class="flex justify-center flex-wrap pt-12 nwdl-bg-blue-dark rounded">
 
     <div class="w-full nwdl-uppercase-header px-4 lg:px-16 -mb-12">
-      <%= current_account.content.html :newsletter_heading %>
+      <div class="nwdl-rich-content-wrapper !max-w-prose">
+        <%= current_account.content.html :newsletter_heading %>
+      </div>
     </div>
 
     <%# NEWSLETTER MAIN %>
-    <div class="w-full md:w-7/12 lg:w-8/12 mt-2 py-12 px-4 lg:px-16 nwdl-index-foreground">
-      <%= current_account.content.html :newsletter_text %>
-      <form class="w-full mt-3">
-        <div class="w-full mb-2">
-          <label for="newsletterNameInput" class="form-label">Name</label>
-          <input type="text" class="form-control" id="newsletterNameInput">
+    <div class="w-full md:w-7/12 lg:w-8/12 mt-2 py-12 px-4 lg:px-16 z-10">
+      <div class="nwdl-rich-content-wrapper !max-w-prose">
+        <%= current_account.content.html :newsletter_text %>
+      </div>
+      <form class="mt-3">
+        <div class="mb-3">
+          <label for="newsletterNameInput" class="block text-sm">Name</label>
+          <input type="text" class="block w-full" id="newsletterNameInput">
         </div>
         <div class="w-full mb-5">
-          <label for="newsletterEmailInput" class="form-label">E-Mail</label>
-          <input type="email" class="form-control" id="newsletterEmailInput">
+          <label for="newsletterEmailInput" class="block text-sm">E-Mail</label>
+          <input type="email" class="block w-full" id="newsletterEmailInput">
         </div>
         <button type="submit" class="btn btn-nwdl">Anmelden</button>
       </form>
@@ -33,12 +37,12 @@
 
       <%# IMAGE NEWSLETTER WOLKE %>
       <div class="relative flex flex-wrap justify-center w-full">
-        <div class="absolute newsletter-wolke nwdl-index-foreground"><%= render 'nwdl/shared/images/newsletter_wolke' %></div>
+        <div class="absolute newsletter-wolke z-10"><%= render 'nwdl/shared/images/newsletter_wolke' %></div>
       </div>
 
       <div class="relative w-full">
-        <div class="mb-4"><%= current_account.content.html :main_address %></div>
-        <div><%= current_account.content.html :main_contact %></div>
+        <div class="mb-4 nwdl-rich-content-wrapper !max-w-prose"><%= current_account.content.html :main_address %></div>
+        <div class="nwdl-rich-content-wrapper !max-w-prose"><%= current_account.content.html :main_contact %></div>
       </div>
     </div>
 
@@ -46,6 +50,6 @@
 
   <%# IMAGE FARBFLECK PINK %>
   <div class="relative flex flex-wrap justify-center">
-    <div class="absolute farbfleck-pink nwdl-index-background"><%= render 'nwdl/shared/images/farbfleck_pink' %></div>
+    <div class="absolute farbfleck-pink -z-10"><%= render 'nwdl/shared/images/farbfleck_pink' %></div>
   </div>
 </div>

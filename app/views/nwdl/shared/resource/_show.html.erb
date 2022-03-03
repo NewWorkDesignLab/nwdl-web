@@ -1,5 +1,5 @@
 <%= render 'nwdl/shared/general/page_wrapper' do %>
-  <div class="mt-3 fs-4">
+  <div class="mt-3 text-xl nwdl-rich-content-wrapper !max-w-prose">
     <% if content(:event_time).present? %>
       <p class="mb-0 nwdl-high-contrast"><strong><%= I18n.l(content(:event_time), format: :event) %></strong></p>
     <% end %>
@@ -9,21 +9,22 @@
 
 <%# METADATA WRAPPER %>
 <% if content(:author).present? || content(:meta_info).present? || content(:lable).present? %>
-  <div class="container-fluid nwdl-bg-blue-dark p-0">
-    <div class="container-xl py-3">
-      <div class="d-flex justify-content-start flex-wrap gap-3">
+  <div class="nwdl-bg-blue-middle p-0 mt-4">
+    <div class="container max-w-screen-xl mx-auto px-4 py-2">
+      <div class="flex justify-content-start flex-wrap gap-3">
+
         <%# AUTHOR %>
         <% if content(:author).present? %>
-          <%= link_to content(:author).materialized_path, class: "text-reset text-decoration-none badge fs-6 bg-light text-dark nwdl-icon nwdl-icon-at" do %>
-            <span class="nwdl-icon"><%= render 'shared/icons/user' %></span>
+          <%= link_to content(:author).materialized_path, class: "text-md px-2.5 py-1 rounded bg-neutral-100 inline-flex items-center gap-1" do %>
+            <span><%= render 'shared/icons/user', classes:"h-5 mb-1" %></span>
             <strong><%= content(:author).title %></strong>
           <% end %>
         <% end %>
 
         <%# ADDITIONAL META INFO %>
         <% if content(:meta_info).present? %>
-          <p class="badge fs-6 bg-light text-dark m-0">
-            <span class="nwdl-icon"><%= render 'shared/icons/clock' %></span>
+          <p class="text-md px-2.5 py-1 rounded bg-neutral-100 inline-flex items-center gap-1">
+            <span><%= render 'shared/icons/clock', classes:"h-5 mb-1" %></span>
             <strong><%= content(:meta_info) %></strong>
           </p>
         <% end %>
@@ -31,8 +32,8 @@
         <%# LABLES %>
         <% if content(:lable).present? %>
           <% content(:lable).each do |content_lable| %>
-            <%= link_to content_lable.materialized_path, class: "text-reset text-decoration-none badge fs-6 bg-light text-dark" do %>
-              <span class="nwdl-icon"><%= render 'shared/icons/tag' %></span>
+            <%= link_to content_lable.materialized_path, class: "text-md px-2.5 py-1 rounded bg-neutral-100 inline-flex items-center gap-1" do %>
+              <span><%= render 'shared/icons/tag', classes:"h-5 mb-1" %></span>
               <strong><%= content_lable.title %></strong>
             <% end %>
           <% end %>
@@ -44,24 +45,24 @@
 <% end %>
 
 <%# MAIN CONTENT %>
-<div class="container-xl mt-3">
-  <%= content.image_tag :thumbnail, {}, { class: "w-100 vh-40 object-fit-cover" } %>
+<div class="container max-w-screen-xl mx-auto px-4 mt-2">
+  <%= content.image_tag :thumbnail, {}, { class: "w-100 h-[40vh] object-cover rounded" } %>
 
-  <div class="nwdl-rich-content-wrapper mt-6 nwdl-high-contrast">
+  <div class="nwdl-rich-content-wrapper !max-w-prose mt-6 nwdl-high-contrast">
     <%= content.html :rich_content %>
   </div>
 </div>
 
 <%# BOTTOM METADATA %>
-<div class="container-xl mt-6">
-  <div class="row justify-content-start flex-wrap">
+<div class="container max-w-screen-xl mx-auto px-4 mt-10">
+  <div class="flex justify-start flex-wrap">
 
     <%# CONTACT PERSON INFO %>
     <% if content(:contact_person).present? %>
-      <div class="col-12 col-md-6 d-flex flex-column align-items-stretch align-items-md-start">
-        <h2 class="fs-5 mb-3">Ihr Ansprechpartner bei Fragen:</h2>
-        <%= link_to content(:contact_person).materialized_path, class: "d-inline-flex gap-3 p-2 pe-6 rounded nwdl-bg-grey-light text-reset text-decoration-none" do %>
-          <%= content(:contact_person).content.image_tag(:thumbnail, {}, {class: "nwdl-contact-person rounded object-fit-cover"}) %>
+      <div class="w-full md:w-6/12 flex flex-col items-stretch md:items-start">
+        <h2 class="text-xl mb-3">Ihr Ansprechpartner bei Fragen:</h2>
+        <%= link_to content(:contact_person).materialized_path, class: "inline-flex gap-3 p-2 pr-6 rounded nwdl-bg-grey-light" do %>
+          <%= content(:contact_person).content.image_tag(:thumbnail, {}, {class: "w-[100px] h-[100px] rounded object-cover"}) %>
           <p>
             <strong><%= content(:contact_person).title %></strong><br>
             <%= content(:contact_person).content(:email) %>
@@ -71,22 +72,22 @@
     <% end %>
 
     <%# DIRECT TIME AND AUTHOR META INFO (espacially for citing) %>
-    <div class="col-12 col-md-6 mt-4 d-flex flex-column justify-content-end ms-auto">
+    <div class="w-full md:w-6/12 mt-4 flex flex-col justify-end ml-auto">
       <%# ALWAYS display Author - if no Author given, fallback to generic Author %>
       <% if content(:author).present? %>
-        <p class="mb-0 text-md-end text-muted">Autor: <%= content(:author).title %></p>
+        <p class="mb-0 md:text-right text-neutral-500">Autor: <%= content(:author).title %></p>
       <% else %>
-        <p class="mb-0 text-md-end text-muted">Autor: New Work Design Lab<br></p>
+        <p class="mb-0 md:text-right text-neutral-500">Autor: New Work Design Lab<br></p>
       <% end %>
 
       <%# will display time of page creation aswell as time of last edited if lasted editet is not
           nearly the same as created_at (edits in the first 10 Minutes (600 Seconds) will not be
           displayed, due to page initial creation time) %>
       <% if (current_page.updated_at - current_page.created_at).abs > 600 %>
-        <p class="mb-0 text-md-end text-muted">Zuletzt geändert: <%= I18n.l(current_page.updated_at, format: :short) %></p>
+        <p class="mb-0 md:text-right text-neutral-500">Zuletzt geändert: <%= I18n.l(current_page.updated_at, format: :short) %></p>
       <% end %>
 
-      <p class="mb-0 text-md-end text-muted">Erstellt: <%= I18n.l(current_page.created_at, format: :short) %></p>
+      <p class="mb-0 md:text-right text-neutral-500">Erstellt: <%= I18n.l(current_page.created_at, format: :short) %></p>
     </div>
 
   </div>

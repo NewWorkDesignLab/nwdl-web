@@ -1,19 +1,19 @@
-<%= link_to resource.materialized_path, class: "col-12 row mb-5 nwdl-event justify-content-center text-reset text-decoration-none" do %>
+<%= link_to resource.materialized_path, class: "w-full mb-5 nwdl-event flex flex-wrap justify-center" do %>
   <%# Date %>
-  <div class="col-12 col-md-5 nwdl-event-date d-flex align-items-center mb-2 gx-0">
+  <div class="nwdl-event-date w-full md:w-5/12 flex items-center justify-start mb-2">
     <p class="m-0 nwdl-high-contrast"><strong><%= I18n.l( resource.content(:event_time), default: '' ) %></strong></p>
   </div>
 
   <%# "Connector" / Timeline %>
-  <div class="d-none d-md-block col-12 col-md-2 nwdl-event-connector gx-0">
+  <div class="hidden md:block w-full md:w-2/12 nwdl-event-connector">
     <div class="vertical-line"></div>
     <div class="dot"></div>
   </div>
 
   <%# Content %>
-  <div class="col-12 col-md-5 nwdl-bg-blue-light row gx-0 rounded">
-    <%= resource.content.image_tag(:thumbnail, {}, {class: "col-12 col-sm-5 rounded object-fit-cover"}) %>
-    <div class="col-12 col-sm-7 p-3">
+  <div class="w-full md:w-5/12 nwdl-bg-blue-light flex flex-wrap rounded">
+    <%= resource.content.image_tag(:thumbnail, {}, {class: "w-full sm:w-5/12 rounded object-cover"}) %>
+    <div class="w-full sm:w-7/12 p-4">
       <p class="mb-1 nwdl-high-contrast"><strong><%= resource.title %></strong></p>
       <div class="nwdl-high-contrast"><%= resource.content.html(:summary) %></div>
     </div>

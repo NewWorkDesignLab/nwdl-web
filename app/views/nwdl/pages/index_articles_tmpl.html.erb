@@ -2,19 +2,19 @@
 
   <%# IMAGES %>
   <% content_for :image_title do %>
-    <div class="articles-lamp index-background"><%= render 'nwdl/shared/images/lampe' %></div>
+    <div class="absolute articles-lamp -z-10"><%= render 'nwdl/shared/images/lampe' %></div>
   <% end %>
 
   <%# HIGHLIGHTS %>
   <% content_for :before_presenter do %>
     <% highlights = content(:highlights)&.order(created_at: :desc) %>
     <% if highlights.present? %>
-      <div class="container-fluid nwdl-bg-blue-dark mt-5 mb-7 p-0">
-        <div class="container-xl py-4">
+      <div class="nwdl-bg-blue-dark mt-14 mb-16">
+        <div class="container max-w-screen-xl mx-auto px-4 py-4">
 
           <%# RICH CONTENT HIGHLIGHTS %>
           <% if current_page.find_part(:rich_content_highlights)&.content.present? %>
-            <div class="nwdl-rich-content-wrapper mb-3 nwdl-high-contrast">
+            <div class="nwdl-rich-content-wrapper !max-w-prose">
               <%= content.html :rich_content_highlights %>
             </div>
           <% end %>

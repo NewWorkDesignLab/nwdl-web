@@ -11,7 +11,7 @@
 
   <%# RICH CONTENT BEFORE PRESENTER %>
   <% if current_page.find_part(:rich_content_before)&.content.present? %>
-    <div class="nwdl-rich-content-wrapper nwdl-high-contrast">
+    <div class="nwdl-rich-content-wrapper !max-w-prose nwdl-high-contrast">
       <%= content.html :rich_content_before %>
     </div>
   <% end %>
@@ -21,7 +21,7 @@
 
 <%# ARTICLES PRESENTER %>
 <% if yield(:presenter_content).present? %>
-  <div class="container max-w-screen-xl mx-auto px-4 mt-20">
+  <div class="container max-w-screen-xl mx-auto px-4 mt-10">
     <%= yield :presenter_content %>
   </div>
 <% end %>
@@ -31,7 +31,7 @@
 <%# RICH CONTENT AFTER PRESENTER %>
 <% if current_page.find_part(:rich_content_after)&.content.present? %>
   <div class="container max-w-screen-xl mx-auto px-4 mt-20">
-    <div class="nwdl-rich-content-wrapper nwdl-high-contrast">
+    <div class="nwdl-rich-content-wrapper !max-w-prose nwdl-high-contrast">
       <%= content.html :rich_content_after %>
     </div>
   </div>

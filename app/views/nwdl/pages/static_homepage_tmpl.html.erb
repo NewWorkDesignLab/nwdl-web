@@ -1,45 +1,55 @@
-<%= content.image_tag(:header_image, {}, {class: "w-full object-cover w-full nwdl-h-70vh"}) %>
+<%= content.image_tag(:header_image, {}, {class: "w-full object-cover w-full h-[70vh]"}) %>
 
 <%# FOCUS %>
 <div class="container max-w-screen-xl mx-auto px-4 mt-40">
   <%# MAIN FOCUS %>
   <div class="flex justify-end">
     <div class="w-full sm:w-9/12 md:w-7/12 py-4 nwdl-uppercase-header nwdl-high-contrast">
-      <%= content.html :focus_text %>
+      <div class="nwdl-rich-content-wrapper !max-w-prose">
+        <%= content.html :focus_text %>
+      </div>
     </div>
   </div>
 
   <%# IMAGES %>
   <div class="relative flex flex-wrap justify-center mt-32">
-    <div class="absolute astronaut nwdl-index-foreground"><%= render 'nwdl/shared/images/astronaut' %></div>
-    <div class="absolute farbklecks nwdl-index-background"><%= render 'nwdl/shared/images/farbfleck' %></div>
+    <div class="absolute astronaut z-10"><%= render 'nwdl/shared/images/astronaut' %></div>
+    <div class="absolute farbklecks -z-10"><%= render 'nwdl/shared/images/farbfleck' %></div>
   </div>
 
   <%# FOCUS BOXES %>
   <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
     <div class="w-full p-6 h-full text-center rounded nwdl-bg-blue-middle">
-      <%= content.html :focus_research_text %>
+      <div class="nwdl-rich-content-wrapper !max-w-prose">
+        <%= content.html :focus_research_text %>
+      </div>
     </div>
     <div class="w-full p-6 h-full text-center rounded nwdl-bg-blue-light">
-      <%= content.html :focus_transver_text %>
+      <div class="nwdl-rich-content-wrapper !max-w-prose">
+        <%= content.html :focus_transver_text %>
+      </div>
     </div>
     <div class="w-full p-6 h-full text-center rounded nwdl-bg-blue-dark">
-      <%= content.html :focus_consulting_text %>
+      <div class="nwdl-rich-content-wrapper !max-w-prose">
+        <%= content.html :focus_consulting_text %>
+      </div>
     </div>
   </div>
 
   <%# IMAGES %>
   <div class="relative flex flex-wrap justify-center">
-    <div class="absolute planet nwdl-index-background"><%= render 'nwdl/shared/images/planet' %></div>
+    <div class="absolute planet -z-10"><%= render 'nwdl/shared/images/planet' %></div>
   </div>
 </div>
 
 
 <%# PROJECTS %>
 <div class="container max-w-screen-xl mx-auto px-4 mt-40">
-  <div class="flex justify-start mb-8">
+  <div class="flex justify-start mb-2">
     <div class="w-full sm:w-9/12 md:w-7/12 py-4 nwdl-uppercase-header nwdl-high-contrast">
-      <%= content.html :projects_text %>
+      <div class="nwdl-rich-content-wrapper !max-w-prose">
+        <%= content.html :projects_text %>
+      </div>
     </div>
   </div>
 
@@ -70,15 +80,15 @@
 <%# EVENTS %>
 <div class="container max-w-screen-xl mx-auto px-4 mt-40 mb-36">
   <%# EVENT MAIN %>
-  <div class="flex justify-end pb-6 pt-2 overflow-hidden">
+  <div class="flex justify-end pb-6 pt-2 overflow-hidden -mx-4">
     <div class="w-full sm:w-9/12 md:w-7/12 py-4 nwdl-uppercase-header">
 
       <%# IMAGE PERSON STEHEND %>
       <div class="relative flex flex-wrap justify-center hidden sm:block">
-        <div class="absolute person-stehend nwdl-index-background"><%= render 'nwdl/shared/images/person_stehend' %></div>
+        <div class="absolute person-stehend -z-10"><%= render 'nwdl/shared/images/person_stehend' %></div>
       </div>
 
-      <div class="nwdl-high-contrast">
+      <div class="nwdl-high-contrast nwdl-rich-content-wrapper !max-w-prose mx-4">
         <%= content.html :events_text %>
       </div>
     </div>
@@ -97,7 +107,7 @@
   <% recent_events = sorted_events.reverse.take(4) %>
   <% any_event_displayed = false %>
 
-  <%= render 'nwdl/shared/resource/iterator', resources: recent_events, classes: "flex gap-4 justify-center overflow-hidden" do |event| %>
+  <%= render 'nwdl/shared/resource/iterator', resources: recent_events, classes: "flex flex-wrap gap-4 justify-center overflow-hidden" do |event| %>
     <% any_event_displayed = true %>
     <%= render 'nwdl/shared/resource/resource_timeline', resource: event %>
   <% end %>
@@ -105,7 +115,7 @@
   <%# AFTER EVENT PRESENTER %>
   <% event_link_target = Spina::Page.find_by(name: $spina_events) %>
   <% if any_event_displayed && event_link_target&.materialized_path.present? %>
-    <div class="flex justify-center flex-wrap mt-8">
+    <div class="flex flex-wrap justify-center mt-8">
       <p class="w-full py-4 text-center nwdl-high-contrast">Sie möchten mehr über aktuelle Events erfahren?</p>
       <%= link_to "Zeige mehr!", event_link_target.materialized_path, class: "btn-nwdl" %>
     </div>
