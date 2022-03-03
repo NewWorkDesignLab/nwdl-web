@@ -1,4 +1,7 @@
 Spina.configure do |config|
+  # Tailwind Content
+  Spina.config.tailwind_content << Rails.root.join("app/views/spina/**")
+
   # Locales
   # ===============
   # All locales your content should be available in.

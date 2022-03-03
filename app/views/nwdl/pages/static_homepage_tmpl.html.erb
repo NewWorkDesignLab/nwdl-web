@@ -37,7 +37,7 @@
 
 <%# PROJECTS %>
 <div class="container max-w-screen-xl mx-auto px-4 mt-40">
-  <div class="flex justify-start">
+  <div class="flex justify-start mb-8">
     <div class="w-full sm:w-9/12 md:w-7/12 py-4 nwdl-uppercase-header nwdl-high-contrast">
       <%= content.html :projects_text %>
     </div>
@@ -47,7 +47,7 @@
   <% project_collection = Spina::Resource.find_by(name: $spina_projects)&.pages&.live&.joins(:translations)&.where(translations: {locale: locale})&.limit(3) %>
   <% any_project_displayed = false %>
 
-  <%= render 'nwdl/shared/resource/iterator', resources: project_collection, classes: "grid grid-cols-1 md:grid-cols-3 gap-3 mt-8" do |project| %>
+  <%= render 'nwdl/shared/resource/iterator', resources: project_collection do |project| %>
     <% any_project_displayed = true %>
     <%= render 'nwdl/shared/resource/resource_default', resource: project %>
   <% end %>
@@ -68,14 +68,14 @@
 
 
 <%# EVENTS %>
-<div class="container-xl mb-7 mt-8">
+<div class="container max-w-screen-xl mx-auto px-4 mt-40 mb-36">
   <%# EVENT MAIN %>
-  <div class="row justify-content-end pb-6 pt-2 overflow-hidden">
-    <div class="col-12 col-sm-8 col-md-7 nwdl-uppercase-header">
+  <div class="flex justify-end pb-6 pt-2 overflow-hidden">
+    <div class="w-full sm:w-9/12 md:w-7/12 py-4 nwdl-uppercase-header">
 
       <%# IMAGE PERSON STEHEND %>
-      <div class="image-anchor d-none d-sm-block">
-        <div class="person-stehend index-background"><%= render 'nwdl/shared/images/person_stehend' %></div>
+      <div class="relative flex flex-wrap justify-center hidden sm:block">
+        <div class="absolute person-stehend nwdl-index-background"><%= render 'nwdl/shared/images/person_stehend' %></div>
       </div>
 
       <div class="nwdl-high-contrast">
@@ -97,7 +97,7 @@
   <% recent_events = sorted_events.reverse.take(4) %>
   <% any_event_displayed = false %>
 
-  <%= render 'nwdl/shared/resource/iterator', resources: recent_events, classes: "row g-4 justify-content-center overflow-hidden" do |event| %>
+  <%= render 'nwdl/shared/resource/iterator', resources: recent_events, classes: "flex gap-4 justify-center overflow-hidden" do |event| %>
     <% any_event_displayed = true %>
     <%= render 'nwdl/shared/resource/resource_timeline', resource: event %>
   <% end %>
@@ -105,11 +105,9 @@
   <%# AFTER EVENT PRESENTER %>
   <% event_link_target = Spina::Page.find_by(name: $spina_events) %>
   <% if any_event_displayed && event_link_target&.materialized_path.present? %>
-    <div class="row mt-3">
-      <div class="col-12 py-3 text-center nwdl-high-contrast">
-        <p>Sie möchten mehr über aktuelle Events erfahren?</p>
-        <%= link_to "Zeige mehr!", event_link_target.materialized_path, class: "btn btn-nwdl" %>
-      </div>
+    <div class="flex justify-center flex-wrap mt-8">
+      <p class="w-full py-4 text-center nwdl-high-contrast">Sie möchten mehr über aktuelle Events erfahren?</p>
+      <%= link_to "Zeige mehr!", event_link_target.materialized_path, class: "btn-nwdl" %>
     </div>
   <% end %>
 </div>

@@ -60,13 +60,21 @@ h6 {
 
 
 
-
+.nwdl-min-h-100vh {
+  min-height: 100vh;
+}
 .nwdl-min-h-80vh {
   min-height: 80vh;
+}
+.nwdl-min-h-20vh {
+  min-height: 20vh;
 }
 
 .nwdl-h-70vh {
   height: 70vh;
+}
+.nwdl-h-100vh {
+  height: 100vh;
 }
 
 
@@ -131,6 +139,20 @@ h6 {
 }
 
 
+.angled-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: bottom left;
+  transform: skewX(8deg);
+  background-color: #EF9C20;
+}
+
+
 
 
 input {
@@ -142,8 +164,8 @@ input {
 }
 
 .btn-nwdl {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
   padding-left: 2rem !important;
   padding-right: 2rem !important;
   background-color: transparent !important;
@@ -156,6 +178,11 @@ input {
 
 
 
+.nwdl-cachel-img {
+  width: 100%;
+  height: 25vh;
+  max-height: 270px;
+}
 
 
 .astronaut {

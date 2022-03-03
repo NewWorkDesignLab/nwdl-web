@@ -1,46 +1,32 @@
-<%# BLACK INFO BAR %>
-<div class="nwdl-footer">
-  <div class="container-fluid nwdl-bg-black text-white p-0">
-    <div class="container-xl py-3">
-      <div class="row justify-content-center justify-content-md-between">
-        <div class="col-12 col-sm-9 col-md-4 py-3">
-          <%= current_account.content.html :main_address %>
-        </div>
+<div id="footer" class="nwdl-min-h-20vh nwdl-bg-black text-white mt-auto">
+  <%# BLACK INFO BAR %>
+  <div class="container max-w-screen-xl mx-auto px-4 py-4 flex flex-wrap content-between">
+    <div class="w-full md:w-4/12 py-3">
+      <%= current_account.content.html :main_address %>
+    </div>
 
-        <div class="col-12 col-sm-9 col-md-4 py-3">
-          <%= current_account.content.html :main_contact %>
-        </div>
+    <div class="w-full md:w-4/12 py-3">
+      <%= current_account.content.html :main_contact %>
+    </div>
 
-        <div class="col-12 col-sm-9 col-md-4 py-3 d-flex justify-content-center">
-          <%= current_account.content.image_tag(:logo, {}, {class: "nwdl-logo"}) %>
-        </div>
-      </div>
+    <div class="w-full md:w-4/12 py-3">
+      <%= current_account.content.image_tag(:logo, {}, {class: "mx-auto md:mr-0 h-8 sm:h-10"}) %>
     </div>
   </div>
 
   <%# WHITE NAVIGATION BAR %>
-  <nav class="navbar navbar-expand-md navbar-dark nwdl-bg-grey">
-    <div class="container-xl">
-      <ul class="navbar-nav mb-2 mb-lg-0">
+  <nav class="bg-neutral-700">
+    <div class="container max-w-screen-xl px-4 py-2.5 mx-auto">
+      <ul class="flex content-start items-start md:items-center flex-col md:flex-row gap-5">
         <% nav = Spina::Navigation.find_by(name: 'footer') %>
         <% items = nav.navigation_items.regular_pages.sorted.live.in_menu.active %>
 
         <%# SOCIAL BUTTONS %>
-        <li class="nav-item d-flex">
-          <%= link_to current_account.content(:facebook_link), class: "nav-link nwdl-footer-icon", target: "_blank" do %>
-            <%= render 'shared/icons/facebook' %>
-          <% end %>
-
-          <%= link_to current_account.content(:instagram_link), class: "nav-link nwdl-footer-icon", target: "_blank" do %>
-            <%= render 'shared/icons/instagram' %>
-          <% end %>
-
-          <%= link_to current_account.content(:linkedin_link), class: "nav-link nwdl-footer-icon", target: "_blank" do %>
-            <%= render 'shared/icons/linkedin' %>
-          <% end %>
-
-          <%= link_to current_account.content(:twitch_link), class: "nav-link nwdl-footer-icon", target: "_blank" do %>
-            <%= render 'shared/icons/twitch' %>
+        <li class="flex gap-2">
+          <% ["facebook", "instagram", "linkedin", "twitch"].each do |social| %>
+            <%= link_to current_account.content("#{social}_link".to_sym), target: "_blank" do %>
+              <%= render "shared/icons/#{social}", classes: "h-8" %>
+            <% end %>
           <% end %>
         </li>
 

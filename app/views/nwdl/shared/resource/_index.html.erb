@@ -4,7 +4,7 @@
 
   <%# IMAGES %>
   <% if yield(:image_title).present? %>
-    <div class="image-anchor">
+    <div class="relative flex flex-wrap justify-center">
       <%= yield(:image_title) %>
     </div>
   <% end %>
@@ -21,7 +21,7 @@
 
 <%# ARTICLES PRESENTER %>
 <% if yield(:presenter_content).present? %>
-  <div class="container-xl mt-5">
+  <div class="container max-w-screen-xl mx-auto px-4 mt-20">
     <%= yield :presenter_content %>
   </div>
 <% end %>
@@ -30,7 +30,7 @@
 
 <%# RICH CONTENT AFTER PRESENTER %>
 <% if current_page.find_part(:rich_content_after)&.content.present? %>
-  <div class="container-xl mt-5">
+  <div class="container max-w-screen-xl mx-auto px-4 mt-20">
     <div class="nwdl-rich-content-wrapper nwdl-high-contrast">
       <%= content.html :rich_content_after %>
     </div>

@@ -20,12 +20,15 @@
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application.css" %>
   </head>
-  <body>
+  <body clasS="overflow-x-hidden">
+    <!-- Main Nav -->
     <%= render 'nwdl/shared/navigation/main' %>
-    <div class="overflow-hidden relative w-full text-gray-900 nwdl-min-h-80vh">
+    <!-- Page Content -->
+    <div id="content" class="overflow-hidden w-full text-gray-900 nwdl-min-h-100vh flex flex-col">
       <%= yield %>
+      <!-- Footer -->
+      <%= render 'nwdl/shared/navigation/footer' %>
     </div>
-    <%= render 'nwdl/shared/navigation/footer' %>
 
     <script src="https://unpkg.com/flowbite@1.3.4/dist/flowbite.js"></script>
   </body>

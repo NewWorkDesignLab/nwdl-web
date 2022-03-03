@@ -7,7 +7,7 @@
 
   <%# HIGHLIGHTS %>
   <% content_for :before_presenter do %>
-    <% highlights = content(:highlights).order(created_at: :desc) %>
+    <% highlights = content(:highlights)&.order(created_at: :desc) %>
     <% if highlights.present? %>
       <div class="container-fluid nwdl-bg-blue-dark mt-5 mb-7 p-0">
         <div class="container-xl py-4">

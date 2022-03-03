@@ -1,90 +1,53 @@
-<nav class="navbar fixed-top navbar-expand-xl navbar-dark bg-dark">
-  <div class="container-xl">
-    <%= link_to root_path, class: "navbar-brand" do %>
-      <%= current_account.content.image_tag(:logo, {}, {class: "nwdl-logo"}) %>
-    <% end %>
+<div id="main-navigation" class="sticky top-0 w-full h-0 z-50">
+  <nav class="bg-zinc-800 absolute top-0 w-full">
+    <div class="container max-w-screen-xl px-4 py-2.5 mx-auto flex flex-wrap justify-between items-center">
+      <%= link_to root_path, class: "flex items-center" do %>
+        <%= current_account.content.image_tag(:logo, {}, {class: "h-8 sm:h-10"}) %>
+      <% end %>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#toggle-target" aria-controls="toggle-target" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+      <button data-collapse-toggle="mobile-menu" type="button" class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="mobile-menu" aria-expanded="false">
+        <span class="sr-only">Hauptmenü öffnen</span>
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+        <svg class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+      </button>
 
-    <div class="collapse navbar-collapse" id="toggle-target">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <%# Admin Edit Button %>
-        <% if current_spina_user.present? %>
-          <li class="nav-item me-5">
-            <%= link_to "Edit Page", spina.edit_admin_page_path(current_page), class: "btn btn-success", target: "_blank" %>
-          </li>
-        <% end %>
-
-        <%# Main Navigation %>
-        <% nav = Spina::Navigation.find_by(name: 'main') %>
-        <% items = nav.navigation_items.regular_pages.sorted.live.in_menu.active %>
-
-        <% any_page_active = false %>
-        <% nav_items = [].tap do |out| %>
-          <% items.each do |item| %>
-            <% if item.page.materialized_path %>
-              <% active_page = item.page.id == current_page.id || ( current_page.resource.present? && item.page.name == current_page.resource.name ) %>
-              <% out << [item.page.menu_title, item.page.materialized_path, active_page] %>
-              <% any_page_active ||= active_page %>
-            <% end %>
+      <div class="hidden w-full md:block md:w-auto my-4 md:my-0" id="mobile-menu">
+        <ul class="flex flex-col md:flex-row md:space-x-6 space-y-6 md:space-y-0">
+          <%# Admin Edit Button %>
+          <% if current_spina_user.present? %>
+            <li><%= link_to "Edit Page", spina.edit_admin_page_path(current_page), class: "block text-white text-base", target: "_blank" %></li>
           <% end %>
-        <% end.each do |item| %>
-          <li class="nav-item">
-            <% classes = [].tap { |out| out << "nav-link"; out << "active" if item[2] || !any_page_active }.join(' ') %>
-            <%= link_to item[0], item[1], class: classes %>
-          </li>
-        <% end %>
 
-        <%# Language Toggle %>
-        <% existing_locales = current_page.translations.pluck(:locale).map(&:to_sym) %>
-        <% current_locale = params[:locale]&.to_sym || I18n.default_locale&.to_sym %>
-        <% existing_locales.each do |locale| %>
-          <% if locale != current_locale %>
-            <li class="nav-item ms-3">
-              <%= link_to t("spina.languages.#{locale}"), current_page.materialized_path(locale: locale), class: "nav-link active" %>
+          <%# Main Navigation %>
+          <% nav = Spina::Navigation.find_by(name: 'main') %>
+          <% items = nav.navigation_items.regular_pages.sorted.live.in_menu.active %>
+
+          <% any_page_active = false %>
+          <% nav_items = [].tap do |out| %>
+            <% items.each do |item| %>
+              <% if item.page.materialized_path %>
+                <% active_page = item.page.id == current_page.id || ( current_page.resource.present? && item.page.name == current_page.resource.name ) %>
+                <% out << [item.page.menu_title, item.page.materialized_path, active_page] %>
+                <% any_page_active ||= active_page %>
+              <% end %>
+            <% end %>
+          <% end.each do |item| %>
+            <li>
+              <% classes = [].tap { |out| out << "block text-gray-400 text-base hover:text-white"; out << "!text-white" if item[2] || !any_page_active }.join(' ') %>
+              <%= link_to item[0], item[1], class: classes %>
             </li>
           <% end %>
-        <% end %>
-      </ul>
+
+          <%# Language Toggle %>
+          <% existing_locales = current_page.translations.pluck(:locale).map(&:to_sym) %>
+          <% current_locale = params[:locale]&.to_sym || I18n.default_locale&.to_sym %>
+          <% existing_locales.each do |locale| %>
+            <% if locale != current_locale %>
+              <li><%= link_to t("spina.languages.#{locale}"), current_page.materialized_path(locale: locale), class: "block text-white text-base" %></li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
-
-
-
-
-
-<%# <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800">
-<div class="container flex flex-wrap justify-between items-center mx-auto">
-<a href="#" class="flex items-center">
-<img src="/docs/images/logo.svg" class="mr-3 h-6 sm:h-10" alt="Flowbite Logo">
-<span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
-</a>
-<button data-collapse-toggle="mobile-menu" type="button" class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
-<span class="sr-only">Open main menu</span>
-<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
-<svg class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-</button>
-<div class="hidden w-full md:block md:w-auto" id="mobile-menu">
-<ul class="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
-<li>
-<a href="#" class="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white" aria-current="page">Home</a>
-</li>
-<li>
-<a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
-</li>
-<li>
-<a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a>
-</li>
-<li>
-<a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Pricing</a>
-</li>
-<li>
-<a href="#" class="block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
-</li>
-</ul>
+  </nav>
 </div>
-</div>
-</nav> %>
