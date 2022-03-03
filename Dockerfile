@@ -1,5 +1,5 @@
 # Base
-FROM ruby:2.7.5-alpine AS base
+FROM ruby:3.0.0-alpine AS base
 LABEL maintainer="Tobias Bohn <info@tobiasbohn.com>"
 
 ARG APP_PATH=/application/
@@ -17,11 +17,9 @@ RUN bundle config --global frozen 1 \
   ruby-dev \
   postgresql-dev \
   tzdata \
-  nodejs \
-  yarn \
   bash \
   git \
-  && gem install bundler:2.0.2
+  && gem install bundler:2.2.3
 
 COPY Gemfile* $APP_PATH
 
@@ -50,9 +48,8 @@ RUN bundle install --without development test -j4 --retry 3 \
 COPY . $APP_PATH
 
 ARG RAILS_MASTER_KEY
-RUN yarn install --check-files --prod \
-  && RAILS_ENV=production bundle exec rake assets:precompile \
-  && rm -rf node_modules tmp/cache app/assets vendor/assets lib/assets spec
+RUN RAILS_ENV=production bundle exec rake assets:precompile \
+  && rm -rf tmp/cache app/assets/builds app/assets/images app/assets/stylesheets vendor/assets lib/assets spec
 
 
 # Developer Final
@@ -68,15 +65,11 @@ RUN apk --update --no-cache add \
   chromium \
   tzdata \
   bash \
-  yarn \
-  nodejs \
   && chmod +x /usr/bin/entrypoint.sh \
   && chmod +x /usr/bin/job-entrypoint.sh
 
 COPY --from=dev_bundle /usr/local/bundle/ /usr/local/bundle/
 COPY --from=dev_bundle $APP_PATH $APP_PATH
-
-RUN yarn install --check-files
 
 ENTRYPOINT ["entrypoint.sh"]
 CMD ["rails", "server", "-b", "0.0.0.0"]

@@ -4,12 +4,6 @@ set -e
 # Remove a potentially pre-existing server.pid for Rails.
 rm -f /application/tmp/pids/server.pid
 
-# wait for database
-# while ! (rake db:connection_possible) do echo "waiting for database..."; sleep 2; done;
-
-echo "checking yarn ..."
-command -v yarn install --check-files --silent
-
 echo "preparing tables ..."
 # depends on custom db:exists Task to check if database exists (lib/tasks/db_exists.rake)
 # Source: https://stackoverflow.com/a/35732641

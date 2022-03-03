@@ -14,11 +14,7 @@
 # Root Files
 !Gemfile*
 !Rakefile
-!package.json
-!postcss.config.js
-!babel.config.js
 !config.ru
-!yarn.lock
 
 # Config Folder
 !config/environments
@@ -27,16 +23,13 @@
 !config/webpack
 !config/application.rb
 !config/boot.rb
-!config/cable.yml
 !config/credentials.yml.enc
 !config/database.yml
 !config/environment.rb
 !config/puma.rb
 !config/routes.rb
-!config/schedule.rb
-!config/spring.rb
 !config/storage.yml
-!config/webpacker.yml
+!config/tailwind.config.js
 
 # DB Folder
 !db/migrate
