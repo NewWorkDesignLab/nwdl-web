@@ -1,0 +1,273 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&family=Raleway&display=swap');
+
+body {
+  font-family: 'Raleway', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  line-height: 1.2;
+}
+h1 {
+  font-size: calc(1.375rem + 1.5vw);
+  @media (min-width: 1200px) {
+    font-size: 2.5rem;
+  }
+}
+h2 {
+  font-size: calc(1.325rem + 0.9vw);
+  @media (min-width: 1200px) {
+    font-size: 2rem;
+  }
+}
+h3 {
+  font-size: calc(1.3rem + 0.6vw);
+  @media (min-width: 1200px) {
+    font-size: 1.75rem;
+  }
+}
+h4 {
+  font-size: calc(1.275rem + 0.3vw);
+  @media (min-width: 1200px) {
+    font-size: 1.5rem;
+  }
+}
+h5 {
+  font-size: 1.25rem;
+}
+h6 {
+  font-size: 1rem;
+}
+
+
+
+
+.nwdl-min-h-80vh {
+  min-height: 80vh;
+}
+
+.nwdl-h-70vh {
+  height: 70vh;
+}
+
+
+
+.nwdl-index-foreground {
+  z-index: 1;
+}
+
+.nwdl-index-background {
+  z-index: -1;
+}
+
+
+
+.nwdl-uppercase-header {
+  h1, h2, h3, h4, h5, h6 {
+    text-transform: uppercase;
+    font-size: calc(2.5rem + 0.9vw);
+  }
+}
+
+.nwdl-high-contrast {
+  @extend .nwdl-index-foreground;
+
+  h1, h2, h3, h4, h5, h6, div, p, span, strong {
+    background-color: rgba(255, 255, 255, 0.7);
+    width: fit-content;
+  }
+
+  div, p, span, strong {
+    display: inline;
+
+    &::after {
+      content: "\a";
+      white-space: pre;
+    }
+  }
+}
+
+.nwdl-rich-content-wrapper {
+  overflow: hidden;
+  max-width: 100%;
+
+  * {
+    max-width: 100%;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  img, figure {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  ul, ol {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+
+
+
+input {
+  background-color: transparent !important;
+  border-radius: 0 !important;
+  border-width: 0 0 2px 0 !important;
+  border-color: #000000 !important;
+  border-style: solid !important;
+}
+
+.btn-nwdl {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+  background-color: transparent !important;
+  border-radius: 2rem !important;
+  border-width: 2px !important;
+  border-color: #000000 !important;
+  border-style: solid !important;
+  color: #000000 !important;
+}
+
+
+
+
+
+.astronaut {
+  position: absolute;
+  min-width: 409px;
+  width: 69%;
+  bottom: -40px;
+  left: -162px;
+}
+
+.farbklecks {
+  position: absolute;
+  min-width: 380px;
+  width: 50%;
+  top: 69px;
+  right: 123px;
+  transform: translate(100%, -50%);
+}
+
+.planet {
+  position: absolute;
+  min-width: 256px;
+  width: 21%;
+  left: -108px;
+  top: -84px;
+}
+
+.newsletter-kreise {
+  position: absolute;
+  min-width: 250px;
+  width: 14%;
+  right: -65px;
+  bottom: -77px;
+}
+
+.newsletter-wolke {
+  position: absolute;
+  min-width: 200px;
+  width: 12%;
+  transform: translate(-50%, -100%);
+  top: -12px;
+  left: 34px;
+}
+
+.farbfleck-pink {
+  position: absolute;
+  min-width: 250px;
+  width: 16%;
+  left: -112px;
+  top: -100px;
+}
+
+.person-stehend {
+  position: absolute;
+  min-width: 350px;
+  width: 20%;
+  top: -10px;
+  left: 69px;
+  transform: translateX(-100%);
+}
+
+.person-sitzend {
+  position: absolute;
+  min-width: 200px;
+  width: 25%;
+  right: 12px;
+  top: -6px;
+  transform: translate(60%, -60%);
+}
+
+.project-gear {
+  position: absolute;
+  min-width: 135px;
+  width: 10%;
+  left: -60px;
+  bottom: 0;
+}
+
+.articles-lamp {
+  position: absolute;
+  min-width: 300px;
+  width: 30%;
+  transform: translate(-80%, -100%) rotate(20deg);
+  left: 120px;
+  top: 69px;
+}
+
+
+
+
+
+.nwdl-bg-blue-light {
+  background-color: #E1EBF3;
+}
+.nwdl-bg-blue-middle {
+  background-color: #C0DAF3;
+}
+.nwdl-bg-blue-dark {
+  background-color: #86AED5;
+}
+.nwdl-bg-orange-light {
+  background-color: #F6CA46;
+}
+.nwdl-bg-orange-dark {
+  background-color: #EF9C20;
+}
+.nwdl-bg-grey {
+  background-color: #272727;
+}
+.nwdl-bg-grey-light {
+  background-color: #d0d0d0;
+}
+.nwdl-bg-black {
+  background-color: #000000;
+}

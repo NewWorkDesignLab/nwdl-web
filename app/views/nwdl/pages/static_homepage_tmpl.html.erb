@@ -1,52 +1,44 @@
-<div class="container-fluid p-0">
-  <%= content.image_tag(:header_image, {}, {class: "w-100 vh-70 object-fit-cover"}) %>
-</div>
+<%= content.image_tag(:header_image, {}, {class: "w-full object-cover w-full nwdl-h-70vh"}) %>
 
 <%# FOCUS %>
-<div class="container-xl mt-8">
+<div class="container max-w-screen-xl mx-auto px-4 mt-40">
   <%# MAIN FOCUS %>
-  <div class="row justify-content-end">
-    <div class="col-12 col-sm-8 col-md-7 py-3 nwdl-uppercase-header nwdl-high-contrast">
+  <div class="flex justify-end">
+    <div class="w-full sm:w-9/12 md:w-7/12 py-4 nwdl-uppercase-header nwdl-high-contrast">
       <%= content.html :focus_text %>
     </div>
   </div>
 
   <%# IMAGES %>
-  <div class="image-anchor mt-7">
-    <div class="astronaut index-foreground"><%= render 'nwdl/shared/images/astronaut' %></div>
-    <div class="farbklecks index-background"><%= render 'nwdl/shared/images/farbfleck' %></div>
+  <div class="relative flex flex-wrap justify-center mt-32">
+    <div class="absolute astronaut nwdl-index-foreground"><%= render 'nwdl/shared/images/astronaut' %></div>
+    <div class="absolute farbklecks nwdl-index-background"><%= render 'nwdl/shared/images/farbfleck' %></div>
   </div>
 
   <%# FOCUS BOXES %>
-  <div class="row justify-content-center g-3">
-    <div class="col-12 col-sm-9 col-md-4">
-      <div class="p-4 h-100 text-center nwdl-bg-blue-middle rounded">
-        <%= content.html :focus_research_text %>
-      </div>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+    <div class="w-full p-6 h-full text-center rounded nwdl-bg-blue-middle">
+      <%= content.html :focus_research_text %>
     </div>
-    <div class="col-12 col-sm-9 col-md-4">
-      <div class="p-4 h-100 text-center nwdl-bg-blue-light rounded">
-        <%= content.html :focus_transver_text %>
-      </div>
+    <div class="w-full p-6 h-full text-center rounded nwdl-bg-blue-light">
+      <%= content.html :focus_transver_text %>
     </div>
-    <div class="col-12 col-sm-9 col-md-4">
-      <div class="p-4 h-100 text-center nwdl-bg-blue-dark rounded">
-        <%= content.html :focus_consulting_text %>
-      </div>
+    <div class="w-full p-6 h-full text-center rounded nwdl-bg-blue-dark">
+      <%= content.html :focus_consulting_text %>
     </div>
   </div>
 
   <%# IMAGES %>
-  <div class="image-anchor">
-    <div class="planet index-background"><%= render 'nwdl/shared/images/planet' %></div>
+  <div class="relative flex flex-wrap justify-center">
+    <div class="absolute planet nwdl-index-background"><%= render 'nwdl/shared/images/planet' %></div>
   </div>
 </div>
 
 
 <%# PROJECTS %>
-<div class="container-xl mt-8">
-  <div class="row">
-    <div class="col-12 col-sm-9 col-md-7 py-3 nwdl-uppercase-header nwdl-high-contrast">
+<div class="container max-w-screen-xl mx-auto px-4 mt-40">
+  <div class="flex justify-start">
+    <div class="w-full sm:w-9/12 md:w-7/12 py-4 nwdl-uppercase-header nwdl-high-contrast">
       <%= content.html :projects_text %>
     </div>
   </div>
@@ -55,7 +47,7 @@
   <% project_collection = Spina::Resource.find_by(name: $spina_projects)&.pages&.live&.joins(:translations)&.where(translations: {locale: locale})&.limit(3) %>
   <% any_project_displayed = false %>
 
-  <%= render 'nwdl/shared/resource/iterator', resources: project_collection, classes: "row g-4 justify-content-start mt-4 flex-wrap flex-sm-nowrap flex-md-wrap" do |project| %>
+  <%= render 'nwdl/shared/resource/iterator', resources: project_collection, classes: "grid grid-cols-1 md:grid-cols-3 gap-3 mt-8" do |project| %>
     <% any_project_displayed = true %>
     <%= render 'nwdl/shared/resource/resource_default', resource: project %>
   <% end %>
@@ -63,11 +55,9 @@
   <%# AFTER PROJECT PRESENTER %>
   <% project_link_target = Spina::Page.find_by(name: $spina_projects) %>
   <% if any_project_displayed && project_link_target&.materialized_path.present? %>
-    <div class="row mt-3">
-      <div class="col-12 py-3 text-center nwdl-high-contrast">
-        <p>Sie möchten mehr über unsere Projekte erfahren?</p>
-        <%= link_to "Zeige mehr!", project_link_target.materialized_path, class: "btn btn-nwdl" %>
-      </div>
+    <div class="flex justify-center flex-wrap mt-8">
+      <p class="w-full py-4 text-center nwdl-high-contrast">Sie möchten mehr über unsere Projekte erfahren?</p>
+      <%= link_to "Zeige mehr!", project_link_target.materialized_path, class: "btn-nwdl" %>
     </div>
   <% end %>
 </div>
