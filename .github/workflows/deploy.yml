@@ -1,0 +1,59 @@
+name: Docker Deployment
+
+on: workflow_dispatch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      DEPLOYMENT_NAME: nwdl
+      CONTAINER_NAME: $DEPLOYMENT_NAME:$(date +%s)
+      DEPLOY_PATH: /path/www/nwdl
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Build Docker Image
+      run: docker build . --file Dockerfile --tag $CONTAINER_NAME --target production --build-arg RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}
+    
+    - name: Compress Docker Image
+      run: docker save $CONTAINER_NAME | gzip > /compressed.tar
+    
+    - name: Preparing SSH & Clear Previos Deployment
+      uses: appleboy/ssh-action@master
+      env:
+        RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+        POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+        POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      with:
+        host: ${{ secrets.DEPLOY_HOST }}
+        username: ${{ secrets.DEPLOY_USERNAME }}
+        password: ${{ secrets.DEPLOY_PASSWORD }}
+        envs: RAILS_MASTER_KEY,POSTGRES_USER,POSTGRES_PASSWORD,RELEASE_PATH,DEPLOYMENT_NAME
+        script: |
+          docker-compose -f $RELEASE_PATH/docker-compose.yml -f $RELEASE_PATH/docker-compose.production.yml -p $DEPLOYMENT_NAME down
+          docker system prune --all -f
+          rm -rf $RELEASE_PATH/*
+        
+    - name: SCP Compressed Container & Dependencies
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.DEPLOY_HOST }}
+        username: ${{ secrets.DEPLOY_USERNAME }}
+        password: ${{ secrets.DEPLOY_PASSWORD }}
+        source: "/compressed.tar,/docker-compose.yml,/docker-compose.production.yml"
+        target: $RELEASE_PATH
+        
+    - name: Start Deployed Container
+      uses: appleboy/ssh-action@master
+      env:
+        RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+        POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+        POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      with:
+        host: ${{ secrets.DEPLOY_HOST }}
+        username: ${{ secrets.DEPLOY_USERNAME }}
+        password: ${{ secrets.DEPLOY_PASSWORD }}
+        envs: RAILS_MASTER_KEY,POSTGRES_USER,POSTGRES_PASSWORD,RELEASE_PATH,DEPLOYMENT_NAME
+        script: |
+          docker image load -q -i $RELEASE_PATH/compressed.tar
+          docker-compose -f $RELEASE_PATH/docker-compose.yml -f $RELEASE_PATH/docker-compose.production.yml -p $DEPLOYMENT_NAME up -d -V
