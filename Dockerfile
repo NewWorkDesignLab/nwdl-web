@@ -19,6 +19,8 @@ RUN bundle config --global frozen 1 \
   tzdata \
   bash \
   git \
+  # for tailwindcss (https://github.com/rails/tailwindcss-rails/issues/115):
+  gcompat \
   && gem install bundler:2.2.3
 
 COPY Gemfile* $APP_PATH
@@ -65,6 +67,7 @@ RUN apk --update --no-cache add \
   chromium \
   tzdata \
   bash \
+  vips \
   && chmod +x /usr/bin/entrypoint.sh \
   && chmod +x /usr/bin/job-entrypoint.sh
 
@@ -91,6 +94,7 @@ RUN apk --update --no-cache add \
   postgresql-client \
   tzdata \
   bash \
+  vips \
   && chmod +x /usr/bin/entrypoint.sh \
   && chmod +x /usr/bin/job-entrypoint.sh
 
