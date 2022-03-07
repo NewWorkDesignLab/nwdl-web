@@ -1,59 +1,110 @@
 name: Docker Deployment
-
 on: workflow_dispatch
+env:
+  DEPLOYMENT_NAME: nwdl
+  DEPLOY_PATH: /var/www/nwdl
+
+# gotchas:
+# ssh host should have custom user just for this purpose, which needs
+# to have his own home directory
+# sudo useradd -m user_name
+# sudo passwd user_name
+# sudo usermod -aG docker user_name
+# sudo usermod -aG www-data user_name
+
+# the DEPLOY_PATH needs to have specific permissions
+# https://serverfault.com/questions/124800/how-to-setup-linux-permissions-for-the-www-folder
+# sudo mkdir $DEPLOY_PATH
+# sudo chgrp -R www-data $DEPLOY_PATH
+# sudo chmod -R 2774 $DEPLOY_PATH
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build and Export
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          tags: ${{ env.DEPLOYMENT_NAME }}:prod
+          build-args: RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}
+          target: production
+          outputs: type=docker,dest=/tmp/compressed.tar
+
+      - name: Save Image
+        uses: actions/upload-artifact@v3
+        with:
+          name: compressed_image_artifact
+          path: /tmp/compressed.tar
+          if-no-files-found: error
+
   deploy:
     runs-on: ubuntu-latest
-    env:
-      DEPLOYMENT_NAME: nwdl
-      CONTAINER_NAME: $DEPLOYMENT_NAME:$(date +%s)
-      DEPLOY_PATH: /path/www/nwdl
+    needs: build
     steps:
-    - uses: actions/checkout@v2
-    
-    - name: Build Docker Image
-      run: docker build . --file Dockerfile --tag $CONTAINER_NAME --target production --build-arg RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}
-    
-    - name: Compress Docker Image
-      run: docker save $CONTAINER_NAME | gzip > /compressed.tar
-    
-    - name: Preparing SSH & Clear Previos Deployment
-      uses: appleboy/ssh-action@master
-      env:
-        RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-        POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
-        POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-      with:
-        host: ${{ secrets.DEPLOY_HOST }}
-        username: ${{ secrets.DEPLOY_USERNAME }}
-        password: ${{ secrets.DEPLOY_PASSWORD }}
-        envs: RAILS_MASTER_KEY,POSTGRES_USER,POSTGRES_PASSWORD,RELEASE_PATH,DEPLOYMENT_NAME
-        script: |
-          docker-compose -f $RELEASE_PATH/docker-compose.yml -f $RELEASE_PATH/docker-compose.production.yml -p $DEPLOYMENT_NAME down
-          docker system prune --all -f
-          rm -rf $RELEASE_PATH/*
-        
-    - name: SCP Compressed Container & Dependencies
-      uses: appleboy/scp-action@master
-      with:
-        host: ${{ secrets.DEPLOY_HOST }}
-        username: ${{ secrets.DEPLOY_USERNAME }}
-        password: ${{ secrets.DEPLOY_PASSWORD }}
-        source: "/compressed.tar,/docker-compose.yml,/docker-compose.production.yml"
-        target: $RELEASE_PATH
-        
-    - name: Start Deployed Container
-      uses: appleboy/ssh-action@master
-      env:
-        RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-        POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
-        POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-      with:
-        host: ${{ secrets.DEPLOY_HOST }}
-        username: ${{ secrets.DEPLOY_USERNAME }}
-        password: ${{ secrets.DEPLOY_PASSWORD }}
-        envs: RAILS_MASTER_KEY,POSTGRES_USER,POSTGRES_PASSWORD,RELEASE_PATH,DEPLOYMENT_NAME
-        script: |
-          docker image load -q -i $RELEASE_PATH/compressed.tar
-          docker-compose -f $RELEASE_PATH/docker-compose.yml -f $RELEASE_PATH/docker-compose.production.yml -p $DEPLOYMENT_NAME up -d -V
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v1
+
+      - name: Load Image
+        uses: actions/download-artifact@v3
+        with:
+          name: compressed_image_artifact
+
+      - name: Preparing SSH & Clear Previos Deployment
+        uses: appleboy/ssh-action@master
+        env:
+          DOCKER_IMAGE_NAME: ${{ env.DEPLOYMENT_NAME }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USERNAME }}
+          password: ${{ secrets.DEPLOY_PASSWORD }}
+          envs: DOCKER_IMAGE_NAME,RAILS_MASTER_KEY,POSTGRES_USER,POSTGRES_PASSWORD
+          script: |
+            export DOCKER_IMAGE_NAME=${DOCKER_IMAGE_NAME}
+            export RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
+            export POSTGRES_USER=${POSTGRES_USER}
+            export POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+            docker-compose -f ${{ env.DEPLOY_PATH }}/docker-compose.yml -f ${{ env.DEPLOY_PATH }}/docker-compose.production.yml -p ${{ env.DEPLOYMENT_NAME }} down || true
+            docker-compose -f ${{ env.DEPLOY_PATH }}/docker-compose.yml -f ${{ env.DEPLOY_PATH }}/docker-compose.production.yml -p ${{ env.DEPLOYMENT_NAME }} rm || true
+            rm -rf ${{ env.DEPLOY_PATH }}/*
+
+      - name: SCP Compressed Container & Dependencies
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USERNAME }}
+          password: ${{ secrets.DEPLOY_PASSWORD }}
+          source: "compressed.tar,docker-compose.yml,docker-compose.production.yml"
+          target: ${{ env.DEPLOY_PATH }}
+
+      - name: Start Deployed Container
+        uses: appleboy/ssh-action@master
+        env:
+          DOCKER_IMAGE_NAME: ${{ env.DEPLOYMENT_NAME }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USERNAME }}
+          password: ${{ secrets.DEPLOY_PASSWORD }}
+          envs: DOCKER_IMAGE_NAME,RAILS_MASTER_KEY,POSTGRES_USER,POSTGRES_PASSWORD
+          script: |
+            export DOCKER_IMAGE_NAME=${DOCKER_IMAGE_NAME}
+            export RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
+            export POSTGRES_USER=${POSTGRES_USER}
+            export POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+            docker image load -q -i ${{ env.DEPLOY_PATH }}/compressed.tar
+            docker-compose -f ${{ env.DEPLOY_PATH }}/docker-compose.yml -f ${{ env.DEPLOY_PATH }}/docker-compose.production.yml -p ${{ env.DEPLOYMENT_NAME }} up -d -V
