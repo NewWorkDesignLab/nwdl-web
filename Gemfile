@@ -20,7 +20,7 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 
 # Spina CMS
-gem 'spina', '~> 2.8.1', github: "spinacms/spina", ref: "db76dca"
+gem 'spina', '~> 2.8.1', github: "spinacms/spina", ref: "8538012"
 # Delayed Job
 gem 'delayed_job_active_record'
 

@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/spinacms/spina.git
-  revision: db76dca77ba8a0ad5207c2f46df841099d691f75
-  ref: db76dca
+  revision: 8538012f75d15912bd016287874590483c4796f4
+  ref: 8538012
   specs:
     spina (2.8.1)
       ancestry
@@ -132,7 +132,7 @@ GEM
       activesupport (>= 5.0)
     i18n (1.10.0)
       concurrent-ruby (~> 1.0)
-    image_processing (1.12.1)
+    image_processing (1.12.2)
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
     importmap-rails (1.0.3)
@@ -167,7 +167,7 @@ GEM
     mini_magick (4.11.0)
     mini_mime (1.1.2)
     minitest (5.15.0)
-    mobility (1.2.5)
+    mobility (1.2.6)
       i18n (>= 0.6.10, < 2)
       request_store (~> 1.0)
     net-imap (0.2.3)
@@ -265,7 +265,7 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
-    view_component (2.49.0)
+    view_component (2.49.1)
       activesupport (>= 5.0.0, < 8.0)
       method_source (~> 1.0)
     web-console (4.2.0)
