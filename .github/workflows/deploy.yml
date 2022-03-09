@@ -61,21 +61,11 @@ jobs:
 
       - name: Preparing SSH & Clear Previos Deployment
         uses: appleboy/ssh-action@master
-        env:
-          DOCKER_IMAGE_NAME: ${{ env.DEPLOYMENT_NAME }}
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
-          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
         with:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USERNAME }}
           password: ${{ secrets.DEPLOY_PASSWORD }}
-          envs: DOCKER_IMAGE_NAME,RAILS_MASTER_KEY,POSTGRES_USER,POSTGRES_PASSWORD
           script: |
-            export DOCKER_IMAGE_NAME=${DOCKER_IMAGE_NAME}
-            export RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
-            export POSTGRES_USER=${POSTGRES_USER}
-            export POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
             docker-compose -f ${{ env.DEPLOY_PATH }}/docker-compose.yml -f ${{ env.DEPLOY_PATH }}/docker-compose.production.yml down || true
             docker-compose -f ${{ env.DEPLOY_PATH }}/docker-compose.yml -f ${{ env.DEPLOY_PATH }}/docker-compose.production.yml rm || true
             rm -rf ${{ env.DEPLOY_PATH }}/*
@@ -91,21 +81,16 @@ jobs:
 
       - name: Start Deployed Container
         uses: appleboy/ssh-action@master
-        env:
-          DOCKER_IMAGE_NAME: ${{ env.DEPLOYMENT_NAME }}
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
-          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
         with:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USERNAME }}
           password: ${{ secrets.DEPLOY_PASSWORD }}
-          envs: DOCKER_IMAGE_NAME,RAILS_MASTER_KEY,POSTGRES_USER,POSTGRES_PASSWORD
           script: |
-            export DOCKER_IMAGE_NAME=${DOCKER_IMAGE_NAME}
-            export RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
-            export POSTGRES_USER=${POSTGRES_USER}
-            export POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+            touch ${{ env.DEPLOY_PATH }}/.env
+            echo 'DOCKER_IMAGE_NAME=${{ env.DEPLOYMENT_NAME }}' >> .env
+            echo 'RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}' >> .env
+            echo 'POSTGRES_USER=${{ secrets.POSTGRES_USER }}' >> .env
+            echo 'POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}' >> .env
             mv ${{ env.DEPLOY_PATH }}/docker-compose.production.yml ${{ env.DEPLOY_PATH }}/docker-compose.override.yml
             docker image load -q -i ${{ env.DEPLOY_PATH }}/compressed.tar
             docker-compose -f ${{ env.DEPLOY_PATH }}/docker-compose.yml -f ${{ env.DEPLOY_PATH }}/docker-compose.override.yml up -d -V
