@@ -68,6 +68,8 @@ RUN apk --update --no-cache add \
   tzdata \
   bash \
   vips \
+  # for tailwindcss (https://github.com/rails/tailwindcss-rails/issues/115):
+  gcompat \
   && chmod +x /usr/bin/entrypoint.sh \
   && chmod +x /usr/bin/job-entrypoint.sh
 

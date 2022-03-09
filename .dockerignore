@@ -15,6 +15,7 @@
 !Gemfile*
 !Rakefile
 !config.ru
+!default_db_backup.psql
 
 # Config Folder
 !config/environments

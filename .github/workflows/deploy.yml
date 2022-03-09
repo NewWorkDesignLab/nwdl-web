@@ -76,8 +76,8 @@ jobs:
             export RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
             export POSTGRES_USER=${POSTGRES_USER}
             export POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-            docker-compose -f ${{ env.DEPLOY_PATH }}/docker-compose.yml -f ${{ env.DEPLOY_PATH }}/docker-compose.production.yml -p ${{ env.DEPLOYMENT_NAME }} down || true
-            docker-compose -f ${{ env.DEPLOY_PATH }}/docker-compose.yml -f ${{ env.DEPLOY_PATH }}/docker-compose.production.yml -p ${{ env.DEPLOYMENT_NAME }} rm || true
+            docker-compose -f ${{ env.DEPLOY_PATH }}/docker-compose.yml -f ${{ env.DEPLOY_PATH }}/docker-compose.production.yml down || true
+            docker-compose -f ${{ env.DEPLOY_PATH }}/docker-compose.yml -f ${{ env.DEPLOY_PATH }}/docker-compose.production.yml rm || true
             rm -rf ${{ env.DEPLOY_PATH }}/*
 
       - name: SCP Compressed Container & Dependencies
@@ -106,5 +106,6 @@ jobs:
             export RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
             export POSTGRES_USER=${POSTGRES_USER}
             export POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+            mv ${{ env.DEPLOY_PATH }}/docker-compose.production.yml ${{ env.DEPLOY_PATH }}/docker-compose.override.yml
             docker image load -q -i ${{ env.DEPLOY_PATH }}/compressed.tar
-            docker-compose -f ${{ env.DEPLOY_PATH }}/docker-compose.yml -f ${{ env.DEPLOY_PATH }}/docker-compose.production.yml -p ${{ env.DEPLOYMENT_NAME }} up -d -V
+            docker-compose -f ${{ env.DEPLOY_PATH }}/docker-compose.yml -f ${{ env.DEPLOY_PATH }}/docker-compose.override.yml up -d -V
