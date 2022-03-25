@@ -1,0 +1,120 @@
+de:
+  # time and date merged in pr #970 github spina
+  time:
+    formats:
+      default: "%d. %b %Y"
+      short: "%d.%m.%Y %H:%M Uhr"
+      event: "%d. %B %Y, %H:%M Uhr"
+  date:
+    abbr_day_names: [Mo, Di, Mi, Do, Fr, Sa, So]
+    abbr_month_names: [~, Jan., Feb., März, Apr., Mai, Jun., Jul., Aug., Sep., Okt., Nov., Dez.]
+    month_names: [~, Januar, Februar, März, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember]
+  theme:
+    homepage: "Home"
+    legal: "Impressum"
+    data: "Datenschutz"
+    project: "Projekt"
+    projects: "Projekte"
+    employee: "Team"
+    employees: "Team"
+    article: "Artikel"
+    articles: "Artikel"
+    event: "Event"
+    events: "Events"
+    lable: "Label"
+    lables: "Label"
+    default: "Seite"
+    parts:
+      summary:
+        title: "Zusammenfassung"
+        hint: "Die Zusammenfassung soll grundlegende Informationen geben. Sie erscheint als Vorschau in der Gallerie sowie als einführender Text auf der Detail-Seite, und ist daher neben Titel und Titelbild außschlaggebend für den Lesenden. Sie sollte entsprechend spannend und informativ formuliert sein."
+      thumbnail:
+        title: "Titelbild"
+        hint: "Vorschaubild in Kacheln sowie Titelbild auf der entsprechenden Seite."
+      rich_content:
+        title: "Textblock"
+        hint: ""
+      rich_content_before:
+        title: "Textblock vor dem Inhalt"
+        hint: "Dieser Textblock wird vor den einzelnen Inhalten (Atrikel, Events,..) angezeigt."
+      rich_content_after:
+        title: "Textblock nach dem Inhalt"
+        hint: "Dieser Textblock wird vor den einzelnen Inhalten (Atrikel, Events,..) angezeigt."
+      rich_content_highlights:
+        title: "Textblock bei den Highlights"
+        hint: "Dieser Textblock wird vor den Highlights angezeigt."
+      highlights:
+        title: "Hervorgehobene Artikel"
+        hint: "Gebe bis zu 5 Artikel an, welche hervorgehoben dargestellt werden sollen."
+      author:
+        title: "Autor"
+        hint: "Der Autor des Beitrages. Der Autor ist die Person, die den Inhalt auf der Webseite erstellt hat."
+      email:
+        title: "E-Mail"
+        hint: "Die E-Mail des Mitarbeitenden. Die E-Mail wird unter anderem auch unter Beiträgen von Mitarbeitenden angezeigt."
+      contact_person:
+        title: "Ansprechpartner"
+        hint: "Hier kann eine Person angegeben werden, welche auf der Seite als Ansprechparter angezeigt wird. Der Ansprechpartner kann ebenfalls der Autor sein, muss es aber nicht."
+      event_time:
+        title: "Beginn des Events"
+        hint: "Startzeitpunkt des Events."
+      meta_info:
+        title: "Zusätzliche Info"
+        hint: "Bitte gebe hier die Lesezeit des Beitrages an. Beispiel: \"Lesezeit: 5 Minuten\""
+      lable:
+        title: "Label"
+        hint: "Gebe bis zu drei Label an, welche zum Thema passen. Mithilfe der Label können Beiträge einfacher gefiltert und gefunden werden."
+      logo:
+        title: "NWDL-Logo"
+        hint: "Das Logo des New Work Design Lab."
+      facebook_link:
+        title: "Facebook Link"
+        hint: "Der zu öffnende Link, wenn man mit dem entsprechenden Menüeintrag interagiert"
+      instagram_link:
+        title: "Instagram Link"
+        hint: "Der zu öffnende Link, wenn man mit dem entsprechenden Menüeintrag interagiert"
+      linkedin_link:
+        title: "LinkedIn Link"
+        hint: "Der zu öffnende Link, wenn man mit dem entsprechenden Menüeintrag interagiert"
+      twitch_link:
+        title: "Twitch Link"
+        hint: "Der zu öffnende Link, wenn man mit dem entsprechenden Menüeintrag interagiert"
+      newsletter_heading:
+        title: "Newsletter Überschrift"
+        hint: ""
+      newsletter_text:
+        title: "Newsletter Text"
+        hint: ""
+      main_address:
+        title: "Anschrift"
+        hint: ""
+      main_contact:
+        title: "Kontakt"
+        hint: ""
+      header_image:
+        title: "Image"
+        hint: ""
+      focus_text:
+        title: "Fokus"
+        hint: ""
+      focus_research_text:
+        title: "Fokus (Forschung)"
+        hint: ""
+      focus_transver_text:
+        title: "Fokus (Transfer)"
+        hint: ""
+      focus_consulting_text:
+        title: "Fokus (Beratung)"
+        hint: ""
+      projects_text:
+        title: "Projekte"
+        hint: ""
+      events_text:
+        title: "Events"
+        hint: ""
+      editor_heading_general:
+        title: "Allgemeine Infos"
+        hint: ""
+      editor_heading_details:
+        title: "Inhaltliche Infos"
+        hint: ""

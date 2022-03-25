@@ -1,7 +1,7 @@
 <div id="main-navigation" class="sticky top-0 w-full h-0 z-50">
   <nav class="bg-zinc-800 absolute top-0 w-full">
     <div class="container max-w-screen-xl px-4 py-2.5 mx-auto flex flex-wrap justify-between items-center">
-      <%= link_to root_path, class: "flex items-center" do %>
+      <%= link_to Spina::Page.find_by(name: "homepage").materialized_path(locale: I18n.locale), class: "flex items-center" do %>
         <%= current_account.content.image_tag(:logo, {}, {class: "h-8 sm:h-10"}) %>
       <% end %>
 
@@ -15,7 +15,7 @@
         <ul class="flex flex-col md:flex-row md:space-x-6 space-y-6 md:space-y-0">
           <%# Admin Edit Button %>
           <% if current_spina_user.present? %>
-            <li><%= link_to "Edit Page", spina.edit_admin_page_path(current_page), class: "block text-white text-base", target: "_blank" %></li>
+            <li><%= link_to "Edit Page", spina.edit_admin_page_path(current_page), class: "block text-gray-400 text-base", target: "_blank" %></li>
           <% end %>
 
           <%# Main Navigation %>
@@ -43,7 +43,7 @@
           <% current_locale = params[:locale]&.to_sym || I18n.default_locale&.to_sym %>
           <% existing_locales.each do |locale| %>
             <% if locale != current_locale %>
-              <li><%= link_to t("spina.languages.#{locale}"), current_page.materialized_path(locale: locale), class: "block text-white text-base" %></li>
+              <li><%= link_to t("spina.languages.#{locale}"), current_page.materialized_path(locale: locale), class: "block #{ any_page_active ? "text-gray-400" : "text-white" } text-base" %></li>
             <% end %>
           <% end %>
         </ul>
