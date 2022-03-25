@@ -60,7 +60,7 @@
     <%# CONTACT PERSON INFO %>
     <% if content(:contact_person).present? %>
       <div class="w-full md:w-6/12 flex flex-col items-stretch md:items-start">
-        <h2 class="text-xl mb-3">Ihr Ansprechpartner bei Fragen:</h2>
+        <h2 class="text-xl mb-3"><%= I18n.t('static.contact_person_heading') %></h2>
         <%= link_to content(:contact_person).materialized_path, class: "inline-flex gap-3 p-2 pr-6 rounded nwdl-bg-grey-light" do %>
           <%= content(:contact_person).content.image_tag(:thumbnail, {}, {class: "w-[100px] h-[100px] rounded object-cover"}) %>
           <p>
@@ -75,19 +75,19 @@
     <div class="w-full md:w-6/12 mt-4 flex flex-col justify-end ml-auto">
       <%# ALWAYS display Author - if no Author given, fallback to generic Author %>
       <% if content(:author).present? %>
-        <p class="mb-0 md:text-right text-neutral-500">Autor: <%= content(:author).title %></p>
+        <p class="mb-0 md:text-right text-neutral-500"><%= I18n.t('static.author') %>: <%= content(:author).title %></p>
       <% else %>
-        <p class="mb-0 md:text-right text-neutral-500">Autor: New Work Design Lab<br></p>
+        <p class="mb-0 md:text-right text-neutral-500"><%= I18n.t('static.author') %>: <%= I18n.t('static.default_author') %><br></p>
       <% end %>
 
       <%# will display time of page creation aswell as time of last edited if lasted editet is not
           nearly the same as created_at (edits in the first 10 Minutes (600 Seconds) will not be
           displayed, due to page initial creation time) %>
       <% if (current_page.updated_at - current_page.created_at).abs > 600 %>
-        <p class="mb-0 md:text-right text-neutral-500">Zuletzt geändert: <%= I18n.l(current_page.updated_at, format: :short) %></p>
+        <p class="mb-0 md:text-right text-neutral-500"><%= I18n.t('static.last_updated') %>: <%= I18n.l(current_page.updated_at, format: :short) %></p>
       <% end %>
 
-      <p class="mb-0 md:text-right text-neutral-500">Erstellt: <%= I18n.l(current_page.created_at, format: :short) %></p>
+      <p class="mb-0 md:text-right text-neutral-500"><%= I18n.t('static.created_at') %>: <%= I18n.l(current_page.created_at, format: :short) %></p>
     </div>
 
   </div>

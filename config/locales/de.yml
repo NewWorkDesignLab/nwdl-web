@@ -1,1 +1,26 @@
 de:
+  time:
+    formats:
+      default: "%d. %b %Y"
+      short: "%d.%m.%Y %H:%M Uhr"
+      event: "%d. %B %Y, %H:%M Uhr"
+  date:
+    abbr_day_names: [Mo, Di, Mi, Do, Fr, Sa, So]
+    abbr_month_names: [~, Jan., Feb., März, Apr., Mai, Jun., Jul., Aug., Sep., Okt., Nov., Dez.]
+    month_names: [~, Januar, Februar, März, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember]
+  static:
+    email: "E-Mail"
+    name: "Name"
+    signin: "Anmelden"
+    open_main_menu: "Hauptmenü öffnen"
+    edit_page: "Seite bearbeiten"
+    no_content: "Leider ist hier noch nichts zu sehen."
+    resources_from: "Beiträge von und mit"
+    more_projects: "Sie möchten mehr über unsere Projekte erfahren?"
+    more_events: "Sie möchten mehr über aktuelle Events erfahren?"
+    show_more: "Zeige mehr!"
+    contact_person_heading: "Ihr Ansprechpartner bei Fragen:"
+    author: "Autor"
+    default_author: "New Work Design Lab"
+    last_updated: "Zuletzt geändert"
+    created_at: "Erstellt"

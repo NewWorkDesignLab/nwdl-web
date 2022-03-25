@@ -20,14 +20,14 @@
       </div>
       <form class="mt-3">
         <div class="mb-3">
-          <label for="newsletterNameInput" class="block text-sm">Name</label>
+          <label for="newsletterNameInput" class="block text-sm"><%= I18n.t('static.name') %></label>
           <input type="text" class="block w-full" id="newsletterNameInput">
         </div>
         <div class="w-full mb-5">
-          <label for="newsletterEmailInput" class="block text-sm">E-Mail</label>
+          <label for="newsletterEmailInput" class="block text-sm"><%= I18n.t('static.email') %></label>
           <input type="email" class="block w-full" id="newsletterEmailInput">
         </div>
-        <button type="submit" class="btn btn-nwdl">Anmelden</button>
+        <button type="submit" class="btn btn-nwdl"><%= I18n.t('static.signin') %></button>
       </form>
     </div>
 

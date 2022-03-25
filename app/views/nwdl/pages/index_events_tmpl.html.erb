@@ -7,7 +7,7 @@
 
   <%# PRESENTER SELF %>
   <% content_for :presenter_content do %>
-    <%= render 'nwdl/shared/resource/iterator', resource_name: $spina_events, nil_message: "Leider ist hier noch nichts zu sehen.", classes: "flex flex-wrap gap-4 justify-center overflow-hidden" do |resource| %>
+    <%= render 'nwdl/shared/resource/iterator', resource_name: $spina_events, nil_message: I18n.t('static.no_content'), classes: "flex flex-wrap gap-4 justify-center overflow-hidden" do |resource| %>
       <%= render 'nwdl/shared/resource/resource_timeline', resource: resource %>
     <% end %>
   <% end %>

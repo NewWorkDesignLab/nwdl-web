@@ -3,7 +3,7 @@
   <%# PRESENTER SELF %>
   <% content_for :presenter_content do %>
     <% labled_pages = Spina::Page.live.joins(:translations).where(translations: {locale: locale.to_sym}).where("json_attributes @> (?)::jsonb", {"#{locale.to_s}_content":[{"lable_ids":[current_page.id]}]}.to_json) %>
-    <%= render 'nwdl/shared/resource/iterator', resources: labled_pages, nil_message: "Dazu scheint es noch keine Beiträge zu geben." do |resource| %>
+    <%= render 'nwdl/shared/resource/iterator', resources: labled_pages, nil_message: I18n.t('static.no_content') do |resource| %>
       <%= render 'nwdl/shared/resource/resource_default', resource: resource %>
     <% end %>
   <% end %>
