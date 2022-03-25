@@ -13,6 +13,7 @@ Spina::Theme.register do |theme|
   theme.parts = [
     # Homepage
     {name: 'header_image', title: I18n.t('theme.parts.header_image.title'), part_type: "Spina::Parts::Image", hint: I18n.t('theme.parts.header_image.hint') },
+    {name: 'header_iframe', title: I18n.t('theme.parts.header_iframe.title'), part_type: "Spina::Parts::Line", hint: I18n.t('theme.parts.header_iframe.hint') },
     {name: 'focus_text', title: I18n.t('theme.parts.focus_text.title'), part_type: "Spina::Parts::Text", hint: I18n.t('theme.parts.focus_text.hint') },
     {name: 'focus_research_text', title: I18n.t('theme.parts.focus_research_text.title'), part_type: "Spina::Parts::Text", hint: I18n.t('theme.parts.focus_research_text.hint') },
     {name: 'focus_transver_text', title: I18n.t('theme.parts.focus_transver_text.title'), part_type: "Spina::Parts::Text", hint: I18n.t('theme.parts.focus_transver_text.hint') },
@@ -56,7 +57,7 @@ Spina::Theme.register do |theme|
   # by referencing them from the theme.parts configuration above.
   theme.view_templates = [
     # for static pages
-    {name: 'static_homepage_tmpl', title: I18n.t('theme.homepage'), parts: %w(header_image focus_text focus_research_text focus_transver_text focus_consulting_text projects_text events_text)},
+    {name: 'static_homepage_tmpl', title: I18n.t('theme.homepage'), parts: %w(header_iframe header_image focus_text focus_research_text focus_transver_text focus_consulting_text projects_text events_text)},
 
     # static pages
     {name: 'static_legal_tmpl', title: I18n.t('theme.legal'), parts: %w(rich_content)},

@@ -1,4 +1,8 @@
-<%= content.image_tag(:header_image, {}, {class: "w-full object-cover w-full h-[70vh]"}) %>
+<% if content(:header_iframe).present? %>
+  <iframe class="w-full h-[70vh] overflow-hidden" src="<%= content(:header_iframe) %>" scrolling="no"></iframe>
+<% else %>
+  <%= content.image_tag(:header_image, {}, {class: "object-cover w-full h-[70vh]"}) %>
+<% end %>
 
 <%# FOCUS %>
 <div class="container max-w-screen-xl mx-auto px-4 mt-40">

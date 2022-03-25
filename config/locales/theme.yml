@@ -82,8 +82,11 @@ de:
         title: "Kontakt"
         hint: ""
       header_image:
-        title: "Image"
-        hint: ""
+        title: "Titlebild der Startseite"
+        hint: "Das Titlebild dient als Fallback und wird immer dann angezeigt, wenn kein IFrame Link angegeben ist."
+      header_iframe:
+        title: "IFrame auf der Startseite (Link)"
+        hint: "Der angegebene Link wird in einem IFrame auf der Startseite geöffnet, und ermöglich dadurch ein interaktives Element (Projekt-Demo, Minispiel, Video, etc.). Sollte kein IFrame Link angegeben sein, so wird das Titelbild angezeigt."
       focus_text:
         title: "Fokus"
         hint: ""
