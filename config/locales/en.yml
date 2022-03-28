@@ -5,8 +5,9 @@ en:
       short: "%d.%m.%Y %H:%M Uhr"
       event: "%d. %B %Y, %H:%M Uhr"
   static:
-    email: "E-Mail"
-    name: "Name"
+    email: "Email Address"
+    first_name: "First Name"
+    last_name: "Last Name"
     signin: "Submit"
     open_main_menu: "Open Main Menu"
     edit_page: "Edit Page"

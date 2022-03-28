@@ -9,8 +9,9 @@ de:
     abbr_month_names: [~, Jan., Feb., März, Apr., Mai, Jun., Jul., Aug., Sep., Okt., Nov., Dez.]
     month_names: [~, Januar, Februar, März, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember]
   static:
-    email: "E-Mail"
-    name: "Name"
+    email: "E-Mail Adresse"
+    first_name: "Vorname"
+    last_name: "Nachname"
     signin: "Anmelden"
     open_main_menu: "Hauptmenü öffnen"
     edit_page: "Seite bearbeiten"
