@@ -1,5 +1,10 @@
 name: Docker Deployment
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: environment
+        required: true
 env:
   DEPLOYMENT_NAME: nwdl
   DEPLOY_PATH: /var/www/nwdl
@@ -46,6 +51,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
     needs: build
     steps:
       - name: Checkout
@@ -87,10 +93,10 @@ jobs:
           password: ${{ secrets.DEPLOY_PASSWORD }}
           script: |
             touch ${{ env.DEPLOY_PATH }}/.env
-            echo 'DOCKER_IMAGE_NAME=${{ env.DEPLOYMENT_NAME }}' >> .env
-            echo 'RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}' >> .env
-            echo 'POSTGRES_USER=${{ secrets.POSTGRES_USER }}' >> .env
-            echo 'POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}' >> .env
+            echo 'DOCKER_IMAGE_NAME=${{ env.DEPLOYMENT_NAME }}' >> ${{ env.DEPLOY_PATH }}/.env
+            echo 'RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}' >> ${{ env.DEPLOY_PATH }}/.env
+            echo 'POSTGRES_USER=${{ secrets.POSTGRES_USER }}' >> ${{ env.DEPLOY_PATH }}/.env
+            echo 'POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}' >> ${{ env.DEPLOY_PATH }}/.env
             mv ${{ env.DEPLOY_PATH }}/docker-compose.production.yml ${{ env.DEPLOY_PATH }}/docker-compose.override.yml
             docker image load -q -i ${{ env.DEPLOY_PATH }}/compressed.tar
             docker-compose -f ${{ env.DEPLOY_PATH }}/docker-compose.yml -f ${{ env.DEPLOY_PATH }}/docker-compose.override.yml up -d -V
