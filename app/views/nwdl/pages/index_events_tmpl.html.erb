@@ -7,7 +7,9 @@
 
   <%# PRESENTER SELF %>
   <% content_for :presenter_content do %>
-    <%= render 'nwdl/shared/resource/iterator', resource_name: $spina_events, nil_message: I18n.t('static.no_content'), classes: "flex flex-wrap gap-4 justify-center overflow-hidden" do |resource| %>
+    <% all_events = Spina::Resource.find_by(name: $spina_events)&.pages&.live&.joins(:translations)&.where(translations: {locale: locale}) %>
+    <% sorted_events = all_events.sort_by { |e| e.content(:event_time) } %>
+    <%= render 'nwdl/shared/resource/iterator', resources: sorted_events, nil_message: I18n.t('static.no_content'), classes: "flex flex-wrap gap-4 justify-center overflow-hidden" do |resource| %>
       <%= render 'nwdl/shared/resource/resource_timeline', resource: resource %>
     <% end %>
   <% end %>

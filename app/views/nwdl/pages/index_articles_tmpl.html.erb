@@ -1,12 +1,11 @@
 <%= render 'nwdl/shared/resource/index' do %>
 
-  <%# IMAGES %>
-  <% content_for :image_title do %>
-    <div class="absolute articles-lamp -z-10"><%= render 'nwdl/shared/images/lampe' %></div>
-  <% end %>
-
   <%# HIGHLIGHTS %>
   <% content_for :before_presenter do %>
+    <div class="relative flex flex-wrap justify-center">
+      <div class="absolute articles-lamp -z-10"><%= render 'nwdl/shared/images/lampe' %></div>
+    </div>
+
     <% if current_page.find_part(:articles_repeater)&.content.present? %>
       <div class="nwdl-bg-blue-dark mt-14 mb-16">
         <div class="container max-w-screen-xl mx-auto px-4 py-4">

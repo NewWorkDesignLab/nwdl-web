@@ -47,7 +47,7 @@
 
 <%# MAIN CONTENT %>
 <div class="container max-w-screen-xl mx-auto px-4 mt-2">
-  <%= content.image_tag :thumbnail, {}, { class: "w-100 h-[40vh] object-cover rounded" } %>
+  <%= content.image_tag :thumbnail, {}, { class: "w-full h-[40vh] object-cover rounded" } %>
 
   <div class="nwdl-rich-content-wrapper !max-w-prose mt-6 nwdl-high-contrast">
     <%= content.html :rich_content %>
