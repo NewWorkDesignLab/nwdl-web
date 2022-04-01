@@ -1,7 +1,7 @@
 <%= link_to resource.materialized_path, class: "relative" do %>
   <%= resource.content.image_tag(:thumbnail, {}, {class: "nwdl-cachel-img rounded object-cover"}) %>
 
-  <% display_lables = resource.content(:lable) %>
+  <% display_lables = resource.content(:lables_repeater)&.map { |repeater_content| repeater_content&.content(:lable_selector) } %>
   <%= render "nwdl/shared/lable_badges", display_lables: display_lables %>
 
   <p class="mt-2 mb-0 nwdl-high-contrast"><strong><%= resource.title %></strong></p>

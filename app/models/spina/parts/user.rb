@@ -4,9 +4,7 @@ module Spina
       attr_json :user_id, :integer
 
       def content
-        # changed from .find to .find_by as described in spina pr#971
-        Spina::Page.find_by(id: user_id)
-
+        Spina::Page.where(id: user_id).live.first
       end
     end
   end

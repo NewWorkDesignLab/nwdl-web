@@ -8,7 +8,7 @@
 <% end %>
 
 <%# METADATA WRAPPER %>
-<% if content(:author).present? || content(:meta_info).present? || content(:lable).present? %>
+<% if content(:author).present? || content(:meta_info).present? || current_page.find_part(:lables_repeater)&.content.present? %>
   <div class="nwdl-bg-blue-middle p-0 mt-4">
     <div class="container max-w-screen-xl mx-auto px-4 py-2">
       <div class="flex justify-content-start flex-wrap gap-3">
@@ -30,11 +30,12 @@
         <% end %>
 
         <%# LABLES %>
-        <% if content(:lable).present? %>
-          <% content(:lable).each do |content_lable| %>
-            <%= link_to content_lable.materialized_path, class: "text-md px-2.5 py-1 rounded bg-neutral-100 inline-flex items-center gap-1" do %>
+        <% if current_page.find_part(:lables_repeater)&.content.present? %>
+          <% repeater(:lables_repeater) do |repeater_content| %>
+            <% lable_page = repeater_content&.content(:lable_selector) %>
+            <%= link_to lable_page.materialized_path, class: "text-md px-2.5 py-1 rounded bg-neutral-100 inline-flex items-center gap-1" do %>
               <span><%= render 'shared/icons/tag', classes:"h-5 mb-1" %></span>
-              <strong><%= content_lable.title %></strong>
+              <strong><%= lable_page.title %></strong>
             <% end %>
           <% end %>
         <% end %>

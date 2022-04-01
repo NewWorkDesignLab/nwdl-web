@@ -2,7 +2,8 @@
 
   <%# PRESENTER SELF %>
   <% content_for :presenter_content do %>
-    <% labled_pages = Spina::Page.live.joins(:translations).where(translations: {locale: locale.to_sym}).where("json_attributes @> (?)::jsonb", {"#{locale.to_s}_content":[{"lable_ids":[current_page.id]}]}.to_json) %>
+    <% search_string = {"#{locale.to_s}_content":[ {"name": "lables_repeater", "content": [{ "parts": [{ "name": "lable_selector", "lable_id": current_page.id }] }]} ]} %>
+    <% labled_pages = Spina::Page.live.joins(:translations).where(translations: {locale: locale.to_sym}).where("json_attributes @> (?)::jsonb", search_string.to_json) %>
     <%= render 'nwdl/shared/resource/iterator', resources: labled_pages, nil_message: I18n.t('static.no_content') do |resource| %>
       <%= render 'nwdl/shared/resource/resource_default', resource: resource %>
     <% end %>

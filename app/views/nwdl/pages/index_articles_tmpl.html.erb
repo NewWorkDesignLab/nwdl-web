@@ -7,8 +7,7 @@
 
   <%# HIGHLIGHTS %>
   <% content_for :before_presenter do %>
-    <% highlights = content(:highlights)&.live&.order(created_at: :desc) %>
-    <% if highlights.present? %>
+    <% if current_page.find_part(:articles_repeater)&.content.present? %>
       <div class="nwdl-bg-blue-dark mt-14 mb-16">
         <div class="container max-w-screen-xl mx-auto px-4 py-4">
 
@@ -20,6 +19,7 @@
           <% end %>
 
           <%# HIGHLIGHT PRESENTER %>
+          <% highlights = current_page.find_part(:articles_repeater)&.content.map { |repeater_content| repeater_content&.content(:article_selector) } %>
           <%= render 'nwdl/shared/resource/slider', resources: highlights %>
 
         </div>

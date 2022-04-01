@@ -1,10 +1,10 @@
 module Spina
   module Parts
     class Article < Base
-      attr_json :article_ids, :integer, array: true
+      attr_json :article_id, :integer
 
       def content
-        Spina::Page.where(id: article_ids)
+        Spina::Page.where(id: article_id).live.first
       end
     end
   end

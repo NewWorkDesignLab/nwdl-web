@@ -3,6 +3,9 @@
   <div class="text-gray-400 text-sm"><%= f.object.hint %></div>
   <div class="mt-1">
     <% options = Spina::Resource.find_by(name: $spina_employees)&.pages.live.joins(:translations).where(translations: {locale: @locale}) %>
-    <%= f.select :user_id, options.collect{ |e| [e.title, e.id] }, { include_blank: true }, { class: "form-select block w-full max-w-5xl sm:text-sm sm:leading-5" } %>
+    <%= f.select :user_id,
+            options.collect{ |e| [e.menu_title(locale: locale), e.id] },
+            { include_blank: true },
+            { class: "form-select block w-full max-w-5xl sm:text-sm sm:leading-5" } %>
   </div>
 </div>

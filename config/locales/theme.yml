@@ -15,6 +15,48 @@ de:
     lables: "Label"
     default: "Seite"
     parts:
+      header_image:
+        title: "Titlebild der Startseite"
+        hint: "Das Titlebild dient als Fallback und wird immer dann angezeigt, wenn kein iFrame Link angegeben ist."
+      header_iframe:
+        title: "iFrame auf der Startseite (Link)"
+        hint: "Der angegebene Link wird in einem iFrame auf der Startseite geöffnet, und ermöglich dadurch ein interaktives Element (Projekt-Demo, Minispiel, Video, etc.). Sollte kein iFrame Link angegeben sein, so wird das Titelbild angezeigt."
+      focus_text:
+        title: "Fokus"
+        hint: ""
+      focus_research_text:
+        title: "Fokus (Forschung)"
+        hint: ""
+      focus_transver_text:
+        title: "Fokus (Transfer)"
+        hint: ""
+      focus_consulting_text:
+        title: "Fokus (Beratung)"
+        hint: ""
+      projects_text:
+        title: "Projekte"
+        hint: ""
+      events_text:
+        title: "Events"
+        hint: ""
+      article_selector:
+        title: "Artikel"
+        hint: "Wähle einen Artikel aus der Liste aus. Es sind nur Artikel verfügbar, welche veröffentlicht sind und in der aktuellen Sprache verfügbar sind."
+      articles_repeater:
+        title: "Hervorgehobene Artikel"
+        hint: "Bitte gebe Artikel an, welche hervorgehoben dargestellt werden sollen."
+      lable_selector:
+        title: "Label"
+        hint: "Wähle ein Label aus der Liste aus. Es sind nur Label verfügbar, welche veröffentlicht sind und in der aktuellen Sprache verfügbar sind."
+      lables_repeater:
+        title: "Label"
+        hint: "Bitte gebe Label an, welche zum Thema passen. Mithilfe der Label können Beiträge einfacher gefiltert und gefunden werden."
+      editor_heading_general:
+        title: "Allgemeine Infos"
+        hint: ""
+      editor_heading_details:
+        title: "Inhaltliche Infos"
+        hint: ""
       summary:
         title: "Zusammenfassung"
         hint: "Die Zusammenfassung soll grundlegende Informationen geben. Sie erscheint als Vorschau in der Gallerie sowie als einführender Text auf der Detail-Seite, und ist daher neben Titel und Titelbild außschlaggebend für den Lesenden. Sie sollte entsprechend spannend und informativ formuliert sein."
@@ -33,15 +75,12 @@ de:
       rich_content_highlights:
         title: "Textblock bei den Highlights"
         hint: "Dieser Textblock wird vor den Highlights angezeigt."
-      highlights:
-        title: "Hervorgehobene Artikel"
-        hint: "Gebe bis zu 5 Artikel an, welche hervorgehoben dargestellt werden sollen."
-      author:
-        title: "Autor"
-        hint: "Der Autor des Beitrages. Der Autor ist die Person, die den Inhalt auf der Webseite erstellt hat."
       email:
         title: "E-Mail"
         hint: "Die E-Mail des Mitarbeitenden. Die E-Mail wird unter anderem auch unter Beiträgen von Mitarbeitenden angezeigt."
+      author:
+        title: "Autor"
+        hint: "Der Autor des Beitrages. Der Autor ist die Person, die den Inhalt auf der Webseite erstellt hat."
       contact_person:
         title: "Ansprechpartner"
         hint: "Hier kann eine Person angegeben werden, welche auf der Seite als Ansprechparter angezeigt wird. Der Ansprechpartner kann ebenfalls der Autor sein, muss es aber nicht."
@@ -51,9 +90,6 @@ de:
       meta_info:
         title: "Zusätzliche Info"
         hint: "Bitte gebe hier die Lesezeit des Beitrages an. Beispiel: \"Lesezeit: 5 Minuten\""
-      lable:
-        title: "Label"
-        hint: "Gebe bis zu drei Label an, welche zum Thema passen. Mithilfe der Label können Beiträge einfacher gefiltert und gefunden werden."
       logo:
         title: "NWDL-Logo"
         hint: "Das Logo des New Work Design Lab."
@@ -80,34 +116,4 @@ de:
         hint: ""
       main_contact:
         title: "Kontakt"
-        hint: ""
-      header_image:
-        title: "Titlebild der Startseite"
-        hint: "Das Titlebild dient als Fallback und wird immer dann angezeigt, wenn kein IFrame Link angegeben ist."
-      header_iframe:
-        title: "IFrame auf der Startseite (Link)"
-        hint: "Der angegebene Link wird in einem IFrame auf der Startseite geöffnet, und ermöglich dadurch ein interaktives Element (Projekt-Demo, Minispiel, Video, etc.). Sollte kein IFrame Link angegeben sein, so wird das Titelbild angezeigt."
-      focus_text:
-        title: "Fokus"
-        hint: ""
-      focus_research_text:
-        title: "Fokus (Forschung)"
-        hint: ""
-      focus_transver_text:
-        title: "Fokus (Transfer)"
-        hint: ""
-      focus_consulting_text:
-        title: "Fokus (Beratung)"
-        hint: ""
-      projects_text:
-        title: "Projekte"
-        hint: ""
-      events_text:
-        title: "Events"
-        hint: ""
-      editor_heading_general:
-        title: "Allgemeine Infos"
-        hint: ""
-      editor_heading_details:
-        title: "Inhaltliche Infos"
         hint: ""
