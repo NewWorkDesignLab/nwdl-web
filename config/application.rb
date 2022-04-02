@@ -30,5 +30,13 @@ module Nwdl
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # Use same secret_key base in dev as in prod (needed to replace spina images cross-environment,
+    # because we only achieve same blobs if secret_key_base is the same)
+    if Rails.env.development? || Rails.env.test?
+      key_file = Rails.root.join("tmp/development_secret.txt")
+      FileUtils.mkdir_p(key_file.dirname) if !File.exist?(key_file)
+      File.binwrite(key_file, credentials.secret_key_base)
+    end
   end
 end

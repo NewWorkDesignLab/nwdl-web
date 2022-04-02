@@ -1,7 +1,7 @@
 GIT
-  remote: https://github.com/spinacms/spina.git
-  revision: 0be93253917b89b9c39f4345180d7eecc92983c0
-  ref: 0be9325
+  remote: https://github.com/tobiasbhn/spina.git
+  revision: 3dc4ada33eef62ffad75980c6977391f4dc96380
+  ref: 3dc4ada
   specs:
     spina (2.9.1)
       ancestry
