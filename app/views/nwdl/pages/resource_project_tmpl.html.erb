@@ -1,1 +1,2 @@
-<%= render 'nwdl/shared/resource/show' %>
+<% related = Spina::Resource.find_by(name: $spina_projects)&.pages&.live&.joins(:translations)&.where(translations: {locale: locale}) %>
+<%= render 'nwdl/shared/resource/show', related_content: related %>

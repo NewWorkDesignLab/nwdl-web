@@ -49,48 +49,63 @@
 <div class="container max-w-screen-xl mx-auto px-4 mt-2">
   <%= content.image_tag :thumbnail, {}, { class: "w-full h-[40vh] object-cover rounded" } %>
 
-  <div class="nwdl-rich-content-wrapper !max-w-prose mt-6 nwdl-high-contrast">
-    <%= content.html :rich_content %>
-  </div>
-</div>
+  <div class="flex flex-wrap lg:flex-nowrap justify-between items-start gap-10 mt-6">
 
-<%# BOTTOM METADATA %>
-<div class="container max-w-screen-xl mx-auto px-4 mt-10">
-  <div class="flex justify-start flex-wrap">
-
-    <%# CONTACT PERSON INFO %>
-    <% if content(:contact_person).present? %>
-      <div class="w-full md:w-6/12 flex flex-col items-stretch md:items-start">
-        <h2 class="text-xl mb-3"><%= I18n.t('static.contact_person_heading') %></h2>
-        <%= link_to content(:contact_person).materialized_path, class: "inline-flex gap-3 p-2 pr-6 rounded nwdl-bg-grey-light" do %>
-          <%= content(:contact_person).content.image_tag(:thumbnail, {}, {class: "w-[100px] h-[100px] rounded object-cover"}) %>
-          <p>
-            <strong><%= content(:contact_person).title %></strong><br>
-            <%= content(:contact_person).content(:email) %>
-          </p>
-        <% end %>
-      </div>
-    <% end %>
-
-    <%# DIRECT TIME AND AUTHOR META INFO (espacially for citing) %>
-    <div class="w-full md:w-6/12 mt-4 flex flex-col justify-end ml-auto">
-      <%# ALWAYS display Author - if no Author given, fallback to generic Author %>
-      <% if content(:author).present? %>
-        <p class="mb-0 md:text-right text-neutral-500"><%= I18n.t('static.author') %>: <%= content(:author).title %></p>
-      <% else %>
-        <p class="mb-0 md:text-right text-neutral-500"><%= I18n.t('static.author') %>: <%= I18n.t('static.default_author') %><br></p>
-      <% end %>
-
-      <%# will display time of page creation aswell as time of last edited if lasted editet is not
-          nearly the same as created_at (edits in the first 10 Minutes (600 Seconds) will not be
-          displayed, due to page initial creation time) %>
-      <% if (current_page.updated_at - current_page.created_at).abs > 600 %>
-        <p class="mb-0 md:text-right text-neutral-500"><%= I18n.t('static.last_updated') %>: <%= I18n.l(current_page.updated_at, format: :short) %></p>
-      <% end %>
-
-      <p class="mb-0 md:text-right text-neutral-500"><%= I18n.t('static.created_at') %>: <%= I18n.l(current_page.created_at, format: :short) %></p>
+    <%# ARTICLE %>
+    <div class="nwdl-rich-content-wrapper nwdl-high-contrast !max-w-prose mx-auto lg:mx-0">
+      <%= content.html :rich_content %>
     </div>
 
+    <%# SIDEBAR METADATA %>
+    <div class="w-full lg:w-[22em] flex flex-wrap justify-between gap-8">
+
+      <%# CONTACT PERSON INFO %>
+      <% if content(:contact_person).present? %>
+        <div class="w-[22em] grow md:grow-0 flex flex-col items-stretch">
+          <h2 class="text-xl mb-3"><%= I18n.t('static.contact_person_heading') %></h2>
+          <%= link_to content(:contact_person).materialized_path, class: "inline-flex gap-3 p-2 rounded nwdl-bg-grey-light" do %>
+            <%= content(:contact_person).content.image_tag(:thumbnail, {}, {class: "w-[100px] h-[100px] rounded object-cover"}) %>
+            <p>
+              <strong><%= content(:contact_person).title %></strong><br>
+              <%= content(:contact_person).content(:email) %>
+            </p>
+          <% end %>
+        </div>
+      <% end %>
+
+      <%# DIRECT TIME AND AUTHOR META INFO (espacially for citing) %>
+      <div class="w-[22em] grow md:grow-0 flex flex-col justify-end ml-auto">
+        <%# ALWAYS display Author - if no Author given, fallback to generic Author %>
+        <% if content(:author).present? %>
+          <p class="mb-0 md:text-right text-neutral-500 truncate"><%= I18n.t('static.author') %>: <%= content(:author).title %></p>
+        <% else %>
+          <p class="mb-0 md:text-right text-neutral-500 truncate"><%= I18n.t('static.author') %>: <%= I18n.t('static.default_author') %><br></p>
+        <% end %>
+
+        <%# will display time of page creation aswell as time of last edited if lasted editet is not
+            nearly the same as created_at (edits in the first 10 Minutes (600 Seconds) will not be
+            displayed, due to page initial creation time) %>
+        <% if (current_page.updated_at - current_page.created_at).abs > 600 %>
+          <p class="mb-0 md:text-right text-neutral-500 truncate"><%= I18n.t('static.last_updated') %>: <%= I18n.l(current_page.updated_at, format: :short) %></p>
+        <% end %>
+
+        <p class="mb-0 md:text-right text-neutral-500 truncate"><%= I18n.t('static.created_at') %>: <%= I18n.l(current_page.created_at, format: :short) %></p>
+      </div>
+
+      <%# RELATED CONTENT %>
+      <% related_content ||= nil %>
+      <% if related_content.present? %>
+        <div class="w-full mt-8">
+          <h2 class="text-xl mb-3"><%= I18n.t('static.related_content_heading') %></h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-5">
+            <% related_content.where.not(id: current_page.id).limit(3).each do |item| %>
+              <%= render 'nwdl/shared/resource/resource_small', resource: item %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
+    </div>
   </div>
 </div>
 
