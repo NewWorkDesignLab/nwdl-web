@@ -1,7 +1,7 @@
 
 <% resources ||= Spina::Resource.find_by(name: resource_name)&.pages&.live&.joins(:translations)&.where(translations: {locale: locale}) %>
 <% if resources&.present? %>
-  <% classes ||= "grid grid-cols-1 md:grid-cols-3 gap-4" %>
+  <% classes ||= "grid grid-cols-1 md:grid-cols-3 gap-x-4 gap-y-10" %>
   <div class="<%= classes %>">
     <% resources.each do |resource| %>
       <% if resource.present? && resource.find_part(:thumbnail)&.content.present? && resource.find_part(:summary)&.content.present? %>

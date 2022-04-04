@@ -1,71 +1,74 @@
 <%= render 'nwdl/shared/general/page_wrapper' do %>
-  <div class="mt-3 text-xl nwdl-rich-content-wrapper !max-w-prose">
-    <% if content(:event_time).present? %>
-      <p class="mb-0 nwdl-high-contrast"><strong><%= I18n.l(content(:event_time), format: :event) %></strong></p>
-    <% end %>
-    <div class="nwdl-high-contrast"><%= content.html :summary %></div>
-  </div>
-<% end %>
-
-<%# METADATA WRAPPER %>
-<% if content(:author).present? || content(:meta_info).present? || current_page.find_part(:lables_repeater)&.content.present? %>
-  <div class="nwdl-bg-blue-middle p-0 mt-4">
-    <div class="container max-w-screen-xl mx-auto px-4 py-2">
-      <div class="flex justify-content-start flex-wrap gap-3">
-
-        <%# AUTHOR %>
-        <% if content(:author).present? %>
-          <%= link_to content(:author).materialized_path, class: "text-md px-2.5 py-1 rounded bg-neutral-100 inline-flex items-center gap-1" do %>
-            <span><%= render 'shared/icons/user', classes:"h-5 mb-1" %></span>
-            <strong><%= content(:author).title %></strong>
-          <% end %>
-        <% end %>
-
-        <%# ADDITIONAL META INFO %>
-        <% if content(:meta_info).present? %>
-          <p class="text-md px-2.5 py-1 rounded bg-neutral-100 inline-flex items-center gap-1">
-            <span><%= render 'shared/icons/clock', classes:"h-5 mb-1" %></span>
-            <strong><%= content(:meta_info) %></strong>
-          </p>
-        <% end %>
-
-        <%# LABLES %>
-        <% if current_page.find_part(:lables_repeater)&.content.present? %>
-          <% repeater(:lables_repeater) do |repeater_content| %>
-            <% lable_page = repeater_content&.content(:lable_selector) %>
-            <%= link_to lable_page.materialized_path, class: "text-md px-2.5 py-1 rounded bg-neutral-100 inline-flex items-center gap-1" do %>
-              <span><%= render 'shared/icons/tag', classes:"h-5 mb-1" %></span>
-              <strong><%= lable_page.title %></strong>
-            <% end %>
-          <% end %>
-        <% end %>
-
-      </div>
-    </div>
-  </div>
+  <% if content(:event_time).present? %>
+    <p class="mt-2 text-xl !max-w-prose mb-0 nwdl-high-contrast"><strong><%= I18n.l(content(:event_time), format: :event) %></strong></p>
+  <% end %>
 <% end %>
 
 <%# MAIN CONTENT %>
-<div class="container max-w-screen-xl mx-auto px-4 mt-2">
+<div class="container max-w-screen-xl mx-auto px-4">
   <%= content.image_tag :thumbnail, {}, { class: "w-full h-[40vh] object-cover rounded" } %>
 
   <div class="flex flex-wrap lg:flex-nowrap justify-between items-start gap-10 mt-6">
 
     <%# ARTICLE %>
-    <div class="nwdl-rich-content-wrapper nwdl-high-contrast !max-w-prose mx-auto lg:mx-0">
+    <div class="nwdl-rich-content-wrapper nwdl-high-contrast text-lg lg:text-xl !max-w-prose mx-auto lg:mx-0">
+      <%# SUBHEADING %>
+      <h2 class="!text-2xl"><%= content.html :summary %></h2>
+
+      <%# META BADGES %>
+      <% if content(:author).present? || content(:meta_info).present? || current_page.find_part(:lables_repeater)&.content.present? %>
+        <div class="!flex !flex-wrap !gap-3 !text-sm !mb-2">
+
+          <% badge_classes = "!px-2.5 !py-1 !rounded-full !bg-neutral-200 !flex !items-center !gap-2" %>
+
+          <%# AUTHOR %>
+          <% if content(:author).present? %>
+            <%= link_to content(:author).materialized_path, class: badge_classes do %>
+              <%= render 'shared/icons/user-circle'%>
+              <%= content(:author).title %>
+            <% end %>
+          <% end %>
+
+          <%# ADDITIONAL META INFO %>
+          <% if content(:meta_info).present? %>
+            <p class="<%= badge_classes %>">
+              <%= render 'shared/icons/clock' %>
+              <%= content(:meta_info) %>
+            </p>
+          <% end %>
+
+          <%# LABLES %>
+          <% if current_page.find_part(:lables_repeater)&.content.present? %>
+            <% repeater(:lables_repeater) do |repeater_content| %>
+              <% lable_page = repeater_content&.content(:lable_selector) %>
+              <%= link_to lable_page.materialized_path, class: badge_classes do %>
+                <%= render 'shared/icons/tag' %>
+                <%= lable_page.title %>
+              <% end %>
+            <% end %>
+          <% end %>
+
+
+        </div>
+      <% end %>
+
+      <%# CONTENT %>
       <%= content.html :rich_content %>
     </div>
 
+    <%# VERTICAL LINE%>
+    <div class="hidden lg:block border-gray-300 border-r self-stretch ml-auto"></div>
+
     <%# SIDEBAR METADATA %>
-    <div class="w-full lg:w-[22em] flex flex-wrap justify-between gap-8">
+    <div class="w-full lg:w-[18em] shrink-0 flex flex-wrap justify-between gap-8">
 
       <%# CONTACT PERSON INFO %>
       <% if content(:contact_person).present? %>
-        <div class="w-[22em] grow md:grow-0 flex flex-col items-stretch">
+        <div class="w-full sm:w-auto lg:w-full flex flex-col items-stretch">
           <h2 class="text-xl mb-3"><%= I18n.t('static.contact_person_heading') %></h2>
           <%= link_to content(:contact_person).materialized_path, class: "inline-flex gap-3 p-2 rounded nwdl-bg-grey-light" do %>
             <%= content(:contact_person).content.image_tag(:thumbnail, {}, {class: "w-[100px] h-[100px] rounded object-cover"}) %>
-            <p>
+            <p class="truncate">
               <strong><%= content(:contact_person).title %></strong><br>
               <%= content(:contact_person).content(:email) %>
             </p>
@@ -74,22 +77,22 @@
       <% end %>
 
       <%# DIRECT TIME AND AUTHOR META INFO (espacially for citing) %>
-      <div class="w-[22em] grow md:grow-0 flex flex-col justify-end ml-auto">
+      <div class="w-full sm:w-auto lg:w-full flex flex-col justify-end ml-auto">
         <%# ALWAYS display Author - if no Author given, fallback to generic Author %>
         <% if content(:author).present? %>
-          <p class="mb-0 md:text-right text-neutral-500 truncate"><%= I18n.t('static.author') %>: <%= content(:author).title %></p>
+          <p class="mb-0 sm:text-right text-neutral-500 truncate"><%= I18n.t('static.author') %>: <%= content(:author).title %></p>
         <% else %>
-          <p class="mb-0 md:text-right text-neutral-500 truncate"><%= I18n.t('static.author') %>: <%= I18n.t('static.default_author') %><br></p>
+          <p class="mb-0 sm:text-right text-neutral-500 truncate"><%= I18n.t('static.author') %>: <%= I18n.t('static.default_author') %><br></p>
         <% end %>
 
         <%# will display time of page creation aswell as time of last edited if lasted editet is not
             nearly the same as created_at (edits in the first 10 Minutes (600 Seconds) will not be
             displayed, due to page initial creation time) %>
         <% if (current_page.updated_at - current_page.created_at).abs > 600 %>
-          <p class="mb-0 md:text-right text-neutral-500 truncate"><%= I18n.t('static.last_updated') %>: <%= I18n.l(current_page.updated_at, format: :short) %></p>
+          <p class="mb-0 sm:text-right text-neutral-500 truncate"><%= I18n.t('static.last_updated') %>: <%= I18n.l(current_page.updated_at, format: :short) %></p>
         <% end %>
 
-        <p class="mb-0 md:text-right text-neutral-500 truncate"><%= I18n.t('static.created_at') %>: <%= I18n.l(current_page.created_at, format: :short) %></p>
+        <p class="mb-0 sm:text-right text-neutral-500 truncate"><%= I18n.t('static.created_at') %>: <%= I18n.l(current_page.created_at, format: :short) %></p>
       </div>
 
       <%# RELATED CONTENT %>
@@ -97,7 +100,7 @@
       <% if related_content.present? %>
         <div class="w-full mt-8">
           <h2 class="text-xl mb-3"><%= I18n.t('static.related_content_heading') %></h2>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-5">
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-1 gap-x-4 gap-y-10">
             <% related_content.where.not(id: current_page.id).limit(3).each do |item| %>
               <%= render 'nwdl/shared/resource/resource_small', resource: item %>
             <% end %>

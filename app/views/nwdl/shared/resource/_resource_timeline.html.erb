@@ -1,6 +1,6 @@
 <%= link_to resource.materialized_path, class: "w-full mb-5 nwdl-event flex flex-wrap justify-center" do %>
   <%# Date %>
-  <div class="nwdl-event-date w-full md:w-5/12 flex items-center justify-start mb-2">
+  <div class="nwdl-event-date w-full md:w-5/12 flex items-center justify-start mb-2 grow">
     <p class="m-0 nwdl-high-contrast"><strong><%= I18n.l( resource.content(:event_time), default: '' ) %></strong></p>
   </div>
 
@@ -11,9 +11,9 @@
   </div>
 
   <%# Content %>
-  <div class="w-full md:w-5/12 nwdl-bg-blue-light flex flex-wrap rounded">
+  <div class="w-full md:w-5/12 nwdl-bg-blue-light flex flex-wrap rounded p-2 grow">
     <%= resource.content.image_tag(:thumbnail, {}, {class: "w-full sm:w-5/12 rounded object-cover"}) %>
-    <div class="w-full sm:w-7/12 p-4">
+    <div class="w-full sm:w-7/12 pt-2 sm:pt-0 sm:pl-4">
       <p class="mb-1 nwdl-high-contrast"><strong><%= resource.title %></strong></p>
       <div class="nwdl-high-contrast"><%= resource.content.html(:summary) %></div>
     </div>

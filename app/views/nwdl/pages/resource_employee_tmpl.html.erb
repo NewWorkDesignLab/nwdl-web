@@ -12,7 +12,10 @@
         <%= content.html :rich_content %>
       </div>
       <% if content(:email).present? %>
-        <p class="mt-3"><strong><%= I18n.t('static.email') %>:</strong> <%= content :email %></p>
+        <p class="mt-3">
+          <strong><%= I18n.t('static.email') %>:</strong>
+          <%= link_to content(:email), "mailto:#{content :email}", target: "_blank" %>
+        </p>
       <% end %>
     </div>
   </div>
