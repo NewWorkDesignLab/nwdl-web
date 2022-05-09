@@ -87,6 +87,9 @@ de:
       event_time:
         title: "Beginn des Events"
         hint: "Startzeitpunkt des Events."
+      event_end_time:
+        title: "Ende des Events"
+        hint: "Endzeitpunkt des Events."
       meta_info:
         title: "Zusätzliche Info"
         hint: "Bitte gebe hier die Lesezeit des Beitrages an. Beispiel: \"Lesezeit: 5 Minuten\""

@@ -1,6 +1,12 @@
 <%= render 'nwdl/shared/general/page_wrapper' do %>
   <% if content(:event_time).present? %>
-    <p class="mt-2 text-xl !max-w-prose mb-0 nwdl-high-contrast"><strong><%= I18n.l(content(:event_time), format: :event) %></strong></p>
+    <p class="mt-2 text-xl !max-w-prose mb-0 nwdl-high-contrast whitespace-nowrap">
+      <%= I18n.l(content(:event_time), format: :event) %>
+      <% if content(:event_end_time).present? %>
+        &nbsp;&ndash;&nbsp;
+        <%= I18n.l(content(:event_end_time), format: :event) %>
+      <% end %>
+    </p>
   <% end %>
 <% end %>
 
