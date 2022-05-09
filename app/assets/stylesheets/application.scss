@@ -111,8 +111,15 @@ h6 {
   }
 
   ul, ol {
+    list-style-type: revert;
     margin-top: 1rem;
     margin-bottom: 1rem;
+    padding-inline-start: 40px;
+  }
+
+  a {
+    text-decoration: underline;
+    color: revert;
   }
 }
 
