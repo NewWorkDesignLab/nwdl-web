@@ -107,7 +107,7 @@
     https://www.postgresql.org/docs/9.5/functions-json.html
   %>
   <% all_events = Spina::Resource.find_by(name: $spina_events)&.pages.live.joins(:translations).where(translations: {locale: locale}) %>
-  <% sorted_events = all_events.sort_by { |e| e.content(:event_time) } %>
+  <% sorted_events = all_events.sort_by { |e| [e.content(:event_time).present? ? 1 : 0, e.content(:event_time)] } %>
   <% recent_events = sorted_events.reverse.take(4) %>
   <% any_event_displayed = false %>
 
