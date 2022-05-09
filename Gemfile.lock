@@ -1,9 +1,9 @@
 GIT
-  remote: https://github.com/tobiasbhn/spina.git
-  revision: 3dc4ada33eef62ffad75980c6977391f4dc96380
-  ref: 3dc4ada
+  remote: https://github.com/spinacms/spina.git
+  revision: e65675b061077298ab0512ad00183abc4d1f251a
+  ref: e65675b
   specs:
-    spina (2.9.1)
+    spina (2.10.0)
       ancestry
       attr_json
       babosa
@@ -265,7 +265,7 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
-    view_component (2.52.0)
+    view_component (2.53.0)
       activesupport (>= 5.0.0, < 8.0)
       method_source (~> 1.0)
     web-console (4.2.0)
