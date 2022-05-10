@@ -22,16 +22,26 @@
       <h2 class="!text-2xl"><%= content.html :summary %></h2>
 
       <%# META BADGES %>
-      <% if content(:author).present? || content(:meta_info).present? || current_page.find_part(:lables_repeater)&.content.present? %>
+      <% if content(:author).present? || content(:guest_author).present? || content(:meta_info).present? || current_page.find_part(:lables_repeater)&.content.present? %>
         <div class="!flex !flex-wrap !gap-3 !text-sm !mb-2">
 
-          <% badge_classes = "!px-2.5 !py-1 !rounded-full !bg-neutral-200 !flex !items-center !gap-2" %>
+          <% badge_classes = "!px-2.5 !py-1 !rounded-full !bg-neutral-200 !flex !items-center !gap-2 !text-black" %>
 
           <%# AUTHOR %>
           <% if content(:author).present? %>
             <%= link_to content(:author).materialized_path, class: badge_classes do %>
               <%= render 'shared/icons/user-circle'%>
+              <%= I18n.t('static.author') %>:
               <%= content(:author).title %>
+            <% end %>
+          <% end %>
+
+          <%# GUEST AUTHOR %>
+          <% if content(:guest_author).present? %>
+            <%= link_to content(:guest_author).materialized_path, class: badge_classes do %>
+              <%= render 'shared/icons/user-circle'%>
+              <%= I18n.t('static.author') %>:
+              <%= content(:guest_author).title %>
             <% end %>
           <% end %>
 
@@ -85,8 +95,13 @@
       <%# DIRECT TIME AND AUTHOR META INFO (espacially for citing) %>
       <div class="w-full sm:w-auto lg:w-full flex flex-col justify-end ml-auto">
         <%# ALWAYS display Author - if no Author given, fallback to generic Author %>
-        <% if content(:author).present? %>
-          <p class="mb-0 sm:text-right text-neutral-500 truncate"><%= I18n.t('static.author') %>: <%= content(:author).title %></p>
+        <% if content(:author).present? || content(:guest_author).present? %>
+          <p class="mb-0 sm:text-right text-neutral-500 truncate">
+            <%= I18n.t('static.author') %>:
+            <%= content(:author).title if content(:author).present? %>
+            <%= "&" if content(:author).present? && content(:guest_author).present? %>
+            <%= content(:guest_author).title if content(:guest_author).present? %>
+          </p>
         <% else %>
           <p class="mb-0 sm:text-right text-neutral-500 truncate"><%= I18n.t('static.author') %>: <%= I18n.t('static.default_author') %><br></p>
         <% end %>

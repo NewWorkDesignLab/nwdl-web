@@ -39,6 +39,7 @@ Spina::Theme.register do |theme|
 
     {name: 'email', title: I18n.t('theme.parts.email.title'), part_type: "Spina::Parts::Line", hint: I18n.t('theme.parts.email.hint') },
     {name: 'author', title: I18n.t('theme.parts.author.title'), part_type: "Spina::Parts::User", hint: I18n.t('theme.parts.author.hint') },
+    {name: 'guest_author', title: I18n.t('theme.parts.guest_author.title'), part_type: "Spina::Parts::Partner", hint: I18n.t('theme.parts.guest_author.hint') },
     {name: 'contact_person', title: I18n.t('theme.parts.contact_person.title'), part_type: "Spina::Parts::User", hint: I18n.t('theme.parts.contact_person.hint') },
     {name: 'event_time', title: I18n.t('theme.parts.event_time.title'), part_type: "Spina::Parts::Datetime", hint: I18n.t('theme.parts.event_time.hint') },
     {name: 'event_end_time', title: I18n.t('theme.parts.event_end_time.title'), part_type: "Spina::Parts::Datetime", hint: I18n.t('theme.parts.event_end_time.hint') },
@@ -75,14 +76,14 @@ Spina::Theme.register do |theme|
     {name: 'index_events_tmpl', title: I18n.t('theme.events'), parts: %w(rich_content_before rich_content_after)},
 
     # for resource pages (resources)
-    {name: 'resource_project_tmpl', title: I18n.t('theme.project'), parts: %w(editor_heading_general summary thumbnail editor_heading_details author contact_person lables_repeater rich_content), exclude_from: ["main", $spina_employees, $spina_articles, $spina_events, $spina_lables] },
+    {name: 'resource_project_tmpl', title: I18n.t('theme.project'), parts: %w(editor_heading_general summary thumbnail editor_heading_details author guest_author contact_person lables_repeater rich_content), exclude_from: ["main", $spina_employees, $spina_articles, $spina_events, $spina_lables, $spina_partners] },
     {name: 'resource_employee_tmpl', title: I18n.t('theme.employee'), parts: %w(editor_heading_general summary email thumbnail editor_heading_details rich_content), exclude_from: ["main", $spina_projects, $spina_articles, $spina_events, $spina_lables] },
-    {name: 'resource_article_tmpl', title: I18n.t('theme.article'), parts: %w(editor_heading_general summary thumbnail editor_heading_details author contact_person meta_info lables_repeater rich_content), exclude_from: ["main", $spina_projects, $spina_employees, $spina_events, $spina_lables] },
-    {name: 'resource_event_tmpl', title: I18n.t('theme.event'), parts: %w(editor_heading_general summary event_time event_end_time thumbnail editor_heading_details author contact_person lables_repeater rich_content), exclude_from: ["main", $spina_projects, $spina_employees, $spina_articles, $spina_lables] },
-    {name: 'resource_lable_tmpl', title: I18n.t('theme.lable'), parts: %w(rich_content), exclude_from: ["main", $spina_projects, $spina_employees, $spina_articles, $spina_events] },
+    {name: 'resource_article_tmpl', title: I18n.t('theme.article'), parts: %w(editor_heading_general summary thumbnail editor_heading_details author guest_author contact_person meta_info lables_repeater rich_content), exclude_from: ["main", $spina_projects, $spina_employees, $spina_events, $spina_lables, $spina_partners] },
+    {name: 'resource_event_tmpl', title: I18n.t('theme.event'), parts: %w(editor_heading_general summary event_time event_end_time thumbnail editor_heading_details author guest_author contact_person lables_repeater rich_content), exclude_from: ["main", $spina_projects, $spina_employees, $spina_articles, $spina_lables, $spina_partners] },
+    {name: 'resource_lable_tmpl', title: I18n.t('theme.lable'), parts: %w(rich_content), exclude_from: ["main", $spina_projects, $spina_employees, $spina_articles, $spina_events, $spina_partners] },
 
     # default page
-    {name: 'default_tmpl', title: I18n.t('theme.default'), parts: %w(editor_heading_general summary thumbnail editor_heading_details rich_content), exclude_from: [$spina_projects, $spina_employees, $spina_articles, $spina_events, $spina_lables] },
+    {name: 'default_tmpl', title: I18n.t('theme.default'), parts: %w(editor_heading_general summary thumbnail editor_heading_details rich_content), exclude_from: [$spina_projects, $spina_employees, $spina_articles, $spina_events, $spina_lables, $spina_partners] },
   ]
 
   # Variable Setup
@@ -99,6 +100,7 @@ Spina::Theme.register do |theme|
   $spina_articles = "c_spina_articles"
   $spina_events = "d_spina_events"
   $spina_lables = "e_spina_lables"
+  $spina_partners = "f_spina_partners"
 
   # Custom pages
   # Some pages should not be created by the user, but generated automatically.
@@ -123,6 +125,7 @@ Spina::Theme.register do |theme|
     {name: $spina_articles, label: I18n.t('theme.articles'), view_template: "resource_article_tmpl", slug_en: "articles", slug_de: "artikel", order_by: "" },
     {name: $spina_events, label: I18n.t('theme.events'), view_template: "resource_event_tmpl", slug_en: "events", slug_de: "events", order_by: "" },
     {name: $spina_lables, label: I18n.t('theme.lables'), view_template: "resource_lable_tmpl", slug_en: "lables", slug_de: "labels", order_by: "" },
+    {name: $spina_partners, label: I18n.t('theme.partners'), view_template: "resource_employee_tmpl", slug_en: "partners", slug_de: "partner", order_by: "" },
   ]
 
   # Navigations (optional)

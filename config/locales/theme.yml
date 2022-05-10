@@ -13,6 +13,7 @@ de:
     events: "Events"
     lable: "Label"
     lables: "Label"
+    partners: "Partner"
     default: "Seite"
     parts:
       header_image:
@@ -77,10 +78,13 @@ de:
         hint: "Dieser Textblock wird vor den Highlights angezeigt."
       email:
         title: "E-Mail"
-        hint: "Die E-Mail des Mitarbeitenden. Die E-Mail wird unter anderem auch unter Beiträgen von Mitarbeitenden angezeigt."
+        hint: "Eine E-Mail welche zur Kontaktaufnahme genutzt werden kann."
       author:
         title: "Autor"
-        hint: "Der Autor des Beitrages. Der Autor ist die Person, die den Inhalt auf der Webseite erstellt hat."
+        hint: "Der Autor des Beitrages. Der Autor ist die Person, die den Inhalt auf der Webseite erstellt hat. Auswählen kann man alle erstellen Personen unter dem Mitarbeitenden-Tab."
+      guest_author:
+        title: "Gastautor"
+        hint: "Ein Gastautor des Beitrages. Auswählen kann man alle erstellen Partner unter dem Partner-Tab."
       contact_person:
         title: "Ansprechpartner"
         hint: "Hier kann eine Person angegeben werden, welche auf der Seite als Ansprechparter angezeigt wird. Der Ansprechpartner kann ebenfalls der Autor sein, muss es aber nicht."
