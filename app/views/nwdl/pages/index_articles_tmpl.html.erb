@@ -18,7 +18,7 @@
           <% end %>
 
           <%# HIGHLIGHT PRESENTER %>
-          <% highlights = current_page.find_part(:articles_repeater)&.content.map { |repeater_content| repeater_content&.content(:article_selector) } %>
+          <% highlights = current_page.find_part(:articles_repeater)&.content.map { |repeater_content| repeater_content&.content(:article_selector) }&.compact %>
           <%= render 'nwdl/shared/resource/slider', resources: highlights %>
 
         </div>

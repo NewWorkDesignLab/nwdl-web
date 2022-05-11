@@ -81,10 +81,22 @@ de:
         hint: "Eine E-Mail welche zur Kontaktaufnahme genutzt werden kann."
       author:
         title: "Autor"
-        hint: "Der Autor des Beitrages. Der Autor ist die Person, die den Inhalt auf der Webseite erstellt hat. Auswählen kann man alle erstellen Personen unter dem Mitarbeitenden-Tab."
-      guest_author:
-        title: "Gastautor"
-        hint: "Ein Gastautor des Beitrages. Auswählen kann man alle erstellen Partner unter dem Partner-Tab."
+        hint: "Ein Autor des Beitrages. Auswählen kann man alle erstellen Personen unter dem Mitarbeitenden-Tab."
+      authors:
+        title: "Autoren des Beitrages"
+        hint: "Die Autoren des Beitrages. Auswählen kann man alle erstellen Personen unter dem Mitarbeitenden-Tab."
+      partner:
+        title: "Externer Partner"
+        hint: "Ein externer Partner, welcher mit dem Beitrag assoziiert ist. Auswählen kann man alle erstellen Personen / Firmen unter dem Partner-Tab."
+      guest_authors:
+        title: "Gastautoren"
+        hint: "Die Gast-Autoren des Beitrages. Auswählen kann man alle erstellen Personen / Firmen unter dem Partner-Tab."
+      partners:
+        title: "Partner"
+        hint: "Assoziierte Partner mit direktem Bezug zum Beitrag. Auswählen kann man alle erstellen Personen / Firmen unter dem Partner-Tab."
+      customers:
+        title: "Kunden"
+        hint: "Kunden oder Auftraggeber. Auswählen kann man alle erstellen Personen / Firmen unter dem Partner-Tab."
       contact_person:
         title: "Ansprechpartner"
         hint: "Hier kann eine Person angegeben werden, welche auf der Seite als Ansprechparter angezeigt wird. Der Ansprechpartner kann ebenfalls der Autor sein, muss es aber nicht."

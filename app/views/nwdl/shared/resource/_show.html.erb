@@ -10,6 +10,15 @@
   <% end %>
 <% end %>
 
+
+<%# MAP REPEATERS TO ARRAYS (STRIP NIL) %>
+<% mapped_authors = content(:authors)&.map { |repeater_content| repeater_content&.content(:author) }&.compact %>
+<% mapped_guest_authors = content(:guest_authors)&.map { |repeater_content| repeater_content&.content(:partner) }&.compact %>
+<% mapped_labels = content(:lables_repeater)&.map { |repeater_content| repeater_content&.content(:lable_selector) }&.compact %>
+<% mapped_partners = content(:partners)&.map { |repeater_content| repeater_content&.content(:partner) }&.compact %>
+<% mapped_customers = content(:customers)&.map { |repeater_content| repeater_content&.content(:partner) }&.compact %>
+
+
 <%# MAIN CONTENT %>
 <div class="container max-w-screen-xl mx-auto px-4">
   <%= content.image_tag :thumbnail, {}, { class: "w-full h-[40vh] object-cover rounded" } %>
@@ -22,26 +31,34 @@
       <h2 class="!text-2xl"><%= content.html :summary %></h2>
 
       <%# META BADGES %>
-      <% if content(:author).present? || content(:guest_author).present? || content(:meta_info).present? || current_page.find_part(:lables_repeater)&.content.present? %>
+      <% if mapped_authors.present? || mapped_guest_authors.present? || mapped_labels.present? || content(:meta_info).present? %>
         <div class="!flex !flex-wrap !gap-3 !text-sm !mb-2">
 
           <% badge_classes = "!px-2.5 !py-1 !rounded-full !bg-neutral-200 !flex !items-center !gap-2 !text-black" %>
 
-          <%# AUTHOR %>
-          <% if content(:author).present? %>
-            <%= link_to content(:author).materialized_path, class: badge_classes do %>
-              <%= render 'shared/icons/user-circle'%>
-              <%= I18n.t('static.author') %>:
-              <%= content(:author).title %>
+          <%# AUTHORS %>
+          <% if mapped_authors.present? %>
+            <% mapped_authors.each do |author| %>
+              <% if author.present? %>
+                <%= link_to author.materialized_path, class: badge_classes do %>
+                  <%= render 'shared/icons/user-circle'%>
+                  <%= I18n.t('static.author') %>:
+                  <%= author.title %>
+                <% end %>
+              <% end %>
             <% end %>
           <% end %>
 
           <%# GUEST AUTHOR %>
-          <% if content(:guest_author).present? %>
-            <%= link_to content(:guest_author).materialized_path, class: badge_classes do %>
-              <%= render 'shared/icons/user-circle'%>
-              <%= I18n.t('static.author') %>:
-              <%= content(:guest_author).title %>
+          <% if mapped_guest_authors.present? %>
+            <% mapped_guest_authors.each do |guest_author| %>
+              <% if guest_author.present? %>
+                <%= link_to guest_author.materialized_path, class: badge_classes do %>
+                  <%= render 'shared/icons/user-circle'%>
+                  <%= I18n.t('static.author') %>:
+                  <%= guest_author.title %>
+                <% end %>
+              <% end %>
             <% end %>
           <% end %>
 
@@ -54,12 +71,13 @@
           <% end %>
 
           <%# LABLES %>
-          <% if current_page.find_part(:lables_repeater)&.content.present? %>
-            <% repeater(:lables_repeater) do |repeater_content| %>
-              <% lable_page = repeater_content&.content(:lable_selector) %>
-              <%= link_to lable_page.materialized_path, class: badge_classes do %>
-                <%= render 'shared/icons/tag' %>
-                <%= lable_page.title %>
+          <% if mapped_labels.present? %>
+            <% mapped_labels.each do |label| %>
+              <% if label.present? %>
+                <%= link_to label.materialized_path, class: badge_classes do %>
+                  <%= render 'shared/icons/tag' %>
+                  <%= label.title %>
+                <% end %>
               <% end %>
             <% end %>
           <% end %>
@@ -80,14 +98,28 @@
 
       <%# CONTACT PERSON INFO %>
       <% if content(:contact_person).present? %>
-        <div class="w-full sm:w-auto lg:w-full flex flex-col items-stretch">
+        <div class="w-full sm:w-auto lg:w-full flex flex-col items-stretch gap-2">
           <h2 class="text-xl mb-3"><%= I18n.t('static.contact_person_heading') %></h2>
-          <%= link_to content(:contact_person).materialized_path, class: "inline-flex gap-3 p-2 rounded nwdl-bg-grey-light" do %>
-            <%= content(:contact_person).content.image_tag(:thumbnail, {}, {class: "w-[100px] h-[100px] rounded object-cover"}) %>
-            <p class="truncate">
-              <strong><%= content(:contact_person).title %></strong><br>
-              <%= content(:contact_person).content(:email) %>
-            </p>
+          <%= render 'nwdl/shared/resource/resource_contact', resource: content(:contact_person) %>
+        </div>
+      <% end %>
+
+      <%# PARTNERS INFO %>
+      <% if mapped_partners.present? %>
+        <div class="w-full sm:w-auto lg:w-full flex flex-col items-stretch gap-2">
+          <h2 class="text-xl mb-3"><%= I18n.t('static.partners_heading') %></h2>
+          <% mapped_partners.each do |partner| %>
+            <%= render 'nwdl/shared/resource/resource_contact', resource: partner %>
+          <% end %>
+        </div>
+      <% end %>
+
+      <%# CUSTOMERS INFO %>
+      <% if mapped_customers.present? %>
+        <div class="w-full sm:w-auto lg:w-full flex flex-col items-stretch gap-2">
+          <h2 class="text-xl mb-3"><%= I18n.t('static.customers_heading') %></h2>
+          <% mapped_customers.each do |customer| %>
+            <%= render 'nwdl/shared/resource/resource_contact', resource: customer %>
           <% end %>
         </div>
       <% end %>
@@ -95,15 +127,19 @@
       <%# DIRECT TIME AND AUTHOR META INFO (espacially for citing) %>
       <div class="w-full sm:w-auto lg:w-full flex flex-col justify-end ml-auto">
         <%# ALWAYS display Author - if no Author given, fallback to generic Author %>
-        <% if content(:author).present? || content(:guest_author).present? %>
-          <p class="mb-0 sm:text-right text-neutral-500 truncate">
-            <%= I18n.t('static.author') %>:
-            <%= content(:author).title if content(:author).present? %>
-            <%= "&" if content(:author).present? && content(:guest_author).present? %>
-            <%= content(:guest_author).title if content(:guest_author).present? %>
-          </p>
+        <% try_get_author = [].tap do |out| %>
+          <% mapped_authors&.each do |author| %>
+            <% out << author&.title %>
+          <% end %>
+          <% mapped_guest_authors&.each do |guest_author| %>
+            <% out << guest_author&.title %>
+          <% end %>
+        <% end.join(', ') %>
+
+        <% if try_get_author.present? %>
+          <p class="mb-0 sm:text-right text-neutral-500"><%= I18n.t('static.author') %>: <%= try_get_author %><br></p>
         <% else %>
-          <p class="mb-0 sm:text-right text-neutral-500 truncate"><%= I18n.t('static.author') %>: <%= I18n.t('static.default_author') %><br></p>
+          <p class="mb-0 sm:text-right text-neutral-500"><%= I18n.t('static.author') %>: <%= I18n.t('static.default_author') %><br></p>
         <% end %>
 
         <%# will display time of page creation aswell as time of last edited if lasted editet is not

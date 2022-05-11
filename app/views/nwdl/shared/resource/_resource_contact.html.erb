@@ -1,0 +1,7 @@
+<%= link_to resource.materialized_path, class: "inline-flex gap-3 p-2 rounded nwdl-bg-grey-light" do %>
+  <%= resource.content.image_tag(:thumbnail, {}, {class: "w-[80px] h-[80px] rounded object-cover"}) %>
+  <p class="truncate">
+    <strong><%= resource.title %></strong><br>
+    <%= resource.content(:email) %>
+  </p>
+<% end %>
