@@ -80,8 +80,8 @@ de:
         title: "E-Mail"
         hint: "Eine E-Mail welche zur Kontaktaufnahme genutzt werden kann."
       author:
-        title: "Autor"
-        hint: "Ein Autor des Beitrages. Auswählen kann man alle erstellen Personen unter dem Mitarbeitenden-Tab."
+        title: "Mitarbeiter"
+        hint: "Ein Mitarbeiter des NWDL. Auswählen kann man alle erstellen Personen unter dem Mitarbeitenden-Tab."
       authors:
         title: "Autoren des Beitrages"
         hint: "Die Autoren des Beitrages. Auswählen kann man alle erstellen Personen unter dem Mitarbeitenden-Tab."
@@ -97,9 +97,9 @@ de:
       customers:
         title: "Kunden"
         hint: "Kunden oder Auftraggeber. Auswählen kann man alle erstellen Personen / Firmen unter dem Partner-Tab."
-      contact_person:
+      contact_persons:
         title: "Ansprechpartner"
-        hint: "Hier kann eine Person angegeben werden, welche auf der Seite als Ansprechparter angezeigt wird. Der Ansprechpartner kann ebenfalls der Autor sein, muss es aber nicht."
+        hint: "Hier können Personen angegeben werden, welche auf der Seite als Ansprechparter angezeigt werden. Der Autor kann ebenfalls ein Ansprechpartner sein, muss es aber nicht."
       event_time:
         title: "Beginn des Events"
         hint: "Startzeitpunkt des Events."

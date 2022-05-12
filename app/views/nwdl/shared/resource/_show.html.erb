@@ -17,6 +17,7 @@
 <% mapped_labels = content(:lables_repeater)&.map { |repeater_content| repeater_content&.content(:lable_selector) }&.compact %>
 <% mapped_partners = content(:partners)&.map { |repeater_content| repeater_content&.content(:partner) }&.compact %>
 <% mapped_customers = content(:customers)&.map { |repeater_content| repeater_content&.content(:partner) }&.compact %>
+<% mapped_contact_persons = content(:contact_persons)&.map { |repeater_content| repeater_content&.content(:author) }&.compact %>
 
 
 <%# MAIN CONTENT %>
@@ -97,10 +98,12 @@
     <div class="w-full lg:w-[18em] shrink-0 flex flex-wrap justify-between gap-8">
 
       <%# CONTACT PERSON INFO %>
-      <% if content(:contact_person).present? %>
+      <% if mapped_contact_persons.present? %>
         <div class="w-full sm:w-auto lg:w-full flex flex-col items-stretch gap-2">
           <h2 class="text-xl mb-3"><%= I18n.t('static.contact_person_heading') %></h2>
-          <%= render 'nwdl/shared/resource/resource_contact', resource: content(:contact_person) %>
+          <% mapped_contact_persons.each do |contact_person| %>
+            <%= render 'nwdl/shared/resource/resource_contact', resource: contact_person %>
+          <% end %>
         </div>
       <% end %>
 

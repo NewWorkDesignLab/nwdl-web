@@ -44,7 +44,7 @@ Spina::Theme.register do |theme|
     {name: 'guest_authors', title: I18n.t('theme.parts.guest_authors.title'), part_type: "Spina::Parts::Repeater", parts: %w(partner), hint: I18n.t('theme.parts.guest_authors.hint') },
     {name: 'partners', title: I18n.t('theme.parts.partners.title'), part_type: "Spina::Parts::Repeater", parts: %w(partner), hint: I18n.t('theme.parts.partners.hint') },
     {name: 'customers', title: I18n.t('theme.parts.customers.title'), part_type: "Spina::Parts::Repeater", parts: %w(partner), hint: I18n.t('theme.parts.customers.hint') },
-    {name: 'contact_person', title: I18n.t('theme.parts.contact_person.title'), part_type: "Spina::Parts::User", hint: I18n.t('theme.parts.contact_person.hint') },
+    {name: 'contact_persons', title: I18n.t('theme.parts.contact_persons.title'), part_type: "Spina::Parts::Repeater", parts: %w(author), hint: I18n.t('theme.parts.contact_persons.hint') },
     {name: 'event_time', title: I18n.t('theme.parts.event_time.title'), part_type: "Spina::Parts::Datetime", hint: I18n.t('theme.parts.event_time.hint') },
     {name: 'event_end_time', title: I18n.t('theme.parts.event_end_time.title'), part_type: "Spina::Parts::Datetime", hint: I18n.t('theme.parts.event_end_time.hint') },
     {name: 'meta_info', title: I18n.t('theme.parts.meta_info.title'), part_type: "Spina::Parts::Line", hint: I18n.t('theme.parts.meta_info.hint') },
@@ -80,10 +80,10 @@ Spina::Theme.register do |theme|
     {name: 'index_events_tmpl', title: I18n.t('theme.events'), parts: %w(rich_content_before rich_content_after)},
 
     # for resource pages (resources)
-    {name: 'resource_project_tmpl', title: I18n.t('theme.project'), parts: %w(editor_heading_general summary thumbnail editor_heading_details authors guest_authors contact_person partners customers lables_repeater rich_content), exclude_from: ["main", $spina_employees, $spina_articles, $spina_events, $spina_lables, $spina_partners] },
+    {name: 'resource_project_tmpl', title: I18n.t('theme.project'), parts: %w(editor_heading_general summary thumbnail editor_heading_details authors guest_authors contact_persons partners customers lables_repeater rich_content), exclude_from: ["main", $spina_employees, $spina_articles, $spina_events, $spina_lables, $spina_partners] },
     {name: 'resource_employee_tmpl', title: I18n.t('theme.employee'), parts: %w(editor_heading_general summary email thumbnail editor_heading_details rich_content), exclude_from: ["main", $spina_projects, $spina_articles, $spina_events, $spina_lables] },
-    {name: 'resource_article_tmpl', title: I18n.t('theme.article'), parts: %w(editor_heading_general summary thumbnail editor_heading_details authors guest_authors contact_person meta_info lables_repeater rich_content), exclude_from: ["main", $spina_projects, $spina_employees, $spina_events, $spina_lables, $spina_partners] },
-    {name: 'resource_event_tmpl', title: I18n.t('theme.event'), parts: %w(editor_heading_general summary event_time event_end_time thumbnail editor_heading_details authors guest_authors contact_person lables_repeater rich_content), exclude_from: ["main", $spina_projects, $spina_employees, $spina_articles, $spina_lables, $spina_partners] },
+    {name: 'resource_article_tmpl', title: I18n.t('theme.article'), parts: %w(editor_heading_general summary thumbnail editor_heading_details authors guest_authors contact_persons meta_info lables_repeater rich_content), exclude_from: ["main", $spina_projects, $spina_employees, $spina_events, $spina_lables, $spina_partners] },
+    {name: 'resource_event_tmpl', title: I18n.t('theme.event'), parts: %w(editor_heading_general summary event_time event_end_time thumbnail editor_heading_details authors guest_authors contact_persons lables_repeater rich_content), exclude_from: ["main", $spina_projects, $spina_employees, $spina_articles, $spina_lables, $spina_partners] },
     {name: 'resource_lable_tmpl', title: I18n.t('theme.lable'), parts: %w(rich_content), exclude_from: ["main", $spina_projects, $spina_employees, $spina_articles, $spina_events, $spina_partners] },
 
     # default page

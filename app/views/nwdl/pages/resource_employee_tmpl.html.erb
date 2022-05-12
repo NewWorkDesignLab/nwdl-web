@@ -22,7 +22,8 @@
 </div>
 
 <%# PAGE PRESENTER %>
-<% related_pages = Spina::Page.live.joins(:translations).where(translations: {locale: locale.to_sym}).where("json_attributes @> (?)::jsonb", {"#{locale.to_s}_content":[ {"user_id": current_page.id} ]}.to_json ) %>
+<% related_pages = Spina::Page.live.joins(:translations).where(translations: {locale: locale.to_sym}).where("json_attributes @> (?)::jsonb", {"#{locale.to_s}_content":[ {"content": [{ "parts":[{"user_id": current_page.id}] }]} ]}.to_json ) %>
+<%# <% related_pages = Spina::Page.live.joins(:translations).where(translations: {locale: locale.to_sym}).where("json_attributes @> (?)::jsonb", {"#{locale.to_s}_content":[ {"user_id": current_page.id} ]}.to_json ) %>
 <% if related_pages.present? %>
   <div class="container max-w-screen-xl mx-auto px-4 mt-14">
     <h2 class="mb-4"><%= I18n.t('static.resources_from') %> <%= current_page.title %></h2>
